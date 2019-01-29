@@ -1372,3 +1372,229 @@ function addToBack(arr, element) {
   return arr;
 }
 ******************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-043-computeAreaOfARectangle
+
+Write a function called “computeAreaOfARectangle”.
+
+Given the length and width of a rectangle, “computeAreaOfARectangle” returns its area.
+
+var output = computeAreaOfARectangle(4, 8);
+console.log(output); // --> 32
+
+Your Code Should Pass:
+
+describe("computeAreaOfARectangle", function() {
+  it("should return a number", function() {
+    expect(typeof computeAreaOfARectangle(7, 6)).toBe("number");
+  });
+  it("should return the area of a rectangle", function() {
+    expect(computeAreaOfARectangle(7, 6)).toBe(42);
+  });
+})
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function computeAreaOfARectangle(length, width) {
+  //return (length*width)/2; // A = (h*b)/2
+  return (length*width);
+}
+***************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-044-computePerimeterOfARectangle
+
+Write a function called “computePerimeterOfARectangle”.
+
+Given a length and a width describing a rectangle, “computePerimeterOfARectangle” returns its perimter.
+
+var output = computePerimeterOfARectangle(5, 2);
+console.log(output); // --> 14
+
+Your Code Should Pass:
+
+describe("computePerimeterOfARectangle", function() {
+  it("should return a number", function() {
+    expect(typeof computePerimeterOfARectangle(5, 2)).toBe("number");
+  });
+  it("should return the perimeter of a rectangle", function() {
+    expect(computePerimeterOfARectangle(5, 2)).toBe(14);
+  });
+})
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function computePerimeterOfARectangle(length, width) {
+  return (length*2)+(width*2);
+};
+*****************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-045-computePerimeterOfATriangle
+
+Write a function called “computePerimeterOfATriangle”.
+
+Given 3 sides describing a triangle, “computePerimeterOfATriangle” returns its perimter.
+
+var output = computePerimeterOfATriangle(6, 4, 10);
+console.log(output); // --> 20
+
+Your Code Should Pass:
+
+describe("computePerimeterOfATriangle", function() {
+  it("should return a number", function() {
+    expect(typeof computePerimeterOfATriangle(6, 4, 10)).toBe("number");
+  });
+  it("should return the perimeter of a triangle", function() {
+    expect(computePerimeterOfATriangle(6, 4, 10)).toBe(20);
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function computePerimeterOfATriangle(side1, side2, side3) {
+  return side1 + side2 + side3;
+}
+*****************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-046-computeTripledAreaOfARectangle
+
+Write a function called “computeTripledAreaOfARectangle”.
+
+Given a length and width of a rectangle, “computeTripledAreaOfARectangle” returns the rectangle’s area, multiplied by 3.
+
+var output = computeTripledAreaOfARectangle(2, 4);
+console.log(output); // --> 24
+
+Your Code Should Pass:
+
+describe("computeTripledAreaOfARectangle", function() {
+  it("should return a number", function() {
+    expect(typeof computeTripledAreaOfARectangle(7, 6)).toBe("number");
+  });
+  it("should return the area of a rectangle", function() {
+    expect(computeTripledAreaOfARectangle(7, 6)).toBe(126);
+  });
+})
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function computeTripledAreaOfARectangle(length, width) {
+  //return ((length*width)/2)*3; // (Height*Base)/2 for area
+  return (length*width)*3;
+}
+**************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-047-computePerimeterOfACircle
+
+Write a function called “computePerimeterOfACircle”.
+
+Given the radius of a circle, “computePerimeterOfACircle” returns its perimeter.
+
+var output = computePerimeterOfACircle(4);
+console.log(output); // --> 25.132741228718345
+
+Your Code Should Pass:
+
+describe("computePerimeterOfACircle", function() {
+  it("should return a number", function() {
+    expect(typeof computePerimeterOfACircle(4)).toBe("number");
+  });
+  it("should return the perimeter of a circle", function() {
+    expect(computePerimeterOfACircle(4)).toBe(25.132741228718345);
+  });
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function computePerimeterOfACircle(radius) {
+  return 2*Math.PI*radius; // Perimeter (P) = 2 · π · R
+}
+***************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-048-computeAreaOfACircle
+
+Write a function called “computeAreaOfACircle”.
+
+Given the radius of a circle, “computeAreaOfACircle” returns its area.
+
+var output = computeAreaOfACircle(4);
+console.log(output); // --> 50.26548245743669
+
+Your Code Should Pass:
+
+describe("computeAreaOfACircle", function() {
+  it("should return a number", function() {
+    expect(typeof computeAreaOfACircle(4)).toBe("number");
+  });
+  it("should return the area of a circle", function() {
+    expect(computeAreaOfACircle(4)).toBe(50.26548245743669);
+  });
+});
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function computeAreaOfACircle(radius) {
+  return Math.PI*(radius*radius) //A=π(square of radius)
+}
+********************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-049-computePower
+
+Write a function called “computePower”.
+
+Given a number and an exponent, “computePower” returns the given number, raised to the given exponent.
+
+var output = computePower(2, 3);
+console.log(output); // --> 8
+
+Your Code Should Pass:
+
+describe("computePower", function() {
+  it("should return a number", function() {
+    expect(typeof computePower(2, 4)).toBe("number");
+  });
+  it("should return a number raised to a given exponent", function() {
+    expect(computePower(2, 4)).toBe(16);
+  });
+  it("should return a negative number raised to a given exponent", function() {
+    expect(computePower(-2, 4)).toBe(16);
+  });
+  it("should return a number raised to 0", function() {
+    expect(computePower(-2, 0)).toBe(1);
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function computePower(num, exponent) {
+  return Math.pow(num, exponent);
+}
+//or
+function computePower(num, exponent) {
+  return num**exponent;
+}
+******************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-050-computeSquareRoot
+
+Write a function called “computeSquareRoot”.
+Given a number, “computeSquareRoot” returns its square root.
+
+var output = computeSquareRoot(9);
+console.log(output); // --> 3
+
+Your Code Should Pass:
+
+describe("computeSquareRoot", function() {
+  it("should return a number", function() {
+    expect(typeof computeSquareRoot(4)).toBe("number");
+  });
+  it("should return the square root of a number", function() {
+    expect(computeSquareRoot(4)).toBe(2);
+  });
+});
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function computeSquareRoot(num) {
+  return Math.sqrt(num);
+}
+***************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-051-doubleSquareRootOf
+
+Write a function called “doubleSquareRootOf”.
+Given a number, “doubleSquareRootOf” returns double its square root.
+
+var output = doubleSquareRootOf(121);
+console.log(output); // --> 22
+
+Your Code Should Pass:
+
+describe("doubleSquareRootOf", function() {
+  it("should return a number", function() {
+    expect(typeof doubleSquareRootOf(9)).toBe("number");
+  });
+  it("should return the doubled square root of the passed in number", function() {
+    expect(doubleSquareRootOf(9)).toBe(6);
+  });
+})
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function doubleSquareRootOf(num) {
+ return (Math.sqrt(num))*2;
+}
+*******************************************************************************************************************************
