@@ -231,15 +231,60 @@ describe("addProperty", function() {
   });
 });
 
-function addProperty(obj, key){
-	obj.key = true;
+var myObj ={};
+
+function addProperty(obj, key) {
+  
+  obj[key] = true;
+  return obj;
+
 }
+var output = addProperty(myObj,"myProperty");
+console.log(output);
+
 // or
-function addProperty(obj, key){
-	obj.[""] = true;
+function addProperty(obj, key) {
+  return obj[key] = true;
+}
+***************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-007-removeProperty
+
+Write a function called “removeProperty”.
+Given an object and a key, “removeProperty” removes the given key from the given object.
+
+var obj = {
+  name: 'Sam',
+  age: 20
+}
+removeProperty(obj, 'name');
+console.log(obj.name); // --> undefined
+
+Your Code Should Pass:
+
+describe("removeProperty", function() {
+  it("should remove the property from the passed in object at the passed in key", function() {
+
+    var testObj = {
+      name: "Mel",
+      age: 88
+    };
+
+    removeProperty(testObj, "name");
+    expect(testObj.name).toBeUndefined();
+  });
+});
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+var obj = {
+  name: "Sam",
+  age: 20
 }
 
-***************************************************************************************************************************************
+function removeProperty(obj, key) {
+  return delete obj[key];
+};
+
+removeProperty(obj, "name");
+***********************************************************************************************************************************
 preImmersive-buildingBlocksMastery-008-checkAge
 
 Write a function called “checkAge”. 
@@ -912,3 +957,289 @@ function addFullNameProperty(obj) {
   return obj.fullName = obj.firstName + ` ` + obj.lastName;
 };
 *******************************************************************************************************************
+preImmersive-buildingBlocksMastery-032-addObjectProperty
+
+Write a function called “addObjectProperty”.
+
+Given two objects and a key, “addObjectProperty” sets a new property on the 1st object at the given key. The value of that new property is the entire 2nd object.
+
+var person1 = {
+  name: 'Joe Blow',
+  role: 'schlub'
+};
+var person2 = {
+  name: 'Mr. Burns',
+  role: 'supervisor'
+};
+addObjectProperty(person1, 'manager', person2);
+console.log(person1.manager); // --> { name: 'Mr. Burns', role: 'supervisor' }
+
+Your Code Should Pass:
+
+describe("addObjectProperty", function() {
+  var obj1;
+  var obj2;
+  beforeEach(function() {
+    obj1 = {};
+    obj2 = {
+      name: "Dude"
+    };
+  });
+  it('should add a property to the passed in object at the passed in key', function() {
+    addObjectProperty(obj1, 'testKey', obj2);
+    expect(obj1.testKey).toBeDefined();
+  });
+  it('should set the value at the passed in key on the passed in object to be the second passed in object', function() {
+    addObjectProperty(obj1, 'testKey', obj2);
+    expect(obj1.testKey).toEqual(obj2);
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function addObjectProperty(obj1, key, obj2) {
+  return obj1[key] = obj2;
+};
+******************************************************************************************************************************
+preImmersive-buildingBlocksMastery-033-isPersonOldEnoughToDrinkAndDrive
+
+Write a function called “isPersonOldEnoughToDrinkAndDrive”.
+
+Given a “person” object, that contains an “age” property, “isPersonOldEnoughToDrinkAndDrive” returns whether the given person is old enough to legally drink and drive in the United States.
+
+Notes:
+* The legal drinking age in the United States is 21.
+* The legal driving age in the United States is 16.
+* It is always illegal to drink and drive in the United States.
+
+var obj = {
+  age: 45
+};
+var output = isPersonOldEnoughToDrinkAndDrive(obj);
+console.log(output); // --> false
+
+Your Code Should Pass:
+
+describe("isPersonOldEnoughToDrinkAndDrive", function() {
+  it("should return a boolean", function() {
+    var person = {
+      age: 55
+    };
+    expect(typeof isPersonOldEnoughToDrinkAndDrive(person)).toBe("boolean");
+  });
+  it("should return false", function() {
+    expect(isPersonOldEnoughToDrinkAndDrive()).toBe(false);
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+var mike = {
+  age: 45
+};
+function isPersonOldEnoughToDrinkAndDrive(person) {
+ return false;
+};
+// its always illegal to drink and drive
+*******************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-034-isPersonOldEnoughToDrive
+
+Write a function called “isPersonOldEnoughToDrive”.
+
+Given a “person” object, that contains an “age” property, “isPersonOldEnoughToDrive” returns whether the given person is old enough to drive.
+
+Notes:
+* The legal driving age in the United States is 16.
+
+var obj = {
+  age: 16
+};
+var output = isPersonOldEnoughToDrive(obj);
+console.log(output); // --> true
+
+Your Code Should Pass:
+
+describe("isPersonOldEnoughToDrive", function() {
+  it("should return a boolean", function() {
+    var person = {
+      age: 55
+    };
+    expect(typeof isPersonOldEnoughToDrive(person)).toBe("boolean");
+  });
+  it("should return true if a person has an age of over 16", function() {
+    var person = {
+      age: 55
+    };
+    expect(isPersonOldEnoughToDrive(person)).toBe(true);
+  });
+  it("should return true if a person has an age of 16", function() {
+    var person = {
+      age: 16
+    };
+    expect(isPersonOldEnoughToDrive(person)).toBe(true);
+  });
+  it("should return false if a person has an age under 16", function() {
+    var person = {
+      age: 15
+    };
+    expect(isPersonOldEnoughToDrive(person)).toBe(false);
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function isPersonOldEnoughToDrive(person) {
+  return person["age"] > 15 ? true : false;
+};
+***********************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-035-isPersonOldEnoughToVote
+
+Write a function called “isPersonOldEnoughToVote”.
+
+Given a “person” object, that contains an “age” property, “isPersonOldEnoughToVote” returns whether the given person is old enough to vote.
+
+Notes:
+* The legal voting age in the United States is 18.
+
+var obj = {
+  age: 19
+};
+var output = isPersonOldEnoughToVote(obj);
+console.log(output); // --> true
+
+Your Code Should Pass:
+
+describe("isPersonOldEnoughToVote", function() {
+  it("should return a boolean", function() {
+    var person = {
+      age: 55
+    };
+    expect(typeof isPersonOldEnoughToVote(person)).toBe("boolean");
+  });
+  it("should return true if a person has an age of over 18", function() {
+    var person = {
+      age: 55
+    };
+    expect(isPersonOldEnoughToVote(person)).toBe(true);
+  });
+  it("should return true if a person has an age of 18", function() {
+    var person = {
+      age: 18
+    };
+    expect(isPersonOldEnoughToVote(person)).toBe(true);
+  });
+  it("should return false if a person has an age under 18", function() {
+    var person = {
+      age: 15
+    };
+    expect(isPersonOldEnoughToVote(person)).toBe(false);
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function isPersonOldEnoughToVote(person) {
+  return person["age"] > 17 ? true : false;
+};
+**************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-036-isPersonOldEnoughToDrink
+
+Write a function called “isPersonOldEnoughToDrink”.
+
+Given a “person” object, that contains an “age” property, “isPersonOldEnoughToDrink” returns whether the given person is old enough to drink.
+
+Notes:
+* The legal drinking age in the United States is 21.
+
+var obj = {
+  age: 16
+};
+var output = isPersonOldEnoughToDrink(obj);
+console.log(output); // --> false
+
+Your Code Should Pass:
+
+describe("isPersonOldEnoughToDrink", function() {
+  it("should return a boolean", function() {
+    var person = {
+      age: 55
+    };
+    expect(typeof isPersonOldEnoughToDrink(person)).toBe("boolean");
+  });
+  it("should return true if a person has an age of over 21", function() {
+    var person = {
+      age: 55
+    };
+    expect(isPersonOldEnoughToDrink(person)).toBe(true);
+  });
+  it("should return true if a person has an age of 21", function() {
+    var person = {
+      age: 21
+    };
+    expect(isPersonOldEnoughToDrink(person)).toBe(true);
+  });
+  it("should return false if a person has an age under 21", function() {
+    var person = {
+      age: 20
+    };
+    expect(isPersonOldEnoughToDrink(person)).toBe(false);
+  });
+});
+ /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ function isPersonOldEnoughToDrink(person) {
+  return person["age"] >20 ? true : false;
+};
+*****************************************************************************************************************************
+preImmersive-buildingBlocksMastery-037-addArrayProperty
+
+Write a function called “addArrayProperty”.
+
+Given an object, a key, and an array, “addArrayProperty” sets a new property on the object at the given key, with its value set to the given array.
+
+var myObj = {};
+var myArray = [1, 3];
+addArrayProperty(myObj, 'myProperty', myArray);
+console.log(myObj.myProperty); // --> [1, 3]
+
+Your Code Should Pass:
+
+describe("addArrayProperty", function() {
+  var testObj;
+  var testArray;
+  beforeEach(function() {
+    testObj = {};
+    testArray = [1, 4];
+  });
+  it("should add a property to the passed in object at the passed in key", function() {
+    addArrayProperty(testObj, "testKey", testArray);
+    expect(testObj.testKey).toBeDefined();
+  });
+  it("should set the value at the passed in key on the passed in object to be the passed in array", function() {
+    addArrayProperty(testObj, "testKey", testArray);
+    expect(testObj.testKey).toEqual(testArray);
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function addArrayProperty(obj, key, arr) {
+  return obj[key] = arr;
+};
+***************************************************************************************************************************
+preImmersive-buildingBlocksMastery-038-getNthElement
+
+Write a function called “getNthElement”.
+
+Given an array and an integer, “getNthElement” returns the element at the given integer, within the given array.
+
+Notes:
+* If the array has a length of 0, it should return ‘undefined’.
+
+var output = getNthElement([1, 3, 5], 1);
+console.log(output); // --> 3
+
+Your Code Should Pass:
+
+describe("getNthElement", function() {
+  it("should return the nth element of an array", function() {
+    expect(getNthElement([1, 3, 5], 1)).toBe(3);
+  });
+  it("should return undefined if the array is empty", function() {
+    expect(getNthElement([], 1)).toBe(undefined);
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function getNthElement(array, n) {
+  return array[n];
+};
+***************************************************************************************************************************************
