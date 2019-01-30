@@ -1598,3 +1598,368 @@ function doubleSquareRootOf(num) {
  return (Math.sqrt(num))*2;
 }
 *******************************************************************************************************************************
+preImmersive-buildingBlocksMastery-052-getLengthOfThreeWords
+
+Write a function called “getLengthOfThreeWords”.
+
+Given 3 words, “getLengthOfThreeWords” returns the sum of their lengths.
+
+var output = getLengthOfThreeWords('some', 'other', 'words');
+console.log(output); // --> 14
+
+Your Code Should Pass:
+
+describe("getLengthOfThreeWords", function() {
+  it("should return a number", function() {
+    expect(typeof getLengthOfThreeWords("three", "random", "words")).toBe("number");
+  });
+  it("should return the sum length of three words", function() {
+    expect(getLengthOfThreeWords("some", "other", "words")).toBe(14)
+  });
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function getLengthOfThreeWords(word1, word2, word3) {
+  return word1.length + word2.length + word3.length;
+}
+****************************************************************************************************************************
+preImmersive-buildingBlocksMastery-053-joinArrays
+
+Write a function called “joinArrays”.
+
+Given two arrays, “joinArrays” returns an array with the elements of “arr1” in order, followed by the elementsin “arr2”.
+
+var output = joinArrays([1, 2], [3, 4]);
+console.log(output); // --> [1, 2, 3, 4]
+You should be familiar with the “concat” method for this problem.
+
+Your Code Should Pass:
+
+describe("joinArrays", function() {
+  it("should return an array", function() {
+    expect(Array.isArray(joinArrays(['a', 'b'], [1, 3]))).toBe(true);
+  });
+  it("should return an array with the elements from the first and then the second array", function() {
+    expect(joinArrays(['a', 'b'], [1, 3])).toEqual(['a', 'b', 1, 3]);
+  });
+  it("should handle empty arrays in the first position", function() {
+    expect(joinArrays([], [1, 3])).toEqual([1, 3]);
+  });
+  it("should handle empty arrays in the second position", function() {
+    expect(joinArrays(['a', 'b'], [])).toEqual(['a', 'b']);
+  });
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function joinArrays(arr1, arr2) {
+  var arr = arr1.concat(arr2);
+  return arr;
+}
+**************************************************************************************************************************
+preImmersive-buildingBlocksMastery-054-getElementsAfter
+
+Write a function called “getElementsAfter”.
+
+Given an array and an index, “getElementsAfter” returns a new array with all the elements after (but not including) the given index.
+
+var output = getElementsAfter(['a', 'b', 'c', 'd', 'e'], 2); 
+console.log(output); // --> ['d', 'e']
+
+Your Code Should Pass:
+
+describe("getElementsAfter", function() {
+  it("should return an array", function() {
+    expect(Array.isArray(getElementsAfter([4, 5, 6], 2))).toBe(true);
+  });
+  it("should return an array with all the elements of the passed in array getElementsAfter the nth", function() {
+    expect(getElementsAfter([4, 5, 6, 7, 8, 9], 3)).toEqual([8, 9]);
+  });
+  it("should return an empty array when passed in a single element array", function() {
+    expect(getElementsAfter([4], 0)).toEqual([]);
+  });
+  it("should return an empty array when passed an n out of range", function() {
+    expect(getElementsAfter([4], 11)).toEqual([]);
+  });
+  it("should return an empty array when passed in an empty array", function() {
+    expect(getElementsAfter([])).toEqual([]);
+  });
+});
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function getElementsAfter(array, n) {
+  arr = array.slice(n+1);
+  return arr;
+}
+**********************************************************************************************************************************
+preImmersive-buildingBlocksMastery-055-getElementsUpTo
+
+Write a function called “getElementsUpTo”.
+
+Given an array and a index, “getElementsUpTo”, returns an array with all the elements up until, but not including, the element at the given index.
+
+Notes:
+* In order to do this you should be familiar with the ‘slice’ method.
+
+var output = getElementsUpTo(['a', 'b', 'c', 'd', 'e'], 3) 
+console.log(output); // --> ['a', 'b', 'c']
+
+Your Code Should Pass:
+
+describe("getElementsUpTo", function() {
+  it("should return an array", function() {
+    expect(Array.isArray(getElementsUpTo([4, 5, 6], 2))).toBe(true);
+  });
+  it("should return an array with all the elements of the passed in array up until the nth", function() {
+    expect(getElementsUpTo([4, 5, 6], 2)).toEqual([4, 5]);
+  });
+  it("should return an empty array when passed in a single element array", function() {
+    expect(getElementsUpTo([4], 0)).toEqual([]);
+  });
+  it("should return a mirror of the original array when passed an n out of range", function() {
+    expect(getElementsUpTo([4], 10)).toEqual([4]);
+  });
+  it("should return an empty array when passed in an empty array", function() {
+    expect(getElementsUpTo([])).toEqual([]);
+  });
+});
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function getElementsUpTo(array, n) {
+   return array = array.slice(0, n)
+};
+
+//Or loop method:
+
+function getElementsUpToWithLoop(array,n){
+  var newArray = [];
+  
+  for(i = 0; array[i] < array[n]; i++){
+    newArray.push(array[i]);
+  }
+  
+  return newArray;
+}
+var output = getElementsUpToWithLoop(['a', 'b', 'c', 'd', 'e'],3);
+console.log(output);
+*************************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-056-getAllElementsButFirst
+
+Write a function called “getAllElementsButFirst”.
+
+Given an array, “getAllElementsButFirst” returns an array with all the elements but the first.
+
+var input = [1, 2, 3, 4];
+var output = getAllElementsButFirst(input);
+console.log(output); // --> [2, 3, 4]
+
+Your Code Should Pass:
+
+describe("getAllElementsButFirst", function() {
+  it("should return an array", function() {
+    expect(Array.isArray(getAllElementsButFirst([4, 5, 6]))).toBe(true);
+  });
+  it("should return an array with all the elements of the passed in array, except for the first", function() {
+    expect(getAllElementsButFirst([4, 5, 6])).toEqual([5, 6]);
+  });
+  it("should return an empty array when passed in a single element array", function() {
+    expect(getAllElementsButFirst([4])).toEqual([]);
+  });
+  it("should return an empty array when passed in an empty array", function() {
+    expect(getAllElementsButFirst([])).toEqual([]);
+  });
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function getAllElementsButFirst(array) {
+  return newArr = array.slice(1);
+}
+************************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-057-getAllElementsButLast
+
+Write a function called “getAllElementsButLast”.
+
+Given an array, “getAllElementsButLast” returns an array with all the elements but the last.
+
+var input = [1, 2, 3, 4];
+var output = getAllElementsButLast(input);
+console.log(output); // --> [1, 2 , 3]
+
+Your Code Should Pass:
+
+describe("getAllElementsButLast", function() {
+  it("should return an array", function() {
+    expect(Array.isArray(getAllElementsButLast([4, 5, 6]))).toBe(true);
+  });
+  it("should return an array with all the elements of the passed in array, except for the last", function() {
+    expect(getAllElementsButLast([4, 5, 6])).toEqual([4, 5]);
+  });
+  it("should return an empty array when passed in a single element array", function() {
+    expect(getAllElementsButLast([4])).toEqual([]);
+  });
+  it("should return an empty array when passed in an empty array", function() {
+    expect(getAllElementsButLast([])).toEqual([]);
+  });
+});
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function getAllElementsButLast(array) {
+  return newArr = array.slice(0, array.length-1);
+}
+//or
+function getAllElementsButLast(array) {
+  // your code here
+  /* START SOLUTION */
+return array.slice(0, -1);
+  /* END SOLUTION */
+}
+//or
+function getAllElementsButLast(array) {
+  array.pop();
+  return array
+}
+***************************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-058-removeFromFront
+
+Write a function called “removeFromFront”.
+
+Given an array, “removeFromFront” returns the given array with its first element removed.
+
+Notes:
+* You should be familiar with the method ‘shift’.
+
+var output = removeFromFront([1, 2, 3]);
+console.log(output); // --> [2, 3]
+
+Your Code Should Pass:
+
+describe("removeFromFront", function() {
+  it("should return an array", function() {
+    expect(Array.isArray(removeFromFront([1, 2, 3]))).toBe(true);
+  });
+  it("should return the array with the first element removed", function() {
+    expect(removeFromFront([1, 2])).toEqual([2]);
+  });
+  it("should handle an empty array", function() {
+    expect(removeFromFront([])).toEqual([]);
+  });
+});
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function removeFromFront(array) {
+  array.shift();
+  return array;
+}
+//or
+function removeFromFront(array) {
+  newArray = array.slice(1);
+  return newArray;
+}
+******************************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-059-removeFromBackOfNew
+
+Write a function called “removeFromBackOfNew”.
+
+Given an array, “removeFromBackOfNew” returns a new array containing all but the last element of the given array.
+
+Notes:
+* You should be familiar with the ‘slice’ method.
+
+var arr = [1, 2, 3];
+var output = removeFromBackOfNew(arr);
+console.log(output); // --> [1, 2]
+console.log(arr); // --> [1, 2, 3]
+
+Your Code Should Pass:
+
+describe("removeFromBackOfNew", function() {
+  it("should return an array", function() {
+    expect(Array.isArray(removeFromBackOfNew([1, 2], 3))).toBe(true);
+  });
+  it("should return an array with the last element of the passed in array removed", function() {
+    expect(removeFromBackOfNew([1, 2])).toEqual([1]);
+  });
+  it("should handle an empty array", function() {
+    expect(removeFromBackOfNew([])).toEqual([]);
+  });
+  it("should leave arr unmodified", function() {
+    var originalArray = [1, 2];
+    var newArray = removeFromBackOfNew(originalArray);
+    expect(originalArray).toEqual([1, 2]);
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function removeFromBackOfNew(arr) {
+  var newArray = arr.slice(0, arr.length-1);
+  return newArray;
+}
+*************************************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-060-removeFromFrontOfNew
+
+Write a function called “removeFromFrontOfNew”.
+
+Given an array, “removeFromFrontOfNew” returns a new array containing all but the first element of the given array.
+
+Notes:
+* You should be familiar with the ‘slice’ method.
+
+var arr = [1, 2, 3];
+var output = removeFromFrontOfNew(arr);
+console.log(output); // --> [2, 3]
+console.log(arr); // --> [1, 2, 3]
+
+Your Code Should Pass:
+
+describe("removeFromFrontOfNew", function() {
+  it("should return an array", function() {
+    expect(Array.isArray(removeFromFrontOfNew([1, 2]))).toBe(true);
+  });
+  it("should remove an element from the front of an array", function() {
+    expect(removeFromFrontOfNew([1, 2])).toEqual([2]);
+  });
+  it("should handle an empty array", function() {
+    expect(removeFromFrontOfNew([])).toEqual([]);
+  });
+  it("should leave arr unmodified", function() {
+    var originalArray = [1, 2];
+    var newArray = removeFromFrontOfNew(originalArray);
+    expect(originalArray).toEqual([1, 2]);
+  });
+});
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function removeFromFrontOfNew(arr) {
+  var newArr = arr.slice(1);
+  return newArr;
+}
+************************************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-061-countCharacter
+
+Write a function called “countCharacter”.
+
+Given a string input and a character, “countCharacter” returns the number of occurences of a given character in the given string.
+
+var output = countCharacter('I am a hacker', 'a');
+console.log(output); // --> 3
+
+Your Code Should Pass:
+
+describe("countCharacter", function() {
+  it("should return a number", function() {
+    expect(typeof countCharacter("say what!?", "a")).toBe("number");
+  });
+  it("should return the number of occurences of a character in a string when the character exists", function() {
+    expect(countCharacter("say what!?", "a")).toBe(2);
+  });
+  it("should return the number of occurences of a character in a string when the character does not exist", function() {
+    expect(countCharacter("say what!?", "x")).toBe(0);
+  });
+  it("should return the number of occurences of a non-alphanumeric character in a string when the character exists", function() {
+    expect(countCharacter("say what!?", " ")).toBe(1);
+  });
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function countCharacter(str, char) {
+  var counter = 0;
+  for (x = 0 ; x < str.length ;  x++) {
+    if (str[x] === char) {
+      counter += 1;
+    }
+  }
+  return counter;
+}
+
+var output = countCharacter('test', 'z');
+console.log(output);
+************************************************************************************************************************************************
