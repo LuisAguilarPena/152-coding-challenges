@@ -1963,3 +1963,163 @@ function countCharacter(str, char) {
 var output = countCharacter('test', 'z');
 console.log(output);
 ************************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-062-getAllLetters
+
+Write a function called “getAllLetters”.
+
+Given a word, “getAllLetters” returns an array containing every character in the word.
+
+Notes:
+* If given an empty string, it should return an empty array.
+
+var output = getAllLetters('Radagast');
+console.log(output); // --> ['R', 'a', 'd', 'a', 'g', 'a', 's', 't']
+
+Your Code Should Pass:
+
+describe("getAllLetters", function() {
+  it("should return an array", function() {
+    expect(Array.isArray(getAllLetters("something like this here"))).toBe(true);
+  });
+  it("should return an array containing all the letters in the word", function() {
+    expect(getAllLetters("Eowin")).toEqual(["E", "o", "w", "i", "n"]);
+  });
+  it("should return an empty array when given an empty string", function() {
+    expect(getAllLetters("")).toEqual([]);
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function getAllLetters(str) {
+  var newArr = str.split("");
+  return newArr;
+}
+var output = getAllLetters('Radagast');
+console.log(output); // --> ['R', 'a', 'd', 'a', 'g', 'a', 's', 't']
+// or
+function getAllLetters(str) {
+return array = str.split('');
+}
+// or
+// Given a word
+var output = getAllLetters('Xoalxiyetl');
+
+//Write a function called “getAllLetters”.
+function getAllLetters(str) {
+  // your code here
+  /* START SOLUTION */
+  // returns an array containing every character in the word.
+  var arr1=[]; // create an array
+  for (var i = 0; i < str.length; i ++){ //for loop to  go trough all the letters 
+    arr1.push(str[i]); // adds the letters to the string 
+  }
+  return arr1;
+  /* END SOLUTION */
+}
+
+console.log(output); // --> [ 'X', 'o', 'a', 'l', 'x', 'i', 'y', 'e', 't', 'l' ]
+******************************************************************************************************************************
+preImmersive-buildingBlocksMastery-063-getAllWords
+
+Write a function called “getAllWords”.
+
+Given a sentence, “getAllWords” returns an array containing every word in the sentence.
+
+Notes:
+* If given an empty string, it should return an empty array.
+
+var output = getAllWords('Radagast the Brown');
+console.log(output); // --> ['Radagast', 'the', 'Brown']
+
+Your Code Should Pass:
+
+describe("getAllWords", function() {
+  it("should return an array", function() {
+    expect(Array.isArray(getAllWords("something like this here"))).toBe(true);
+  });
+  it("should return an array containing all the words in the sentence", function() {
+    expect(getAllWords("Something like this here")).toEqual(["Something", "like", "this", "here"]);
+  });
+  it("should return an empty array when given an empty string", function() {
+    expect(getAllWords("")).toEqual([]);
+  });
+});
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function getAllWords(str) {
+  return str.split(" ", str.length);
+}
+// or
+function getAllWords(str) {
+  if (str === "") return [];
+  return str.split(" ")
+}
+// or
+function getAllWords(str) {
+
+  return str.length > 0 ? str.split(' ') : [];
+}
+*****************************************************************************************************************
+preImmersive-buildingBlocksMastery-064-countWords
+
+Write a function called “countWords”.
+
+Given a string, “countWords” returns an object where each key is a word in the given string, with its value being how many times that word appeared in the given string.
+
+Notes:
+* If given an empty string, it should return an empty object.
+
+var output = countWords('ask a bunch get a bunch'); 
+console.log(output); // --> {ask: 1, a: 2, bunch: 2, get: 1}
+
+Your Code Should Pass:
+
+describe("countWords", function() {
+  it("should return an object", function() {
+    expect(typeof countWords("ask a bunch try a bunch get a bunch")).toBe("object");
+  });
+  it("should return an object where each property gives a word in the string, with its number of appearances", function() {
+    var result = {
+      ask: 1,
+      a: 2,
+      bunch: 2,
+      get: 1
+    };
+    expect(countWords("ask a bunch get a bunch")).toEqual(result);
+  });
+  it("should return an empty object if passed an empty string", function() {
+    expect(countWords("")).toEqual({});
+  });
+});
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function countWords(str){
+  
+  var obj = {}; // creates an empty object
+  
+  if (str === '') { // if string is empty
+    return obj; // stop function and return empty obj
+  }
+  
+  array = str.split(' ');  // creates an array to store the words ["ask", "a", "bunch", "get", "a", "bunch"]
+  for (var x = 0; x <array.length; x++){ // loop over each word in the array (index)
+    if (obj[array[x]] === undefined) { // if obj[key] has and undefined value it means that key/word is new
+      obj[array[x]] = 1; // so add a value of one to start
+    } else // else it means that the key/word has a defined value so its not new 
+      obj[array[x]]++; // add one to that key's value
+  }
+  return obj; // finally return to us the object with all the new properties
+}
+
+countWords('ask a bunch get a bunch');
+
+// or
+
+function countWords(str) {
+  if (str === "") return {};
+  var obj = {};
+  str.split(" ").forEach(function (e) {
+    if (obj[e] === undefined) { obj[e] = 1; }
+    else { obj[e]++; }
+  });
+  
+  return obj;
+}
+*********************************************************************************************************************
