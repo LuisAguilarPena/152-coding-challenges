@@ -2123,3 +2123,553 @@ function countWords(str) {
   return obj;
 }
 *********************************************************************************************************************
+preImmersive-buildingBlocksMastery-065-removeFromBack
+
+Write a function called “removeFromBack”.
+
+Given an array, “removeFromBack” returns the given array with its last element removed.
+
+Notes:
+* You should be familiar with the method ‘pop’.
+
+var output = removeFromBack([1, 2, 3]);
+console.log(output); // --> [1, 2]
+
+Your Code Should Pass:
+
+describe("removeFromBack", function() {
+  it("should return an array", function() {
+    expect(Array.isArray(removeFromBack([1, 2, 3]))).toBe(true);
+  });
+  it("should remove the last element from a 3-element array", function() {
+    expect(removeFromBack([1, 2, 3])).toEqual([1, 2]);
+  });
+  it("should remove the last element from a 2-element array", function() {
+    expect(removeFromBack([1, 2])).toEqual([1]);
+  });
+  it("should handle an empty array", function() {
+    expect(removeFromBack([])).toEqual([]);
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function removeFromBack(arr) {
+  arr.pop();
+  return arr;
+}
+*************************************************************************************************************************
+preImmersive-buildingBlocksMastery-066-or
+
+Write a function called “or”.
+
+Given 2 boolean expressions, “or” returns true or false, corresponding to the ‘||’ operator.
+Notes:
+* Do not use the || operator.
+* Use ! and && operators instead.
+
+var output = or(true, false);
+console.log(output); // --> true;
+
+Your Code Should Pass:
+
+describe("or", function() {
+  it("should not use the logical OR operator", function() {
+    var body = or.toString()
+    expect(/\|\|/.test(body)).toBe(false);
+  });
+  it("should return a boolean", function() {
+    expect(typeof or(true, true)).toEqual("boolean");
+  });
+  it("should return true if the first value is true", function() {
+    expect(or(true, false)).toBe(true);
+  });
+  it("should return true if the second value is true", function() {
+    expect(or(false, true)).toBe(true);
+  });
+  it("should return true both values are true", function() {
+    expect(or(true, true)).toBe(true);
+  });
+  it("should return false both values are false", function() {
+    expect(or(false, false)).toBe(false);
+  });
+});
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function or(expression1, expression2) {
+return  expression1 && expression2 ? true : !expression1 && !expression2 ? false : !expression1 && expression2 ? true : true;
+}
+// or
+function or(expression1, expression2) {
+  if (expression1) { return true; }
+  if (expression2) { return true; }
+  return false;
+}
+// or
+function or(expression1, expression2) {
+ if(!expression1 && !expression2){
+  return false;
+  }else {
+  return true;
+  }
+}
+**********************************************************************************************************************
+preImmersive-buildingBlocksMastery-067-isEitherEvenOrAreBoth7
+
+Write a function called “isEitherEvenOrAreBoth7”.
+
+Given two numbers, ‘isEitherEvenOrAreBoth7’ returns whether at least one of them is even, or, both of them are 7.
+
+var output = isEitherEvenOrAreBoth7(3, 7);
+console.log(output); // --> false
+
+var output = isEitherEvenOrAreBoth7(2, 3);
+console.log(output); // --> true
+
+Your Code Should Pass:
+
+describe("isEitherEvenOrAreBoth7", function() {
+  it("should return a boolean", function() {
+    expect(typeof isEitherEvenOrAreBoth7(40, 3)).toEqual("boolean");
+  });
+  it("should return true if the first number is even", function() {
+    expect(isEitherEvenOrAreBoth7(4, 3)).toBe(true);
+  });
+  it("should return true if the second number is even", function() {
+    expect(isEitherEvenOrAreBoth7(7, 8)).toBe(true);
+  });
+  it("should return true if the both numbers are even", function() {
+    expect(isEitherEvenOrAreBoth7(2, 4)).toBe(true);
+  });
+  it("should return true if the both numbers are 7", function() {
+    expect(isEitherEvenOrAreBoth7(7, 7)).toBe(true);
+  });
+  it("should return false if the both numbers are odd and not both 7", function() {
+    expect(isEitherEvenOrAreBoth7(7, 3)).toBe(false);
+  });
+});
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function isEitherEvenOrAreBoth7(num1, num2) {
+  return (num1%2 === 1 && num2%2 === 1) && (num1 !== 7 || num2 !== 7)  ? false : 
+  num1 === 7 || num2 === 7 ? true : num1 === 7 && num2 === 7 ? true :
+  num1%2 === 0 || num2%2 === 0 ? true : num1%2 === 0 && num2%2 === 0 ? true : false;  
+}
+// or
+function isEitherEvenOrAreBoth7(num1, num2) {
+  return ((num1 === 7 && num2 === 7) || (num1 % 2 === 0 || num2 % 2 === 0))
+}
+*********************************************************************************************************************************
+preImmersive-buildingBlocksMastery-068-isEitherEvenAndLessThan9
+
+Write a function called “isEitherEvenAndLessThan9”.
+
+Given two numbers, ‘isEitherEvenAndLessThan9’ returns whether at least one of them is even, and, both of them are less than 9.
+
+var output = isEitherEvenAndLessThan9(2, 4);
+console.log(output); // --> true
+
+var output = isEitherEvenAndLessThan9(72, 2);
+console.log(output); // --> false
+
+Your Code Should Pass:
+
+describe("isEitherEvenAndLessThan9", function() {
+  it("should return a boolean", function() {
+    expect(typeof isEitherEvenAndLessThan9(40, 3)).toEqual("boolean");
+  });
+  it("should return true if the first number is even and both are less than 9", function() {
+    expect(isEitherEvenAndLessThan9(4, 3)).toBe(true);
+  });
+  it("should return true if the second number is even and both are less than 9", function() {
+    expect(isEitherEvenAndLessThan9(7, 8)).toBe(true);
+  });
+  it("should return true if the both numbers are even and both are less than 9", function() {
+    expect(isEitherEvenAndLessThan9(2, 4)).toBe(true);
+  });
+  it("should return false if the both numbers are greater than 9", function() {
+    expect(isEitherEvenAndLessThan9(72, 32)).toBe(false);
+  });
+  it("should return false if the first number is greater than 9", function() {
+    expect(isEitherEvenAndLessThan9(72, 2)).toBe(false);
+  });
+  it("should return false if the second number is greater than 9", function() {
+    expect(isEitherEvenAndLessThan9(2, 20)).toBe(false);
+  });
+  it("should return false if neither is even", function() {
+    expect(isEitherEvenAndLessThan9(3, 5)).toBe(false);
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function isEitherEvenAndLessThan9(num1, num2) {
+  return ((num1%2===0 || num2%2===0) && (num1<9 && num2<9));
+}
+*****************************************************************************************************************
+preImmersive-buildingBlocksMastery-069-extend
+
+Write a function called “extend”.
+
+Given two objects, “extend” adds properties from the 2nd object to the 1st object.
+
+Notes:
+* Add any keys that are not in the 1st object.
+* If the 1st object already has a given key, ignore it (do not overwrite the property value).
+* Do not modify the 2nd object at all.
+
+var obj1 = {
+  a: 1,
+  b: 2
+};
+var obj2 = {
+  b: 4,
+  c: 3
+};
+
+extend(obj1, obj2);
+
+console.log(obj1); // --> {a: 1, b: 2, c: 3}
+console.log(obj2); // --> {b: 4, c: 3}
+
+Your Code Should Pass:
+
+describe("extend", function() {
+  it("should extend the first object with unrepresented properties from the second object", function() {
+    var obj1 = {
+      a: 1,
+      b: 2
+    };
+    var obj2 = {
+      b: 4,
+      c: 3
+    };
+    var result = {
+      a: 1,
+      b: 2,
+      c: 3
+    };
+
+    extend(obj1, obj2);
+    expect(obj1).toEqual(result);
+  });
+  it("should extend the first object with unrepresented properties from the second object", function() {
+    var obj1 = {
+      a: 1,
+      b: 2
+    };
+    var obj2 = {
+      b: 4,
+      c: 3
+    };
+
+    extend(obj1, obj2);
+    expect(obj2).toEqual({b: 4, c: 3});
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+var obj1 = {
+  a: 1,
+  b: 2
+};
+var obj2 = {
+  b: 4,
+  c: 3
+};
+
+function extend(obj1, obj2) {
+    for (var propertykey in obj2) {
+      if (!obj1[propertykey]) { 
+        obj1[propertykey] = obj2[propertykey]
+      }
+    }
+}
+
+extend(obj1, obj2);
+console.log(obj1); // --> {a : 1, b : 2, c : 3}
+console.log(obj2);
+// or
+function extend(obj1, obj2) {
+  for (k in obj2) {
+    if (obj1[k] === undefined) obj1[k] = obj2[k];
+  }
+}
+// or
+function extend(obj1, obj2) {
+  
+ for (var key in obj2){
+  if(obj1.hasOwnProperty(key) === false){
+   obj1[key] = obj2[key];
+  }
+ }
+   return obj1;
+}
+************************************************************************************************************
+preImmersive-buildingBlocksMastery-070-removeNumbersLargerThan
+
+Write a function called “removeNumbersLargerThan”.
+
+Given a number and an object, “removeNumbersLargerThan” removes any properties whose values are numbers greater than the given number.
+
+var obj = {
+  a: 8,
+  b: 2,
+  c: 'montana'
+}
+removeNumbersLargerThan(5, obj);
+console.log(obj); // --> { b: 2, c: 'montana' }
+
+Your Code Should Pass:
+
+describe("removeNumbersLargerThan", function() {
+  it("should remove any properties with values that are numbers greater than num", function() {
+    var obj = {
+      a: "hello",
+      b: 2,
+      c: "montana",
+      d: 4
+    };
+    var result = {
+      a: "hello",
+      b: 2,
+      c: "montana"
+    };
+    removeNumbersLargerThan(3, obj);
+    expect(obj).toEqual(result);
+  });
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function removeNumbersLargerThan(num, obj) {
+ 
+    for (var propertykey in obj) {
+      if (obj[propertykey]>num) { 
+        delete obj[propertykey];
+      }
+    }
+    return obj;
+}
+*************************************************************************************************************************
+preImmersive-buildingBlocksMastery-071-removeNumbersLessThan
+
+Write a function called “removeNumbersLessThan”.
+
+Given a number and an object, “removeNumbersLessThan” removes any properties whose values are numbers less than the given number.
+
+var obj = {
+  a: 8,
+  b: 2,
+  c: 'montana'
+}
+removeNumbersLessThan(5, obj);
+console.log(obj); // --> { a: 8, c: 'montana' }
+
+Your Code Should Pass:
+
+describe("removeNumbersLessThan", function() {
+  it("should remove any properties with values that are numbers less than num", function() {
+    var obj = {
+      a: "hello",
+      b: 2,
+      c: "montana",
+      d: 4
+    };
+    var result = {
+      a: "hello",
+      c: "montana",
+      d: 4
+    };
+    removeNumbersLessThan(3, obj);
+    expect(obj).toEqual(result);
+  });
+});
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function removeNumbersLessThan(num, obj) {
+  
+    for (var x in obj) {
+      if (obj[x]<num) { 
+        delete obj[x];
+      }
+    }
+    
+    return obj;
+}
+****************************************************************************************************************************
+preImmersive-buildingBlocksMastery-072-removeStringValuesLongerThan
+
+Write a function called “removeStringValuesLongerThan”.
+
+Given an number and an object, “removeStringValuesLongerThan” removes any properties on the given object whose values are strings longer than the given number.
+
+var obj = {
+  name: 'Montana',
+  age: 20,
+  location: 'Texas'
+};
+removeStringValuesLongerThan(6, obj);
+console.log(obj); // { age: 20, location: 'Texas' }
+
+Your Code Should Pass:
+
+describe("removeStringValuesLongerThan", function() {
+  it("should remove any properties with values that are strings longer than num", function() {
+    var obj = {
+      a: "hello",
+      b: 2,
+      c: "montana",
+      d: 4
+    };
+    var result = {
+      a: "hello",
+      b: 2,
+      d: 4
+    };
+    removeStringValuesLongerThan(5, obj);
+    expect(obj).toEqual(result);
+  });
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+var obj = {
+  name: 'Montana',
+  age: 20,
+  location: 'Texas'
+};
+
+function removeStringValuesLongerThan(num, obj) {
+  for(var x in obj){
+    if (obj[x].length>num) {
+      delete obj[x];
+    }
+  }
+  return obj;
+}
+removeStringValuesLongerThan(6, obj);
+console.log(obj); // { age: 20, location: 'Texas' }
+*******************************************************************************************************************************
+preImmersive-buildingBlocksMastery-073-removeEvenValues
+
+Write a function called “removeEvenValues”.
+
+Given an object, “removeEvenValues” removes any properties whose values are even numbers.
+
+Do this in place and return the original object, do not construct a cloned object that omits the properties.
+
+Example:
+
+var obj = {
+  a: 2,
+  b: 3,
+  c: 4
+};
+removeEvenValues(obj);
+console.log(obj); // --> { b: 3 }
+
+Your Code Should Pass:
+
+describe("removeEvenValues", function() {
+  it("should remove any properties with values that are even numbers", function() {
+    var obj = {
+      a: 1,
+      b: 2,
+      c: 3,
+      d: 4
+    };
+    var result = {
+      a: 1,
+      c: 3
+    };
+    removeEvenValues(obj);
+    expect(obj).toEqual(result);
+  });
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+var obj = {
+  a: 2,
+  b: 3,
+  c: 4
+};
+
+function removeEvenValues(obj) {
+  for(var x in obj) {
+    if (obj[x]%2===0){
+      delete obj[x];  
+    }
+  }
+}
+
+removeEvenValues(obj);
+console.log(obj); // --> { b: 3 }
+*********************************************************************************************************************************
+preImmersive-buildingBlocksMastery-074-countNumberOfKeys
+
+Write a function called “countNumberOfKeys”.
+
+Given an object, “countNumberOfKeys” returns how many properties the given object has.
+
+var obj = {
+  a: 1,
+  b: 2,
+  c: 3
+};
+var output = countNumberOfKeys(obj);
+console.log(output); // --> 3
+
+Your Code Should Pass:
+
+describe("countNumberOfKeys", function() {
+  it("should return a number", function() {
+    var obj = {};
+    expect(typeof(countNumberOfKeys(obj))).toBe("number");
+  });
+  it("should return the number of keys for an object", function() {
+    var obj = {
+      a: 1,
+      b: 2,
+      c: 3
+    };
+    expect(countNumberOfKeys(obj)).toBe(3);
+  });
+  it("should return 0 for an object with no keys", function() {
+    var obj = {};
+    expect(countNumberOfKeys(obj)).toBe(0);
+  });
+});  
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function countNumberOfKeys(obj) {
+  return Object.keys(obj).length;
+}
+// or
+function countNumberOfKeys(obj) {
+  count = 0;
+  
+  for (i in obj) { count++; }
+  
+  return count;
+}
+******************************************************************************************************************************
+preImmersive-buildingBlocksMastery-075-removeOddValues
+
+Write a function called “removeOddValues”.
+
+Given an object, “removeOddValues” removes any properties whose values are odd numbers.
+
+var obj = {
+  a: 2,
+  b: 3,
+  c: 4
+};
+removeOddValues(obj);
+console.log(obj); // --> { a: 2, c: 4 }
+
+Your Code Should Pass:
+
+describe("removeOddValues", function() {
+  it("should remove any properties with values that are odd numbers", function() {
+    var obj = {
+      a: 1,
+      b: 2,
+      c: 3,
+      d: 4
+    };
+    var result = {
+      b: 2,
+      d: 4
+    };
+    removeOddValues(obj);
+    expect(obj).toEqual(result);
+  });
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
