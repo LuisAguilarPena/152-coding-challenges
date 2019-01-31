@@ -2819,3 +2819,232 @@ describe("removeStringValues", function() {
   });
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function removeStringValues(obj) {
+  for(var x in obj) {
+    if(typeof obj[x] === "string") {
+      delete obj[x];
+    }
+  }
+  return obj;
+}
+*****************************************************************************************************************
+preImmersive-buildingBlocksMastery-079-convertDoubleSpaceToSingle
+
+Write a function called “convertDoubleSpaceToSingle”.
+
+Given a string, “convertDoubleSpaceToSingle” returns the passed in string, with all the double spaces converted to single spaces.
+
+var output = convertDoubleSpaceToSingle("string  with  double  spaces");
+console.log(output); // --> "string with double spaces"
+Notes:
+* In order to do this problem, you should be familiar with “String.split”, and “Array.join”.
+
+Your Code Should Pass:
+
+describe("convertDoubleSpaceToSingle", function() {
+  it("should return a string", function() {
+    expect(typeof convertDoubleSpaceToSingle("This  here sentence")).toBe("string");
+  });
+  it("should return the passed in string, with any double spaces converted to single spaces", function() {
+    expect(convertDoubleSpaceToSingle("this  here  string")).toBe("this here string");
+  });
+  it("should return the passed in string when there are no double spaces", function() {
+    expect(convertDoubleSpaceToSingle("this here string")).toBe("this here string");
+  });
+  it("should return an empty string when passed an empty string", function() {
+    expect(convertDoubleSpaceToSingle("")).toBe("");
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function convertDoubleSpaceToSingle(str) {
+  return  str = str.replace(/  /g, " "); // if str.replace("  ", " ") will only do it once, g is for globally
+}
+// or 
+function convertDoubleSpaceToSingle(str) {
+  return str.split("  ").join(" ");
+}
+********************************************************************************************************************
+preImmersive-buildingBlocksMastery-080-joinThreeArrays
+
+Write a function called “joinThreeArrays”.
+
+Given three arrays, “joinThreeArrays” returns an array with the elements of “arr1” in order followed by the elements in “arr2” in order followed by the elements of “arr3” in order.
+
+var output = joinThreeArrays([1, 2], [3, 4], [5, 6]);
+console.log(output); // --> [1, 2, 3, 4, 5, 6]
+You should be familiar with the “concat” method for this problem.
+
+Your Code Should Pass:
+
+describe("joinThreeArrays", function() {
+  it("should return an array", function() {
+    expect(Array.isArray(joinThreeArrays(['a', 'b'], [1, 3], [true, false]))).toBe(true);
+  });
+  it("should return an array with the elements from the first and then the second array", function() {
+    expect(joinThreeArrays(['a', 'b'], [1, 3], [true, false])).toEqual(['a', 'b', 1, 3, true, false]);
+  });
+  it("should handle empty arrays in the first position", function() {
+    expect(joinThreeArrays([], [1, 3], [true, false])).toEqual([1, 3, true, false]);
+  });
+  it("should handle empty arrays in the second position", function() {
+    expect(joinThreeArrays(['a', 'b'], [], [true, false])).toEqual(['a', 'b', true, false]);
+  });
+  it("should handle empty arrays in the third position", function() {
+    expect(joinThreeArrays(['a', 'b'], [1, 3], [])).toEqual(['a', 'b', 1, 3]);
+  });
+  it("should handle empty arrays in all positions", function() {
+    expect(joinThreeArrays([], [], [])).toEqual([]);
+  });
+});
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function joinThreeArrays(arr1, arr2, arr3) {
+  var arr = arr1.concat(arr2.concat(arr3));
+  return arr;
+}
+// or 
+function joinThreeArrays(arr1, arr2, arr3) {
+  return arr1.concat(arr2, arr3);
+};
+*********************************************************************************************************************
+preImmersive-buildingBlocksMastery-081-addToFrontOfNew
+
+Write a function called “addToFrontOfNew”.
+
+Given an array and an element, “addToFrontOfNew” returns a new array containing all the elements of the given array, with the given element added to the front.
+
+Important: It should be a NEW array instance, not the original array instance.
+
+var input = [1, 2];
+var output = addToFrontOfNew(input, 3);
+console.log(output); // --> [3, 1, 2];
+console.log(input); --> [1, 2]
+
+Your Code Should Pass:
+
+describe("addToFrontOfNew", function() {
+  it("should return an array", function() {
+    expect(Array.isArray(addToFrontOfNew([1, 2], 3))).toBe(true);
+  });
+  it("should add an element to the end of an array", function() {
+    expect(addToFrontOfNew([1, 2], 3)).toEqual([3, 1, 2]);
+  });
+  it("should add an element to the end of an empty array", function() {
+    expect(addToFrontOfNew([], 3)).toEqual([3]);
+  });
+  it("should leave arr unmodified", function() {
+    var originalArray = [1, 2];
+    var newArray = addToFrontOfNew(originalArray, 3);
+    expect(originalArray).toEqual([1, 2]);
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+var input = [1, 2];
+
+function addToFrontOfNew(arr, element) {
+ return [element].concat(arr); // element can be almost anything but
+                               // needs to be inside square brackets
+                               // The only use you'll have for square brackets in javascript will be 
+                               // for getting/setting a property on an object, or for creating an Array literal
+
+}
+
+var output = addToFrontOfNew(input, 3);
+console.log(output);
+// or 
+function addToFrontOfNew(arr, element) {
+
+arr2 =  arr.slice();
+ arr2.unshift(element);
+ return arr2;
+
+}
+// or
+function addToFrontOfNew(arr, element) {
+  var newArray = arr.slice();
+  newArray.splice((-newArray.length), 0, element);
+  return newArray;
+}
+// or
+function addToFrontOfNew(arr, element) {
+  var arr = arr.slice();
+  arr.unshift(element);
+  return arr;
+}
+******************************************************************************************************************************
+preImmersive-buildingBlocksMastery-082-addToBackOfNew
+
+Write a function called “addToBackNew”.
+
+Given an array and an element, “addToBackNew” returns a clone of the given array, with the given element added to the end.
+
+Important: It should be a NEW array instance, not the original array instance.
+
+var input = [1, 2];
+var output = addToBackOfNew(input, 3);
+console.log(input); // --> [1, 2]
+console.log(output); // --> [1, 2, 3]
+
+Your Code Should Pass:
+
+describe("addToBackOfNew", function() {
+  it("should return an array", function() {
+    expect(Array.isArray(addToBackOfNew([1, 2], 3))).toBe(true);
+  });
+  it("should add an element to the end of an array", function() {
+    expect(addToBackOfNew([1, 2], 3)).toEqual([1, 2, 3]);
+  });
+  it("should add an element to the end of an empty array", function() {
+    expect(addToBackOfNew([], 3)).toEqual([3]);
+  });
+  it("should leave arr unmodified", function() {
+    var originalArray = [1, 2];
+    var newArray = addToBackOfNew(originalArray, 3);
+    expect(originalArray).toEqual([1, 2]);
+  });
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+var input = [1, 2];
+
+function addToBackOfNew(arr, element) {
+  var newArr = arr.concat(element)
+  return newArr;
+}
+
+var output = addToBackOfNew(input, 3);
+console.log(output);
+// or
+function addToBackOfNew(arr, element) {
+  arr2 =  arr.slice();
+  arr2.push(element);
+  return arr2;
+}
+***********************************************************************************************************************
+preImmersive-buildingBlocksMastery-083-getAllElementsButNth*
+
+Write a function called “getAllElementsButNth”.
+
+Given an array and an index, “getAllElementsButNth” returns an array with all the elements but the nth.
+
+var output = getAllElementsButNth(['a', 'b', 'c'], 1);
+console.log(output); // --> ['a', 'c']
+
+Your Code Should Pass:
+
+describe("getAllElementsButNth", function() {
+  it("should return an array", function() {
+    expect(Array.isArray(getAllElementsButNth([4, 5, 6], 2))).toBe(true);
+  });
+  it("should return an array with all the elements of the passed in array, except for the nth", function() {
+    expect(getAllElementsButNth([4, 5, 6], 0)).toEqual([5, 6]);
+  });
+  it("should return an empty array when passed in a single element array", function() {
+    expect(getAllElementsButNth([4], 0)).toEqual([]);
+  });
+  it("should return a mirror of the original array when passed an n out of range", function() {
+    expect(getAllElementsButNth([4], 10)).toEqual([4]);
+  });
+  it("should return an empty array when passed in an empty array", function() {
+    expect(getAllElementsButNth([])).toEqual([]);
+  });
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
