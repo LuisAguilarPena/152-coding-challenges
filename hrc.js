@@ -2673,3 +2673,149 @@ describe("removeOddValues", function() {
   });
 });
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function removeOddValues(obj) {
+  for (var x in obj) {
+    if(obj[x]%2===1) {
+      delete obj[x];
+    }
+  }
+}
+*****************************************************************************************************************************
+preImmersive-buildingBlocksMastery-076-removeArrayValues
+
+Write a function called “removeArrayValues”.
+
+Given an object, “removeArrayValues” removes any properties whose values are arrays.
+
+var obj = {
+  a: [1, 3, 4],
+  b: 2,
+  c: ['hi', 'there']
+}
+removeArrayValues(obj);
+console.log(obj); // --> { b: 2 }
+
+Your Code Should Pass:
+
+describe("removeArrayValues", function() {
+  it("should remove any properties with values that are arrays", function() {
+    var obj = {
+      a: [true, false],
+      b: 2,
+      c: [8, 0],
+      d: 4
+    };
+    var result = {
+      b: 2,
+      d: 4
+    };
+    removeArrayValues(obj);
+    expect(obj).toEqual(result);
+  });
+});
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+var obj = {
+  a: [1, 3, 4],
+  b: 2,
+  c: ['hi', 'there']
+}
+removeArrayValues(obj);
+console.log(obj); // --> { b: 2 }
+
+function removeArrayValues(obj) {
+  for (var x in obj) {
+    if (typeof obj[x] === "object") {
+      delete obj[x];
+    }
+  }
+  return obj;
+}
+// or
+function removeArrayValues(obj) {
+  for (k in obj) {
+    if (Array.isArray(obj[k])) delete obj[k];
+  }
+}
+***********************************************************************************************************************
+preImmersive-buildingBlocksMastery-077-removeNumberValues
+
+Write a function called “removeNumberValues”.
+
+Given an object, “removeNumberValues” removes any properties whose values are numbers.
+
+var obj = {
+  a: 2,
+  b: 'remaining',
+  c: 4
+};
+removeNumberValues(obj);
+console.log(obj); // --> { b: 'remaining' }
+Your Code Should Pass:
+
+describe("removeNumberValues", function() {
+  it("should remove any properties with values that are numbers", function() {
+    var obj = {
+      a: [true, false],
+      b: 2,
+      c: [8, 0],
+      d: 4
+    };
+    var result = {
+      a: [true, false],
+      c: [8, 0]
+    };
+    removeNumberValues(obj);
+    expect(obj).toEqual(result);
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function removeNumberValues(obj) {
+  for(var x in obj) {
+    if (typeof obj[x] === "number") {
+      delete obj[x];
+    }
+  }
+  return obj;
+}
+// or 
+function removeNumberValues(obj) {
+  for (var key in obj) {
+    if (obj[key].length === undefined) {
+      delete obj[key];
+    }
+  }
+  return obj;
+}
+**************************************************************************************************************************+
+preImmersive-buildingBlocksMastery-078-removeStringValues
+
+Write a function called “removeStringValues”.
+
+Given an object, “removeStringValues” removes any properties on the given object whose values are strings.
+
+var obj = {
+  name: 'Sam',
+  age: 20
+}
+removeStringValues(obj);
+console.log(obj); // { age: 20 }
+
+Your Code Should Pass:
+
+describe("removeStringValues", function() {
+  it("should remove any properties with values that are strings", function() {
+    var obj = {
+      a: "hello",
+      b: 2,
+      c: "montana",
+      d: 4
+    };
+    var result = {
+      b: 2,
+      d: 4
+    };
+    removeStringValues(obj);
+    expect(obj).toEqual(result);
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
