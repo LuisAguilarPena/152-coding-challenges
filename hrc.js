@@ -3048,3 +3048,209 @@ describe("getAllElementsButNth", function() {
   });
 });
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+var arr = ["a","b","c"];
+
+function getAllElementsButNth(array, n) {
+  var newArr = array.slice(); // unnecessary already had the required array
+  newArr.splice(n, 1); // use array.splice
+  return newArr;
+}
+
+var output = getAllElementsButNth(['a', 'b', 'c'], 1);
+console.log(output); // --> ['a', 'c']
+// or
+function getAllElementsButNth(array, n) {
+  array.splice(n,1);
+  return array;
+}
+*******************************************************************************************************
+preImmersive-buildingBlocksMastery-084-areValidCredentials
+
+Write a function called “areValidCredentials”.
+
+Given a name and a password, “areValidCredentials”, returns true if the name is longer than 3 characters, AND, the password is at least 8 characters long. Otherwise it returns false.
+
+var output = areValidCredentials('Ritu', 'mylongpassword')
+console.log(output); // --> true
+
+Your Code Should Pass:
+
+describe("areValidCredentials", function() {
+  it("should return a boolean", function() {
+    expect(typeof areValidCredentials("Ritu", "mylongpassword")).toEqual("boolean");
+  });
+  it("should return true if the name is longer than 3 characters and the password is at least 8 characters", function() {
+    expect(areValidCredentials("Ritu", "mylongpassword")).toBe(true);
+  });
+  it("should return false if the name is less than 3 characters", function() {
+    expect(areValidCredentials("me", "mylongpassword")).toBe(false);
+  });
+  it("should return false if the password is not at least 8 characters", function() {
+    expect(areValidCredentials("Someone", "1234567")).toBe(false);
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function areValidCredentials(name, password) {
+  return name.length>3 && password.length>8 ? true : false;
+}
+var output = areValidCredentials('Ritu', 'mylongpassword')
+console.log(output); // --> true
+// or 
+function areValidCredentials(name, password) {
+  return name.length > 3 && password.length >= 8
+}
+********************************************************************************************************************
+preImmersive-buildingBlocksMastery-085-getIndexOf
+
+Write a function called “getIndexOf”.
+
+Given a character and a string, “getIndexOf” returns the first position of the given character in the given string.
+
+Notes:
+* Strings are zero indexed, meaning the first character in a string is at position 0.
+* When a string contains more than one occurrence of a character, it should return the index of its first occurrence.
+* If the character does not exist in the string, it should return -1.
+* Do not use the native indexOf function in your implementation.
+
+var output = getIndexOf('a', 'I am a hacker');
+console.log(output); // --> 2
+
+Your Code Should Pass:
+
+describe("getIndexOf", function() {
+  it("should not use indexOf", function() {
+    var body = getIndexOf.toString();
+    expect(/indexOf/.test(body)).toBe(false);
+    expect(getIndexOf("a", "I am a hacker")).toBe(2);
+  });
+  it("should return a number", function() {
+    expect(typeof getIndexOf("a", "I am a hacker")).toBe("number");
+  });
+  it("should return the index of the first occurence of a string", function() {
+    expect(getIndexOf("a", "I am a hacker")).toBe(2);
+  });
+  it("should return -1 when the character does not occur in the string", function() {
+    expect(getIndexOf("x", "I am a hacker")).toBe(-1);
+  });
+});
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 1. iterate through the str
+// 2. locate the char in str that is equal
+// 3. return that char position
+function getIndexOf(char, str) {
+  for (var x = 0; x < str.length; x++) { //loop/ite thru str
+    if (str[x] === char) { // if char in str index x is equal to char
+      return x; // return the index
+    }
+  }  
+  return -1;  //If the character does not exist in the string, it should return -1.
+}
+// or
+function getIndexOf(char, str) {
+  return str.search(char, 'i');
+}
+// or
+function getIndexOf(char, str) {
+  if (str.includes(char)=== false )
+      return -1
+ var char_arr = str.split('');
+  for (var i = 0; i < char_arr.length; i++) {
+    if (char_arr[i] == char) {
+      count = i;
+      break;
+    }
+  }
+  return count;
+} 
+*******************************************************************************************************************
+preImmersive-buildingBlocksMastery-086-findMinLengthOfThreeWords
+
+Write a function called “findMinLengthOfThreeWords”.
+
+Given 3 words, “findMinLengthOfThreeWords” returns the length of the shortest word.
+
+var output = findMinLengthOfThreeWords('a', 'be', 'see');
+console.log(output); // --> 1
+
+Your Code Should Pass:
+
+describe("findMinLengthOfThreeWords", function() {
+  it("should return a number", function() {
+    expect(typeof findMinLengthOfThreeWords("a", "be", "see")).toBe("number");
+  });
+  it("should return the minimimum length of three words", function() {
+    expect(findMinLengthOfThreeWords("a", "be", "see")).toBe(1);
+  });
+  it("should return the minimimum length of three words when there is a tie", function() {
+    expect(findMinLengthOfThreeWords("these", "three", "words")).toBe(5);
+  });
+});
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function findMinLengthOfThreeWords(word1, word2, word3) {
+  return Math.min(word1.length, word2.length, word3.length);
+}
+
+// or
+
+// 1. check length of individual words
+// 2. compare lengths of words
+// 3. return the length of the shortest words
+
+function findMinLengthOfThreeWords(word1, word2, word3) {
+  var x = word1.length;
+  var y = word2.length;
+  var z = word3.length;
+  if (x<(y&&z)) {
+    return x;
+  } else if (y<(x&&z)) {
+    return y;
+  } else {
+    return z;
+  }
+}
+***********************************************************************************************************************
+preImmersive-buildingBlocksMastery-087-findMaxLengthOfThreeWords
+
+Write a function called “findMaxLengthOfThreeWords”.
+
+Given 3 words, “findMaxLengthOfThreeWords” returns the length of the longest word.
+
+var output = findMaxLengthOfThreeWords('a', 'be', 'see');
+console.log(output); // --> 3
+
+Your Code Should Pass:
+
+describe("findMaxLengthOfThreeWords", function() {
+  it("should return a string", function() {
+    expect(typeof findMaxLengthOfThreeWords("a", "be", "see")).toBe("number");
+  });
+  it("should return the maximimum length of three words", function() {
+    expect(findMaxLengthOfThreeWords("a", "be", "see")).toBe(3);
+  });
+  it("should return the maximimum length of three words when there is a tie", function() {
+    expect(findMaxLengthOfThreeWords("these", "three", "words")).toBe(5);
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+
+// 1. check length of individual words
+// 2. compare lengths of words
+// 3. return the length of the longest word
+// Math.max([x[, y[, …]]]) Returns the largest of zero or more numbers.
+
+function findMaxLengthOfThreeWords(word1, word2, word3) {
+  var x = word1.length;
+  var y = word2.length;
+  var z = word3.length;
+  if (x>(y&&z)) {
+    return x;
+  } else if (y>(x&&z)) {
+    return y;
+  } else {
+    return z;
+  }
+}
+// or
+function findMaxLengthOfThreeWords(word1, word2, word3) {
+ return Math.max(word1.length, word2.length, word3.length);
+}
+***********************************************************************************************************************
