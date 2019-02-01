@@ -1687,6 +1687,21 @@ function getElementsAfter(array, n) {
   arr = array.slice(n+1);
   return arr;
 }
+// or
+function getElementsAfter(array, n) {
+  // create new array
+  var newArray = [];
+  // loop through the input array 
+  for(var i = n + 1; i < array.length; i++ ){
+  // if index > n
+    // if(i >= n){
+  // add to the new array
+      newArray.push(array[i])
+    // }  
+  }
+    // return  the new array
+   return newArray
+}
 **********************************************************************************************************************************
 preImmersive-buildingBlocksMastery-055-getElementsUpTo
 
@@ -3254,3 +3269,172 @@ function findMaxLengthOfThreeWords(word1, word2, word3) {
  return Math.max(word1.length, word2.length, word3.length);
 }
 ***********************************************************************************************************************
+preImmersive-buildingBlocksMastery-088-getElementsThatEqual10AtProperty*
+
+Write a function called “getElementsThatEqual10AtProperty”.
+
+Given an object and a key, “getElementsThatEqual10AtProperty” returns an array containing all the elements of the array located at the given key that are equal to ten.
+
+Notes:
+* If the array is empty, it should return an empty array.
+* If the array contains no elements that are equal to 10, it should return an empty array.
+* If the property at the given key is not an array, it should return an empty array.
+* If there is no property at the key, it should return an empty array.
+
+var obj = {
+  key: [1000, 10, 50, 10]
+};
+var output = getElementsThatEqual10AtProperty(obj, 'key');
+console.log(output); // --> [10, 10]
+
+Your Code Should Pass:
+
+describe("getElementsThatEqual10AtProperty", function() {
+  it("should return an array containing all the elements that equal 10 in the array located at key", function() {
+    var obj = {
+      array: [10, 20, 40]
+    };
+    expect(getElementsThatEqual10AtProperty(obj, "array")).toEqual([10]);
+  });
+  it("should return an empty array if the array has no elements that equal 10", function() {
+    var obj = {
+      array: [1, 3]
+    };
+    expect(getElementsThatEqual10AtProperty(obj, "array")).toEqual([]);
+  });
+  it("should return an empty array if the array is empty", function() {
+    var obj = {
+      array: []
+    };
+    expect(getElementsThatEqual10AtProperty(obj, "array")).toEqual([]);
+  });
+  it("should return an empty array if the property is not an array", function() {
+    var obj = {
+      array: "sike"
+    };
+    expect(getElementsThatEqual10AtProperty(obj, "array")).toEqual([]);
+  });
+  it("should return an empty array if the property does not exist", function() {
+    var obj = {
+      what: "sike"
+    };
+    expect(getElementsThatEqual10AtProperty(obj, "array")).toEqual([]);
+  });
+});
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 1. access array property inside object
+// 2. check array values
+// 3. return an array with the values that are equal to ten
+
+function getElementsThatEqual10AtProperty(obj, key) {
+    var newArray = [];
+    for (var x in obj[key])
+    if (obj[key][x] === 10) {
+      newArray.push(obj[key][x]);
+    }
+  return newArray  
+}
+// or
+function getElementsThatEqual10AtProperty(obj, key) {
+  if (!Array.isArray(obj[key])) return [];
+  return obj[key].filter((e) => e===10);
+}
+// or
+function getElementsThatEqual10AtProperty(obj, key) {
+
+var array1 = [];
+
+for(var keys in obj){
+  for(i = 0; i < obj[keys].length; i++){
+   if (obj[keys][i] === 10){
+   array1.push(obj[keys][i]); 
+   }
+}
+}
+return array1;
+}
+*****************************************************************************************************************
+preImmersive-buildingBlocksMastery-090-getElementsLessThan100AtProperty*
+
+Write a function called “getElementsLessThan100AtProperty”.
+
+Given an object and a key, “getElementsLessThan100AtProperty” returns an array containing all the elements of the array located at the given key that are less than 100.
+
+Notes:
+* If the array is empty, it should return an empty array.
+* If the array contains no elements less than 100, it should return an empty array.
+* If the property at the given key is not an array, it should return an empty array.
+* If there is no property at the key, it should return an empty array.
+
+var obj = {
+  key: [1000, 20, 50, 500]
+};
+var output = getElementsLessThan100AtProperty(obj, 'key');
+console.log(output); // --> [20, 50]
+
+Your Code Should Pass:
+
+describe("getElementsLessThan100AtProperty", function() {
+  it("should return an array containing all the elements less than 100 in the array located at key", function() {
+    var obj = {
+      array: [100, 20, 40]
+    };
+    expect(getElementsLessThan100AtProperty(obj, "array")).toEqual([20, 40]);
+  });
+  it("should return an empty array if the array has no elements less than 100", function() {
+    var obj = {
+      array: [1000, 3000]
+    };
+    expect(getElementsLessThan100AtProperty(obj, "array")).toEqual([]);
+  });
+  it("should return an empty array if the array is empty", function() {
+    var obj = {
+      array: []
+    };
+    expect(getElementsLessThan100AtProperty(obj, "array")).toEqual([]);
+  });
+  it("should return an empty array if the property is not an array", function() {
+    var obj = {
+      array: "sike"
+    };
+    expect(getElementsLessThan100AtProperty(obj, "array")).toEqual([]);
+  });
+  it("should return an empty array if the property does not exist", function() {
+    var obj = {
+      what: "sike"
+    };
+    expect(getElementsLessThan100AtProperty(obj, "array")).toEqual([]);
+  });
+});
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 1. access array property inside object
+// 2. check array values
+// 3. return an array with the values that are less than 100
+
+function getElementsLessThan100AtProperty(obj, key) {
+    var newArray = [];
+    for (var x in obj[key]) {
+      if (obj[key][x] < 100) {
+        newArray.push(obj[key][x]);
+      }
+    }
+  return newArray  
+}
+// or
+function getElementsLessThan100AtProperty(obj, key) {
+  if (!Array.isArray(obj[key])) return [];
+  return obj[key].filter((e) => e<100);
+}
+// or
+function getElementsLessThan100AtProperty(obj, key) {
+var array1 = [];
+for(var keys in obj){
+  for(i = 0; i < obj[keys].length; i++){
+   if (obj[keys][i] < 100){
+   array1.push(obj[keys][i]); 
+   }
+}
+}
+return array1;
+}
+*********************************************************************************************************************
