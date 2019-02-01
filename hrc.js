@@ -2494,7 +2494,7 @@ describe("removeNumbersLessThan", function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function removeNumbersLessThan(num, obj) {
   
-    for (var x in obj) {
+    for (var x input obj) {
       if (obj[x]<num) { 
         delete obj[x];
       }
@@ -3354,6 +3354,115 @@ for(var keys in obj){
 return array1;
 }
 *****************************************************************************************************************
+preImmersive-buildingBlocksMastery-089-select*
+
+Write a function called “select”.
+
+Given an array and an object, “select” returns a new object whose properties are those in the given object AND whose keys are present in the given array.
+
+Notes:
+* If keys are present in the given array, but are not in the given object, it should ignore them. 
+* It does not modify the passed in object.
+
+var arr = ['a', 'c', 'e'];
+var obj = {
+  a: 1,
+  b: 2,
+  c: 3,
+  d: 4
+};
+var output = select(arr, obj);
+console.log(output); // --> { a: 1, c: 3 }
+
+Your Code Should Pass:
+
+describe("select", function() {
+  it("should return an object", function() {
+    var keys = ["a", "c", "e"];
+    var obj = {
+      a: 1,
+      b: 2,
+      c: 3,
+      d: 4
+    };
+    expect(typeof select(keys, obj)).toBe("object");
+  });
+  it("should return an object with properties in from the passed in object whose keys are present in the given function", function() {
+    var keys = ["a", "c", "e"];
+    var obj = {
+      a: 1,
+      b: 2,
+      c: 3,
+      d: 4
+    };
+    var result = {
+      a: 1,
+      c: 3
+    };
+    expect(select(keys, obj)).toEqual(result);
+  });
+  it("should not modify the passed in object", function() {
+    var keys = ["a", "c", "e"];
+    var obj = {
+      a: 1,
+      b: 2,
+      c: 3,
+      d: 4
+    };
+    select(keys, obj)
+    expect(Object.keys(obj).length).toEqual(4);
+  });
+});
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//  0. create a new empty object
+//  1. access elements in array and keys in object 
+//  2. match elements in array with keys in object
+//  3. return the new object only with properties = to the ones on the orginal object
+//  && keys = to the elements in the array
+
+var arr = ['a', 'c', 'e'];
+var obj = {
+  a: 1,
+  b: 2,
+  c: 3,
+  d: 4
+};
+
+function select(arr, obj) {
+  var newObj = {}; // 0. empty object that will store matching elements/properties
+  for (var x = 0; x < arr.length; x++) { // 1. with a loop we access elements in array
+    if (typeof obj[arr[x]] !== "undefined") { // 1. -> obj[a, b, ...]=1 arr[0, 1, ...]="a"...
+      newObj[arr[x]] = obj[arr[x]] // 2. -> newObj[key]=obj[value]...  
+    }
+  }
+  return newObj; // 3
+}
+var output = select(arr, obj); // to test 
+console.log(output); 
+console.log(arr); // untouched
+console.log(obj);
+// or
+function select(arr, obj) {
+  var newObj = {};
+  
+  for (key in obj) {
+    if (arr.includes(key)) newObj[key] = obj[key];
+  }
+  
+  return newObj;
+}
+// or
+function select(arr, obj) {
+  var newObj = {};
+  for(var i = 0; i < arr.length; i++){
+    for(var prop in obj){
+      if(arr[i] === prop){
+        newObj[prop] = obj[prop];
+      }
+    }
+  }
+  return newObj;
+**************************************************************************************************************************
 preImmersive-buildingBlocksMastery-090-getElementsLessThan100AtProperty*
 
 Write a function called “getElementsLessThan100AtProperty”.
@@ -3438,3 +3547,179 @@ for(var keys in obj){
 return array1;
 }
 *********************************************************************************************************************
+preImmersive-buildingBlocksMastery-091-countAllCharacters
+
+Write a function called “countAllCharacters”.
+
+Given a string, “countAllCharacters” returns an object where each key is a character in the given string. The value of each key should be how many times each character appeared in the given string.
+
+Notes:
+* If given an empty string, countAllCharacters should return an empty object.
+
+var output = countAllCharacters('banana');
+console.log(output); // --> {b: 1, a: 3, n: 2}
+
+Your Code Should Pass:
+
+describe("countAllCharacters", function() {
+  it("should return an object", function() {
+    expect(typeof countAllCharacters("banana")).toBe("object");
+  });
+  it("should return an object where each property gives a character in the string, with its number of appearances", function() {
+    var result = {
+      s: 1,
+      a: 3,
+      m: 1,
+      n: 1,
+      t: 1,
+      h: 1
+    };
+    expect(countAllCharacters("samantha")).toEqual(result);
+  });
+  it("should return an object empty object if passed an empty string", function() {
+    expect(countAllCharacters("")).toEqual({});
+  });
+});
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 1. create an empty object ot store properties
+// 2. access all of the characters inside the string (iterate)
+// 3. convert those characters into keys for the emptyobject
+// 4. The value of each key is going to be determined by the number of times they appear in the string
+// 5. return the not empty newobj with the properties
+
+function countAllCharacters(str) {
+  var newObj = {}; 
+  for (x = 0; x < str.length; x++) {
+    if (newObj[str[x]] === undefined) { // newObj[char], str[index]. when you check 
+            // inside an empty obj with a key that is not there will return undefined
+            // so that means that key has not been added
+      newObj[str[x]] = 0; // if thats the case add that key with a 0 value      
+    }
+    newObj[str[x]]++; // this notation will actually add one to the value of that particular key
+  } // so if it was 0 it will now be 1, and does that for every key only new characters will be 
+  // created with the if statement otherwise they will just have their values incremented by one
+  return newObj;
+}
+
+var output = countAllCharacters('banana');
+console.log(output); // --> {b: 1, a: 3, n: 2}
+// or
+function countAllCharacters(str) {
+  var chars = {};
+  str.split("").forEach((c) => {
+    chars[c] = (chars[c] === undefined) ? 1 : chars[c] + 1;
+  });
+  
+  return chars;
+}
+// or
+function countAllCharacters(str) {
+  var newObj = {}; // placeholder for the new obj
+  for (i = 0; i < str.length; i++) { // looping through given string
+    if (!newObj[str[i]]) { // checks if property already exists in the newbj (placeholder)
+      newObj[str[i]] = 1; // creates the new property when it does not exist
+    } else { 
+      newObj[str[i]]++ // adds to the count if the property already exists
+    }
+  }
+  return newObj
+}
+***************************************************************************************************************************
+preImmersive-buildingBlocksMastery-092-getElementsGreaterThan10AtProperty*
+Write a function called “getElementsGreaterThan10AtProperty”.
+
+Given an object and a key, “getElementsGreaterThan10AtProperty” returns an array containing the elements within the array, located at the given key, that are greater than 10.
+
+Notes:
+* If the array is empty, it should return an empty array.
+* If the array contains no elements greater than 10, it should return an empty array.
+* If the property at the given key is not an array, it should return an empty array.
+* If there is no property at the key, it should return an empty array.
+
+var obj = {
+  key: [1, 20, 30]
+};
+var output = getElementsGreaterThan10AtProperty(obj, 'key');
+console.log(output); // --> [20, 30]
+
+Your Code Should Pass:
+
+describe("getElementsGreaterThan10AtProperty", function() {
+  it("should return an array containing all the elements greater than 10 in the array located at key", function() {
+    var obj = {
+      array: [10, 20, 40]
+    };
+    expect(getElementsGreaterThan10AtProperty(obj, "array")).toEqual([20, 40]);
+  });
+  it("should return an empty array if the array has no elements greater than 10", function() {
+    var obj = {
+      array: [1, 3]
+    };
+    expect(getElementsGreaterThan10AtProperty(obj, "array")).toEqual([]);
+  });
+  it("should return an empty array if the array is empty", function() {
+    var obj = {
+      array: []
+    };
+    expect(getElementsGreaterThan10AtProperty(obj, "array")).toEqual([]);
+  });
+  it("should return an empty array if the property is not an array", function() {
+    var obj = {
+      array: "sike"
+    };
+    expect(getElementsGreaterThan10AtProperty(obj, "array")).toEqual([]);
+  });
+  it("should return an empty array if the property does not exist", function() {
+    var obj = {
+      what: "sike"
+    };
+    expect(getElementsGreaterThan10AtProperty(obj, "array")).toEqual([]);
+  });
+});
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 0. how to access an array value within an object obj["key"][index];
+// 1. how to add elements into an array arr.push(element)
+
+var obj = {
+  key: [1, 20, 30]
+};
+
+function getElementsGreaterThan10AtProperty(obj, key) {
+  var arr =[];
+  if (obj[key] === undefined) {
+    return arr;
+  }
+  for (x = 0; x < obj[key].length; x++) {
+   if (obj[key][x] > 10) {
+     arr.push(obj[key][x]);
+   }
+  }
+  return arr;
+}
+
+var output = getElementsGreaterThan10AtProperty(obj, 'key');
+console.log(output); // --> [20, 30]
+// or
+function getElementsGreaterThan10AtProperty(obj, key) {
+  if (!Array.isArray(obj[key])) return [];
+  return obj[key].filter((e) => e>10);
+}
+// or
+function getElementsGreaterThan10AtProperty(obj, key) {
+
+var array1 = [];
+
+for(var keys in obj){
+  for(i = 0; i < obj[keys].length; i++){
+   if (obj[keys][i] > 10){
+   array1.push(obj[keys][i]); 
+   }
+  }
+ }
+return array1;
+}
+// or
+function getElementsGreaterThan10AtProperty(obj, key) {
+    return !Array.isArray(obj[key]) ? [] : obj[key].filter(elm => elm > 10)
+}
+******************************************************************************************************************
