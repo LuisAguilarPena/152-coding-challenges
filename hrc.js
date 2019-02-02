@@ -4787,3 +4787,49 @@ function getEvenElementsAtProperty(obj, key) {
   }
 }
 *******************************************************************************************************************************
+preImmersive-buildingBlocksMastery-106-filterEvenLengthWords*
+
+Write a function called “filterEvenLengthWords”.
+
+Given an array of strings, “filterEvenLengthWords” returns an array containing only the elements of the given array whose length is an even number.
+
+var output = filterEvenLengthWords(['word', 'words', 'word', 'words']);
+console.log(output); // --> ['word', 'word']
+
+Your Code Should Pass:
+
+describe("filterEvenLengthWords", function() {
+  it("should return an array", function() {
+    expect(Array.isArray(filterEvenLengthWords(["there", "it", "is", "now"]))).toBe(true);
+  });
+  it("should return an array with even lengthed words", function() {
+    expect(filterEvenLengthWords(["there", "it", "is", "now"])).toEqual(["it", "is"]);
+  });
+  it("should return an empty array when passed an array with no even lengthed words", function() {
+    expect(filterEvenLengthWords(["there", "now"])).toEqual([]);
+  });
+  it("should return an empty array when passed an empty array", function() {
+    expect(filterEvenLengthWords([])).toEqual([]);
+  });
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function filterEvenLengthWords(words) {
+  var arr = [];
+  
+  for (var x = 0 ; x < words.length ; x++) {
+    if (words[x].length % 2 === 0) {
+      arr.push(words[x]);
+    }
+  }
+  return arr;
+}
+
+var output = filterEvenLengthWords(['word', 'words', 'word', 'words']);
+console.log(output); // --> ['word', 'word']
+
+// or 
+
+function filterEvenLengthWords(words) {
+  return words.filter((e) => e.length % 2 === 0);
+}
+**********************************************************************************************************************************
