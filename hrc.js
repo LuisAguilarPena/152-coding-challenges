@@ -3723,3 +3723,510 @@ function getElementsGreaterThan10AtProperty(obj, key) {
     return !Array.isArray(obj[key]) ? [] : obj[key].filter(elm => elm > 10)
 }
 ******************************************************************************************************************
+preImmersive-buildingBlocksMastery-093-removeElement*
+
+Write a function called “removeElement”.
+
+Given an array of elements, and a “discarder” parameter, “removeElement” returns an array containing the items in the given array that do not match the “discarder” parameter.
+
+Notes:
+* If all the elements match, it should return an empty array.
+* If an empty array is passed in, it should return an empty array.
+
+var output = removeElement([1, 2, 3, 2, 1], 2);
+console.log(output); // --> [1, 3, 1]
+
+Your Code Should Pass:
+
+describe("removeElement", function() {
+  it("should return an array", function() {
+    expect(Array.isArray(removeElement(["there", "it", "is", "there"]))).toBe(true);
+  });
+  it("return an array with all strings not matching 'discarder'", function() {
+    expect(removeElement(["there", "it", "is", "there"], "there")).toEqual(["it", "is"]);
+  });
+  it("return an array with all numbers not matching 'discarder'", function() {
+    expect(removeElement([1, 2, 4, 3, 1, 4], 4)).toEqual([1, 2, 3, 1]);
+  });
+  it("return an array with all booleans not matching 'discarder'", function() {
+    expect(removeElement([true, true, true, false, true], true)).toEqual([false]);
+  });
+  it("return an emtpy array when all elements match 'discarder'", function() {
+    expect(removeElement([true, true, true, true], true)).toEqual([]);
+  });
+  it("return an emtpy array when given an empty array", function() {
+    expect(removeElement([], 4)).toEqual([]);
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function removeElement(array, discarder) {
+  var arr = [];
+  
+  for (x = 0; x < array.length; x++) {
+    if (array[x] !== discarder) {
+      arr.push( array[x] );
+    }
+  }
+  return arr;
+}
+
+var output = removeElement([1, 2, 3, 2, 1], 2);
+console.log(output); // --> [1, 3, 1]
+// or
+function removeElement(array, discarder) {
+  return array.filter((x) => x !== discarder);
+}
+************************************************************************************************************************
+preImmersive-buildingBlocksMastery-094-getFirstElementOfProperty
+
+Write a function called “getFirstElementOfProperty”.
+
+Given an object and a key, “getFirstElementOfProperty” returns the first element of the array located at the given key.
+
+Notes:
+* If the array is empty, it should return undefined.
+* If the property at the given key is not an array, it should return undefined.
+* If there is no property at the key, it should return undefined.
+
+var obj = {
+  key: [1, 2, 4]
+};
+var output = getFirstElementOfProperty(obj, 'key');
+console.log(output); // --> 1
+
+Your Code Should Pass:
+
+describe("getFirstElementOfProperty", function() {
+  it("should return the first element of the array located at key", function() {
+    var obj = {
+      array: [1, 2, 4]
+    };
+    expect(getFirstElementOfProperty(obj, "array")).toBe(1);
+  });
+  it("should return undefined if the array is empty", function() {
+    var obj = {
+      array: []
+    };
+    expect(getFirstElementOfProperty(obj, "array")).toBe(undefined);
+  });
+  it("should return undefined if the property is not an array", function() {
+    var obj = {
+      array: "sike"
+    };
+    expect(getFirstElementOfProperty(obj, "array")).toBe(undefined);
+  });
+  it("should return undefined if the property does not exist", function() {
+    var obj = {
+      what: "sike"
+    };
+    expect(getFirstElementOfProperty(obj, "array")).toBe(undefined);
+  });
+});
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// access object property and return the first element of that array
+
+var obj = {
+  key: [1, 2, 4]
+};
+
+function getFirstElementOfProperty(obj, key) {
+  if (obj[key] === undefined) {
+    return undefined;
+  }
+  
+  if (typeof obj[key] !== "object") {
+    return undefined;
+  }
+  
+  return obj[key][0];
+}
+
+
+var output = getFirstElementOfProperty(obj, 'key');
+console.log(output); // --> 1
+
+// or
+
+function getFirstElementOfProperty(obj, key) {
+  if (!Array.isArray(obj[key])) return undefined;
+  return obj[key][0]
+}
+
+// or 
+
+function getFirstElementOfProperty(obj, key) {
+  if (Array.isArray(obj[key])) {
+    return obj[key][0];
+  } else {
+    return undefined;
+  }
+}
+
+// or
+
+function getFirstElementOfProperty(obj, key) {
+ //input is array looking for propety values 
+ //iterate throught obj  
+ // return first key 
+if(Array.isArray(obj[key]))
+ return obj[key][0]  
+}
+***********************************************************************************************************************
+preImmersive-buildingBlocksMastery-095-getNthElementOfProperty
+
+Write a function called “getNthElementOfProperty”.
+
+Given an object and a key, “getNthElementOfProperty” returns the nth element of an array located at the given key.
+
+Notes:
+* If the array is empty, it should return undefined.
+* If n is out of range, it should return undefined.
+* If the property at the given key is not an array, it should return undefined.
+* If there is no property at the key, it should return undefined.
+
+var obj = {
+  key: [1, 2, 6]
+};
+var output = getNthElementOfProperty(obj, 'key', 1);
+console.log(output); // --> 2
+
+Your Code Should Pass:
+
+describe("getNthElementOfProperty", function() {
+  it("should return the nth element of the array located at key", function() {
+    var obj = {
+      array: [1, 2, 4]
+    };
+    expect(getNthElementOfProperty(obj, "array", 2)).toBe(4);
+  });
+  it("should return undefined if the n is out of range", function() {
+    var obj = {
+      array: [1, 2, 4]
+    };
+    expect(getNthElementOfProperty(obj, "array", 8)).toBe(undefined);
+  });
+  it("should return undefined if the array is empty", function() {
+    var obj = {
+      array: []
+    };
+    expect(getNthElementOfProperty(obj, "array", 8)).toBe(undefined);
+  });
+  it("should return undefined if the property is not an array", function() {
+    var obj = {
+      array: "sike"
+    };
+    expect(getNthElementOfProperty(obj, "array", 8)).toBe(undefined);
+  });
+  it("should return undefined if the property does not exist", function() {
+    var obj = {
+      what: "sike"
+    };
+    expect(getNthElementOfProperty(obj, "array", 8)).toBe(undefined);
+  });
+});
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// how to access the obj->key->n obj["key"][index]
+
+var obj = {
+  key: [1, 2, 6]
+};
+
+function getNthElementOfProperty(obj, key, n) {
+  
+  return Array.isArray(obj[key]) ? obj[key][n] : undefined;
+}
+
+var output = getNthElementOfProperty(obj, 'key', 1);
+console.log(output); // --> 2
+
+// or
+
+function getNthElementOfProperty(obj, key, n) {
+  if (obj[key] === [] || typeof obj[key] !== 'object' || obj === {}) {
+    return undefined;
+  } else if (n > obj[key].length) {
+    return undefined;
+  } else {
+    return obj[key][n];
+  }
+  ****************************************************************************************************
+  preImmersive-buildingBlocksMastery-096-getLastElementOfProperty
+Write a function called “getLastElementOfProperty”.
+
+Given an object and a key, “getLastElementOfProperty” returns the last element of an array located at the given key.
+
+Notes:
+* If the array is empty, it should return undefined.
+* if the property at the given key is not an array, it should return undefined.
+* If there is no property at the key, it should return undefined.
+
+var obj = {
+  key: [1, 2, 5]
+};
+var output = getLastElementOfProperty(obj, 'key');
+console.log(output); // --> 5
+Your Code Should Pass:
+
+describe("getLastElementOfProperty", function() {
+  it("should return the last element of the array located at key", function() {
+    var obj = {
+      array: [1, 2, 4]
+    };
+    expect(getLastElementOfProperty(obj, "array")).toBe(4);
+  });
+  it("should return undefined if the array is empty", function() {
+    var obj = {
+      array: []
+    };
+    expect(getLastElementOfProperty(obj, "array")).toBe(undefined);
+  });
+  it("should return undefined if the property is not an array", function() {
+    var obj = {
+      array: "sike"
+    };
+    expect(getLastElementOfProperty(obj, "array")).toBe(undefined);
+  });
+  it("should return undefined if the property does not exist", function() {
+    var obj = {
+      what: "sike"
+    };
+    expect(getLastElementOfProperty(obj, "array")).toBe(undefined);
+  });
+});
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function getLastElementOfProperty(obj, key) {
+return Array.isArray(obj[key]) ? obj[key].pop() : undefined;
+}
+
+// or
+
+function getLastElementOfProperty(obj, key) {
+  if (!Array.isArray(obj[key])) return undefined;
+  return obj[key][obj[key].length-1]
+}
+**********************************************************************************************************************
+preImmersive-buildingBlocksMastery-097-keep*
+
+Write a function called “keep”.
+
+Given an array and a keeper element, “keep” returns an array containing the items that match the given keeper element.
+
+Notes:
+* If no elements match, “keep” should return an empty array.
+
+var output = keep([1, 2, 3, 2, 1], 2) 
+console.log(output); --> [2, 2]
+
+Your Code Should Pass:
+
+describe("keep", function() {
+  it("should return an array", function() {
+    expect(Array.isArray(keep(["there", "it", "is", "there"]))).toBe(true);
+  });
+  it("returns an array with all strings matching 'kept'", function() {
+    expect(keep(["there", "it", "is", "there"], "there")).toEqual(["there", "there"]);
+  });
+  it("returns an array with all numbers matching 'kept'", function() {
+    expect(keep([1, 2, 4, 3, 1, 4], 4)).toEqual([4, 4]);
+  });
+  it("returns an array with all booleans matching 'kept'", function() {
+    expect(keep([true, true, true, false, true], true)).toEqual([true, true, true, true]);
+  });
+  it("returns an emtpy array when no elements match 'kept'", function() {
+    expect(keep([true, true, true, false, true], 4)).toEqual([]);
+  });
+  it("returns an emtpy array when given an empty array", function() {
+    expect(keep([], 4)).toEqual([]);
+  });
+});
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function keep(array, keeper) {
+  var arr =[];
+  for (x = 0; x < array.length; x++) {
+    if (array[x] === keeper) {
+      arr.push(array[x]);
+    }
+  }
+  return arr;
+}
+// or
+function keep(array, keeper) {
+  return array.filter((e) => e===keeper);
+}
+**************************************************************************************************************
+preImmersive-buildingBlocksMastery-098-getOddLengthWordsAtProperty*
+
+Write a function called “getOddLengthWordsAtProperty”.
+
+Given an object and a key, “getOddLengthWordsAtProperty” returns an array containing all the odd length word elements of the array located at the given key.
+
+Notes:
+* If the array is empty, it should return an empty array.
+* If it contains no odd length elements, it should return an empty array.
+* If the property at the given key is not an array, it should return an empty array.
+* If there is no property at the given key, it should return an empty array.
+
+var obj = {
+  key: ['It', 'has', 'some', 'words']
+};
+var output = getOddLengthWordsAtProperty(obj, 'key');
+console.log(output); // --> ['has', 'words']
+
+Your Code Should Pass:
+
+describe("getOddLengthWordsAtProperty", function() {
+  it("should return an array containing all the odd length elements of the array located at key", function() {
+    var obj = {
+      array: ["a", "long", "night"]
+    };
+    expect(getOddLengthWordsAtProperty(obj, "array")).toEqual(["a", "night"]);
+  });
+  it("should return an empty array if the array has only no odd length elements", function() {
+    var obj = {
+      array: ["It", "is", "gone"]
+    };
+    expect(getOddLengthWordsAtProperty(obj, "array")).toEqual([]);
+  });
+  it("should return an empty array if the array is empty", function() {
+    var obj = {
+      array: []
+    };
+    expect(getOddLengthWordsAtProperty(obj, "array")).toEqual([]);
+  });
+  it("should return an empty array if the property is not an array", function() {
+    var obj = {
+      array: "sike"
+    };
+    expect(getOddLengthWordsAtProperty(obj, "array")).toEqual([]);
+  });
+  it("should return an empty array if the property does not exist", function() {
+    var obj = {
+      what: "sike"
+    };
+    expect(getOddLengthWordsAtProperty(obj, "array")).toEqual([]);
+  });
+});
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+var obj = {
+  key: ['It', 'has', 'some', 'words']
+};
+
+function getOddLengthWordsAtProperty(obj, key) {
+  var arr = [];
+  if (!Array.isArray(obj[key])) {
+    return [];
+  }
+  
+  for (var x in obj[key]) {
+    if (obj[key][x].length % 2 !== 0) {
+      arr.push(obj[key][x]);
+    }
+  } 
+  return arr;  
+}
+
+var output = getOddLengthWordsAtProperty(obj, 'key');
+console.log(output); // --> ['has', 'words']
+
+// or 
+
+var obj = {
+  key: ['It', 'has', 'some', 'words']
+};
+
+function getOddLengthWordsAtProperty(obj, key) {
+  var arr = [];
+  if (!Array.isArray(obj[key])) {
+    return [];
+  }
+  
+  for (x = 0 ; x < obj[key].length ; x++) {
+    if (obj[key][x].length % 2 !== 0) {
+      arr.push(obj[key][x]);
+    }
+  } 
+  return arr;  
+}
+
+var output = getOddLengthWordsAtProperty(obj, 'key');
+console.log(output); // --> ['has', 'words']
+
+// or
+
+function getOddLengthWordsAtProperty(obj, key) {
+  if (obj[key] === [] || !Array.isArray(obj[key])) return [];
+  return obj[key].filter((e) => e.length % 2 === 1);
+}
+**********************************************************************************************************************
+preImmersive-buildingBlocksMastery-099-computeAverageOfNumbers*
+
+Write a function called “computeAverageOfNumbers”.
+
+Given an array of numbers, “computeAverageOfNumbers” returns their average.
+
+Notes:
+* If given an empty array, it should return 0.
+
+var input = [1,2,3,4,5];
+var output = computeAverageOfNumbers(input);
+console.log(output); // --> 3
+
+Your Code Should Pass:
+
+describe("computeAverageOfNumbers", function() {
+  it("should return a number", function() {
+    expect(typeof(computeAverageOfNumbers([6, 8, 10]))).toBe("number");
+  });
+  it("should return the average of the numbers in the given array", function() {
+    expect(computeAverageOfNumbers([6, 8, 10])).toBe(8);
+  });
+  it("should return the average of negative numbers in the given array", function() {
+    expect(computeAverageOfNumbers([-6, -8, -10])).toBe(-8);
+  });
+  it("should return 0 if given an empty array", function() {
+    expect(computeAverageOfNumbers([])).toBe(0);
+  });
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+var input = [1,2,3,4,5];
+
+function computeAverageOfNumbers(nums) {
+  if (nums.length === 0) {
+    return 0;
+  }
+
+  y = 0;
+  for (x = 0; x < nums.length ; x++) {
+    y += nums[x];
+  }
+  return y/nums.length;
+}
+
+var output = computeAverageOfNumbers(input);
+console.log(output); // --> 3
+
+// or
+
+function computeAverageOfNumbers(nums) {
+  if (!nums.length) return 0;
+  return nums.reduce((a, b) => a + b) / nums.length;
+}
+
+// or
+
+function computeAverageOfNumbers(nums) {
+
+var sum = 0;
+
+
+for(var i = 0; i < nums.length; i++){
+  sum += nums[i];
+  var avg = sum/nums.length;
+ }
+ if(nums.length <= 0){
+   return 0;
+  }else{
+   return avg;
+ }
+}
+**********************************************************************************************************************
