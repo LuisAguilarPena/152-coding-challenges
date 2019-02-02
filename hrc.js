@@ -4602,3 +4602,188 @@ var arr = [];
 return arr;
 }
 **************************************************************************************************************************
+preImmersive-buildingBlocksMastery-104-getOddElementsAtProperty*
+
+Write a function called “getOddElementsAtProperty”.
+
+Given an object and a key, “getOddElementsAtProperty” returns an array containing all the odd elements of the array located at the given key.
+
+Notes:
+* If the array is empty, it should return an empty array.
+* If it contains no odd elements, it should return an empty array.
+* If the property at the given key is not an array, it should return an empty array.
+* If there is no property at the key, it should return an empty array.
+
+var obj = {
+  key: [1, 2, 3, 4, 5]
+};
+var output = getOddElementsAtProperty(obj, 'key');
+console.log(output); // --> [1, 3, 5]
+
+Your Code Should Pass:
+
+describe("getOddElementsAtProperty", function() {
+  it("should return an array containing all the odd elements of the array located at key", function() {
+    var obj = {
+      array: [1, 2, 7]
+    };
+    expect(getOddElementsAtProperty(obj, "array")).toEqual([1, 7]);
+  });
+  it("should return an empty array if the array has only no odd elements", function() {
+    var obj = {
+      array: [2, 30]
+    };
+    expect(getOddElementsAtProperty(obj, "array")).toEqual([]);
+  });
+  it("should return an empty array if the array is empty", function() {
+    var obj = {
+      array: []
+    };
+    expect(getOddElementsAtProperty(obj, "array")).toEqual([]);
+  });
+  it("should return an empty array if the property is not an array", function() {
+    var obj = {
+      array: "sike"
+    };
+    expect(getOddElementsAtProperty(obj, "array")).toEqual([]);
+  });
+  it("should return an empty array if the property does not exist", function() {
+    var obj = {
+      what: "sike"
+    };
+    expect(getOddElementsAtProperty(obj, "array")).toEqual([]);
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+var obj = {
+  key: [1, 2, 3, 4, 5]
+};
+
+function getOddElementsAtProperty(obj, key) {
+  var arr = [];
+  
+  if (!Array.isArray(obj[key])) {
+    return arr;
+  }
+  
+  for (var x = 0; x < obj[key].length ; x++) {
+    if (obj[key][x] % 2 !== 0) {
+      arr.push(obj[key][x]);
+    }
+  }
+  return arr;
+}
+
+// or
+
+function getOddElementsAtProperty(obj, key) {
+  if (obj[key] === [] || !Array.isArray(obj[key])) {
+    return [];
+  }
+  return obj[key].filter((x) => x % 2 === 1);
+}
+
+// or
+
+function getOddElementsAtProperty(obj, key) {
+ if (!Array.isArray(obj[key]) || obj[key].length < 1 || obj[key] === undefined) {
+   return [];
+ } else {
+   return obj[key].filter((e) => e % 2 === 1)
+ }
+}
+******************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-105-getEvenElementsAtProperty*
+
+Write a function called “getEvenElementsAtProperty”.
+
+Given an object and a key, “getEvenElementsAtProperty” returns an array containing all the even elements of the array located at the given key.
+
+Notes:
+* If the array is empty, it should return an empty array.
+* If the array contains no even elements, it should return an empty array.
+* If the property at the given key is not an array, it should return an empty array.
+* If there is no property at the given key, it should return an empty array.
+
+var obj = {
+  key: [1000, 11, 50, 17]
+};
+var output = getEvenElementsAtProperty(obj, 'key');
+console.log(output); // --> [1000, 50]
+
+Your Code Should Pass:
+
+describe("getEvenElementsAtProperty", function() {
+  it("should return an array containing all the even elements of the array located at key", function() {
+    var obj = {
+      array: [1, 2, 4]
+    };
+    expect(getEvenElementsAtProperty(obj, "array")).toEqual([2, 4]);
+  });
+  it("should return an empty array if the array has only no even elements", function() {
+    var obj = {
+      array: [1, 3]
+    };
+    expect(getEvenElementsAtProperty(obj, "array")).toEqual([]);
+  });
+  it("should return an empty array if the array is empty", function() {
+    var obj = {
+      array: []
+    };
+    expect(getEvenElementsAtProperty(obj, "array")).toEqual([]);
+  });
+  it("should return an empty array if the property is not an array", function() {
+    var obj = {
+      array: "sike"
+    };
+    expect(getEvenElementsAtProperty(obj, "array")).toEqual([]);
+  });
+  it("should return an empty array if the property does not exist", function() {
+    var obj = {
+      what: "sike"
+    };
+    expect(getEvenElementsAtProperty(obj, "array")).toEqual([]);
+  });
+});
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+var obj = {
+  key: [1000, 11, 50, 17]
+};
+
+function getEvenElementsAtProperty(obj, key) {
+  var arr = [];
+  
+  if (!Array.isArray(obj[key])) {
+    return arr;
+  }
+  
+  for (var x in obj[key]) {
+    if (obj[key][x] % 2 === 0) {
+      arr.push(obj[key][x]);
+    }
+  }
+  return arr;
+}
+
+var output = getEvenElementsAtProperty(obj, 'key');
+console.log(output); // --> [1000, 50]
+
+// or 
+
+function getEvenElementsAtProperty(obj, key) {
+  if (obj[key] === [] || !Array.isArray(obj[key])) {
+    return [];
+  }
+  return obj[key].filter((x) => x % 2 === 0);
+}
+
+// or
+
+function getEvenElementsAtProperty(obj, key) {
+  if (!Array.isArray(obj[key]) || obj[key].length < 1 || obj[key] === undefined) {
+    return [];
+  } else {
+    return obj[key].filter((e) => e % 2 === 0);
+  }
+}
+*******************************************************************************************************************************
