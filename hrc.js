@@ -4230,3 +4230,375 @@ for(var i = 0; i < nums.length; i++){
  }
 }
 **********************************************************************************************************************
+preImmersive-buildingBlocksMastery-100-getAverageOfElementsAtProperty*
+
+Write a function called “getAverageOfElementsAtProperty”.
+
+Given an object and a key, “getAverageOfElementsAtProperty” returns the average of all the elements in the array located at the given key.
+
+Notes:
+* If the array at the given key is empty, it should return 0.
+* If the property at the given key is not an array, it should return 0.
+* If there is no property at the given key, it should return 0.
+
+var obj = {
+  key: [1, 2, 3]
+};
+var output = getAverageOfElementsAtProperty(obj, 'key');
+console.log(output); // --> 2
+
+Your Code Should Pass:
+
+describe("getAverageOfElementsAtProperty", function() {
+  it("should return the average of all the elements of the array located at key", function() {
+    var obj = {
+      array: [1, 3, 5]
+    };
+    expect(getAverageOfElementsAtProperty(obj, "array")).toBe(3);
+  });
+  it("should return 0 if the array is empty", function() {
+    var obj = {
+      array: []
+    };
+    expect(getAverageOfElementsAtProperty(obj, "array")).toBe(0);
+  });
+  it("should return 0 if the property is not an array", function() {
+    var obj = {
+      array: "sike"
+    };
+    expect(getAverageOfElementsAtProperty(obj, "array")).toBe(0);
+  });
+  it("should return 0 if the property does not exist", function() {
+    var obj = {
+      what: "sike"
+    };
+    expect(getAverageOfElementsAtProperty(obj, "array")).toBe(0);
+  });
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+var obj = {
+  key: [1, 2, 3]
+};
+
+function getAverageOfElementsAtProperty(obj, key) {
+  // if the property doesn't exist or array is empty or if property is not an array
+  if ( obj[key] === undefined || obj[key].length < 1 || Array.isArray(obj[key]) === false ){
+    return 0;
+  }
+  
+  avg = 0;
+  for (var x = 0 ; x < obj[key].length ; x++) {
+    avg += obj[key][x];
+  }
+  return avg/obj[key].length;
+}
+
+var output = getAverageOfElementsAtProperty(obj, 'key');
+console.log(output); // --> 2
+
+// or 
+
+function getAverageOfElementsAtProperty(obj, key) {
+  //edge case
+  if (!(obj[key] instanceof Array) || obj[key].length == 0) {
+    return 0;
+  } else {
+    //initilize count
+    var total = 0;
+    //iterate tgrough obj keys to keep count 
+    for (i = 0; i < obj[key].length; i++) {
+      //
+      total += obj[key][i];
+    }
+    return total / (obj[key].length);
+  }
+}
+
+// or
+
+function getAverageOfElementsAtProperty(obj, key) {
+  if (!Array.isArray(obj[key]) || obj[key].length === 0) return 0;
+  
+  return obj[key].reduce((a, b) => a + b) / obj[key].length;
+}
+
+// or
+
+function getAverageOfElementsAtProperty(obj, key) {
+
+var avg = 0
+var sum = 0;
+if(!Array.isArray(obj[key]) || (obj[key].length === 0)){
+   return 0
+}
+if(obj[key] === 0){
+  return 0;
+}
+
+for(var prop in obj[key]){
+  sum+= obj[key][prop];
+}
+avg = sum/obj[key].length;
+return avg;
+}
+*************************************************************************************************************************
+preImmersive-buildingBlocksMastery-101-getEvenLengthWordsAtProperty*
+
+Write a function called “getEvenLengthWordsAtProperty”.
+
+Given an object and a key, “getEvenLengthWordsAtProperty” returns an array containing all the even length word elements of the array located at the given key.
+
+Notes:
+* If the array is empty, it should return an empty array.
+* If it contains no even length elements, it should return an empty array.
+* If the property at the given key is not an array, it should return an empty array.
+* If there is no property at the key, it should return an empty array.
+
+var obj = {
+  key: ['a', 'long', 'game']
+};
+var output = getEvenLengthWordsAtProperty(obj, 'key');
+console.log(output); // --> ['long', 'game']
+
+Your Code Should Pass:
+
+describe("getEvenLengthWordsAtProperty", function() {
+  it("should return an array containing all the even length elements of the array located at key", function() {
+    var obj = {
+      array: ["a", "long", "game"]
+    };
+    expect(getEvenLengthWordsAtProperty(obj, "array")).toEqual(["long", "game"]);
+  });
+  it("should return an empty array if the array has only no even length elements", function() {
+    var obj = {
+      array: ["I", "may", "say"]
+    };
+    expect(getEvenLengthWordsAtProperty(obj, "array")).toEqual([]);
+  });
+  it("should return an empty array if the array is empty", function() {
+    var obj = {
+      array: []
+    };
+    expect(getEvenLengthWordsAtProperty(obj, "array")).toEqual([]);
+  });
+  it("should return an empty array if the property is not an array", function() {
+    var obj = {
+      array: "sike"
+    };
+    expect(getEvenLengthWordsAtProperty(obj, "array")).toEqual([]);
+  });
+  it("should return an empty array if the property does not exist", function() {
+    var obj = {
+      what: "sike"
+    };
+    expect(getEvenLengthWordsAtProperty(obj, "array")).toEqual([]);
+  });
+});
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+var obj = {
+  key: ['a', 'long', 'game']
+};
+
+function getEvenLengthWordsAtProperty(obj, key) {
+  var arr = [];
+  
+  for (var x in obj[key]) {
+    if (obj[key][x].length % 2 === 0) {
+      arr.push(obj[key][x]);
+    }
+  }
+  return arr;
+}
+
+var output = getEvenLengthWordsAtProperty(obj, 'key');
+console.log(output); // --> ['long', 'game']
+
+// or
+
+function getEvenLengthWordsAtProperty(obj, key) {
+  if (!Array.isArray(obj[key])) return [];
+  
+  return obj[key].filter((e) => e.length % 2 === 0);
+}
+
+// or
+
+function getEvenLengthWordsAtProperty(obj, key) {
+
+var arr = []
+if(!Array.isArray(obj[key]) ){
+ return  arr;
+}
+if(!obj.hasOwnProperty(key)){
+  return arr;
+}
+
+for(var key in obj){
+  for(i = 0; i < obj[key].length; i++){
+    if(obj[key][i].length % 2 === 0){
+      arr.push(obj[key][i])
+    }
+  }
+  
+}
+
+return arr;
+}
+
+// or
+
+function getEvenLengthWordsAtProperty(obj, key) {
+ if (typeof obj[key] === undefined || !Array.isArray(obj[key]) || obj[key].length < 1 ) { // return 0 if array is empty or if not an array
+   return [];
+ } else {
+    return obj[key].filter((e) => e.length % 2 === 0);
+ }
+}
+******************************************************************************************************************
+preImmersive-buildingBlocksMastery-102-filterOddLengthWords*
+
+Write a function called “filterOddLengthWords”.
+
+Given an array of string, “filterOddLengthWords” returns an array containing only the elements of the given array whose lengths are odd numbers.
+
+var output = filterOddLengthWords(['there', 'it', 'is', 'now']);
+console.log(output); // --> ['there', "now']
+
+Your Code Should Pass:
+
+describe("filterOddLengthWords", function() {
+  it("should return an array", function() {
+    expect(Array.isArray(filterOddLengthWords(["there", "it", "is", "now"]))).toBe(true);
+  });
+  it("should return an array with odd lengthed words", function() {
+    expect(filterOddLengthWords(["there", "it", "is", "now"])).toEqual(["there", "now"]);
+  });
+  it("should return an empty array when passed an array with no odd lengthed words", function() {
+    expect(filterOddLengthWords(["it", "cats"])).toEqual([]);
+  });
+  it("should return an empty array when passed an empty array", function() {
+    expect(filterOddLengthWords([])).toEqual([]);
+  });
+}); 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function filterOddLengthWords(words) {
+  
+  var arr = [];
+  
+  for (var x = 0 ; x < words.length ; x++) {
+    if (words[x].length % 2 !== 0) {
+      arr.push(words[x]);
+    }
+  }
+  return arr;
+}
+
+
+var output = filterOddLengthWords(['there', 'it', 'is', 'now']);
+console.log(output); // --> ['there', "now']
+
+// or
+
+function filterOddLengthWords(words) {
+  return words.filter(function (x) {
+    return x.length % 2 === 1;
+  })
+}
+
+// or
+
+function filterOddLengthWords(words) {
+  return words.filter((e) => e.length % 2 === 1);
+}
+********************************************************************************************************************
+preImmersive-buildingBlocksMastery-103-getSquaredElementsAtProperty*
+
+Write a function called “getSquaredElementsAtProperty”.
+
+Given an object and a key, “getSquaredElementsAtProperty” returns an array containing all the squared elements of the array located at the given key.
+
+Notes:
+* If the array is empty, it should return an empty array.
+* If the property at the given key is not an array, it should return an empty array.
+* If there is no property at the key, it should return an empty array.
+
+var obj = {
+  key: [2, 1, 5]
+};
+var output = getSquaredElementsAtProperty(obj, 'key');
+console.log(output); // --> [4, 1, 25]
+
+Your Code Should Pass:
+
+describe("getSquaredElementsAtProperty", function() {
+  it("should return an array containing all the squared elements of the array located at key", function() {
+    var obj = {
+      array: [1, 2, 7]
+    };
+    expect(getSquaredElementsAtProperty(obj, "array")).toEqual([1, 4, 49]);
+  });
+  it("should return an empty array if the array is empty", function() {
+    var obj = {
+      array: []
+    };
+    expect(getSquaredElementsAtProperty(obj, "array")).toEqual([]);
+  });
+  it("should return an empty array if the property is not an array", function() {
+    var obj = {
+      array: "sike"
+    };
+    expect(getSquaredElementsAtProperty(obj, "array")).toEqual([]);
+  });
+  it("should return an empty array if the property does not exist", function() {
+    var obj = {
+      what: "sike"
+    };
+    expect(getSquaredElementsAtProperty(obj, "array")).toEqual([]);
+  });
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+var obj = {
+  key: [2, 1, 5]
+};
+
+function getSquaredElementsAtProperty(obj, key) {
+  var arr = [];
+  
+  if (!Array.isArray(obj[key])) {
+    return arr;
+  }
+  
+  
+  for ( var x = 0; x < obj[key].length ; x++) {
+    arr.push((obj[key][x])*(obj[key][x]));   
+  }
+  return arr;
+}
+
+var output = getSquaredElementsAtProperty(obj, 'key');
+console.log(output); // --> [4, 1, 25]
+
+// or
+
+function getSquaredElementsAtProperty(obj, key) {
+  if (!Array.isArray(obj[key])
+      || obj[key] === []) return [];
+  return obj[key].map((x) => x ** 2);
+}
+
+// or 
+
+function getSquaredElementsAtProperty(obj, key) {
+
+var arr = [];
+
+ if(!Array.isArray(obj[key]) || (obj[key].length === 0)){
+   return arr;
+ }
+ 
+   for(var i = 0; i < obj[key].length; i++){
+    arr.push(Math.pow(obj[key][i], 2));
+   }
+return arr;
+}
+**************************************************************************************************************************
