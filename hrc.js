@@ -6518,3 +6518,127 @@ function getProductOfAllElementsAtProperty(obj, key) {
   return (!Array.isArray(arr) || !arr.length) ? 0 : arr.reduce((e1, e2) => e1 * e2);
 }
 *************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-126-sumDigits*
+
+Write a function called “sumDigits”.
+
+Given a number, “sumDigits” returns the sum of all its digits.
+
+var output = sumDigits(1148);
+console.log(output); // --> 14
+If the number is negative, the first digit should count as negative.
+
+var output = sumDigits(-316);
+console.log(output); // --> 4
+Notes:
+* In order to use some of the methods that will be most helpful to you, you will most likely want to do some string to number conversion and vice versa.
+* Be sure to familiarize yourself with the “toString” method, as well as the “Number” function.
+
+Your Code Should Pass:
+
+describe("sumDigits", function() {
+  it("should return a number", function() {
+    expect(typeof sumDigits(2002)).toBe("number");
+  });
+  it("should sum the digits of a positive number", function() {
+    expect(sumDigits(2002)).toBe(4);
+  });
+  it("should sum the digits of a negative number", function() {
+    expect(sumDigits(-2004)).toBe(2);
+  });
+  it("should sum return 0 if the number is 0", function() {
+    expect(sumDigits(0)).toBe(0);
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+**********************************************************************************************************************************
+preImmersive-buildingBlocksMastery-127-getSumOfAllElementsAtProperty*
+
+Write a function called “getSumOfAllElementsAtProperty”.
+
+Given an object and a key, “getSumOfAllElementsAtProperty” returns the sum of all the elements in the array located at the given key.
+
+Notes:
+* If the array is empty, it should return 0.
+* If the property at the given key is not an array, it should return 0.
+* If there is no property at the key, it should return 0.
+
+var obj = {
+  key: [4, 1, 8]
+};
+var output = getSumOfAllElementsAtProperty(obj, 'key');
+console.log(output); // --> 13
+
+Your Code Should Pass:
+
+describe("getSumOfAllElementsAtProperty", function() {
+  it("should return the sum of all the elements of the array located at key", function() {
+    var obj = {
+      array: [1, 2, 4]
+    };
+    expect(getSumOfAllElementsAtProperty(obj, "array")).toBe(7);
+  });
+  it("should return 0 if the array is empty", function() {
+    var obj = {
+      array: []
+    };
+    expect(getSumOfAllElementsAtProperty(obj, "array")).toBe(0);
+  });
+  it("should return 0 if the property is not an array", function() {
+    var obj = {
+      array: "sike"
+    };
+    expect(getSumOfAllElementsAtProperty(obj, "array")).toBe(0);
+  });
+  it("should return 0 if the property does not exist", function() {
+    var obj = {
+      what: "sike"
+    };
+    expect(getSumOfAllElementsAtProperty(obj, "array")).toBe(0);
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: Σ in the obj[key]'s array
+// I: obj[key]
+// C: none
+// E: if obj[key] 's array empty, if property not an array and if no prop  ret 0
+
+// declare placeholder
+// loop thru array
+  // add all elements inside that array
+// return placeholder
+
+
+function getSumOfAllElementsAtProperty(obj, key) {
+   if (!Array.isArray(obj[key]) || obj[key].length < 1) {
+    return 0;
+  }
+  var Σ = 0;
+  for (x in obj[key]) {
+    Σ += obj[key][x];
+  }
+  return Σ;
+}
+
+// or
+
+function getSumOfAllElementsAtProperty(obj, key) {
+  if (!Array.isArray(obj[key])) { return 0; }
+  if (obj[key].length === 0) return 0;
+  return obj[key].reduce(function (a, b) {
+    return a + b;
+  });
+}
+
+// or
+
+function getSumOfAllElementsAtProperty(obj, key) {
+  // your code here
+  if (!obj.hasOwnProperty(key) || !obj[key].length || !Array.isArray(obj[key])) {
+    return 0;
+  }
+  
+  return obj[key].reduce((acc, curr) => acc + curr);
+}
+************************************************************************************************************************************
