@@ -5554,3 +5554,967 @@ describe("computeProductOfAllElements", function() {
   });
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: the product of all elements in the original array
+// I: an array
+// C: none
+// E: none
+
+// loop thru array's elements
+// start multiplying elements, utilize container
+// return product
+
+function computeProductOfAllElements(arr) {
+  if (arr.length === 0) {
+    return 0;
+  }
+  
+  var product = arr[0];
+  
+  for (x = 0 ; x < arr.length ; x++) {
+    product = arr[x]*product;
+  }
+  return product;
+}
+
+// or
+
+function computeProductOfAllElements(arr) {
+  if (arr.length === 0) return 0;
+  
+  return arr.reduce((a, b) => a * b);
+}
+
+// or
+
+function computeProductOfAllElements(arr) {
+  // your code here
+  if (arr.length === 0) {
+  return 0;
+  }
+  var product = arr.reduce((acc, curr) => acc * curr);
+  return product;
+}
+******************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-115-filterEvenElements*
+
+Write a function called “filterEvenElements”.
+
+Given an array of numbers, “filterEvenElements” returns an array containing only the even numbers of the given array.
+var output = filterEvenElements([2, 3, 4, 5, 6]); console.log(output); // --> [2, 4, 6]
+
+Your Code Should Pass:
+
+describe("filterEvenElements", function() {
+  it("should return an array", function() {
+    expect(Array.isArray(filterEvenElements([1, 2, 3, 4]))).toBe(true);
+  });
+  it("should return an array with the even elements from the passed in array", function() {
+    expect(filterEvenElements([1, 2, 3, 4, 5])).toEqual([2, 4]);
+  });
+  it("should return an array if there are no even numbers", function() {
+    expect(filterEvenElements([1, 3, 5])).toEqual([]);
+  });
+  it("should return an array if given an emtpy array", function() {
+    expect(filterEvenElements([])).toEqual([]);
+  });
+});
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: an ARRAY with the even elements of the original array
+// I: an array
+// C: none
+// E: none
+
+// declare container
+// loop thru array's elements
+// get even elements
+// store new values in container
+// return new array
+
+function filterEvenElements(arr) {
+  var evens = [];
+  for (x = 0 ; x < arr.length ; x++) {
+    if (arr[x] % 2 === 0) {
+      evens.push(arr[x]);
+    }
+  }
+  return evens;
+}
+
+// or 
+
+function filterEvenElements(arr) {
+  return arr.filter((x) => x % 2 === 0)
+}
+******************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-116-getLengthOfShortestElement*
+
+Write a function called “getLengthOfShortestElement”.
+
+Given an array, “getLengthOfShortestElement” returns the length of the shortest string in the given array.
+
+Notes:
+* It should return 0 if the array is empty.
+
+var output = getLengthOfShortestElement(['one', 'two', 'three']);
+console.log(output); // --> 3
+
+Your Code Should Pass:
+
+describe("getLengthOfShortestElement", function() {
+  it("should return a number", function() {
+    expect(typeof getLengthOfShortestElement(["one", "two", "three"])).toBe("number");
+  });
+  it("should return the length of the shortest element in an array", function() {
+    expect(getLengthOfShortestElement(["one", "four", "three"])).toBe(3);
+  });
+  it("it should handle ties", function() {
+    expect(getLengthOfShortestElement(["one", "to", "no"])).toBe(2);
+  });
+  it("it should return 0 when given an empty array", function() {
+    expect(getLengthOfShortestElement([])).toBe(0);
+  });
+});
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: the length of the shortest element of the original array
+// I: an array
+// C: none
+// E: return 0 if the array is empty.
+
+// declare container to store element with the shortest length
+// loop thru array's elements
+// check the element's length
+// store value if shortest than last value
+// return shortes
+
+function getLengthOfShortestElement(arr) {
+  if (arr === []){
+    return 0;
+  }
+  
+  for (var x = 0 ; x < arr.length ; x++) {
+    var shortest = arr[0].length;
+    if (arr[x].length < shortest) {
+      shortest = arr[x].length;
+    }
+  }
+  if (shortest === undefined) {
+    return 0;
+  } else {
+    return shortest;
+  }
+}
+
+// or
+
+function getLengthOfShortestElement(arr) {
+  var s = Infinity;
+  
+  if (arr.length === 0) return 0;
+  
+  arr.forEach((x) => { if (x.length < s) s = x.length });
+  
+  return s;
+}
+
+// or
+
+function getLengthOfShortestElement(arr) {
+  // your code here
+  var length;
+
+  if (arr.length === 0) {
+    return 0;
+  }
+  
+  var lengths = arr.map(x => x.length);
+  var min = Math.min(...lengths);
+  return min;
+}
+**************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-117-getLongestElement*
+
+Write a function called “getLongestElement”.
+
+Given an array, “getLongestElement” returns the longest string in the given array.
+
+Notes:
+* If there are ties, it returns the first element to appear.
+* If the array is empty, it should return an empty string.
+
+var output = getLongestElement(['one', 'two', 'three']);
+console.log(output); // --> 'three'
+
+Your Code Should Pass:
+
+describe("getLongestElement", function() {
+  it("should return a string", function() {
+    expect(typeof(getLongestElement(["one", "two", "three"]))).toBe("string");
+  });
+  it("should return the longest element in an array", function() {
+    expect(getLongestElement(["one", "two", "three"])).toBe("three");
+  });
+  it("should return the first longest element in an array when there are ties", function() {
+    expect(getLongestElement(["one", "two", "one"])).toBe("one");
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: longest string in arr
+// I: array
+// C: none
+// E: with ties returns first element that appears, if arr empty ret empty str
+
+// declare container to store element with the longest length
+// loop thru array's elements
+// check the element's length
+// store longest str if longest than last value
+// return longest str
+
+function getLongestElement(arr) {
+  if (arr === []){
+    return "";
+  }
+  
+  for (var x = 0 ; x < arr.length ; x++) {
+    var longestStr = arr[0];
+    if (arr[x].length > longestStr.length) {
+      longestStr = arr[x];
+    }
+  }
+  if (longestStr === undefined) {
+    return "";
+  } else {
+    return longestStr;
+  }
+}
+
+// or
+
+function getLongestElement(arr) {
+  var longest = "";
+  
+  arr.forEach((x) => {
+    if (x.length > longest.length) longest = x;
+  });
+  
+  return longest;
+}
+
+// or 
+
+function getLongestElement(arr) {
+  // your code here
+
+  if (arr.length === 0) {
+    return '';
+  }
+  
+  arr.sort(function(a, b) { return b.length - a.length; });
+  return arr[0];
+}
+*************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-118-findSmallestElement*
+
+Write a function called “findSmallestElement”.
+
+Given an array of numbers, “findSmallestElement” returns the smallest number within the given array.
+
+Notes:
+* If the given array is empty, it should return 0.
+
+var output = findSmallestElement([4, 1, 9, 10]);
+console.log(output); // --> 1
+
+Your Code Should Pass:
+
+describe("findSmallestElement", function() {
+  it("should return a number", function() {
+    expect(typeof findSmallestElement([3, 5, 3, 1])).toBe("number");
+  });
+  it("should return the smallest element in an array", function() {
+    expect(findSmallestElement([3, 5, 3, 1])).toBe(1);
+  });
+  it("should return the smallest element in an array when there are ties", function() {
+    expect(findSmallestElement([3, 1, 3, 1, 5])).toBe(1);
+  });
+  it("should return the smallest element in an array when they are all negative", function() {
+    expect(findSmallestElement([-1, -5, -3])).toBe(-5);
+  });
+  it("should return 0 if the array is empty", function() {
+    expect(findSmallestElement([])).toBe(0);
+  })
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: smallest number from the given array
+// I: an array
+// C: none
+// E: if arr empty ret 0
+
+// declare a container for smallest element / placeholder
+// loop thru arr
+  // check values of elements to find smallest
+  // store smallest in container
+// return container
+
+function findSmallestElement(arr) {
+    if (arr.length < 1) {  
+      return 0;
+    }
+    var smallest = arr[0]; 
+    for (var i in arr) {
+      if (arr[i] < smallest) {  
+        smallest = arr[i];
+      }
+    }
+    return smallest;
+  }
+
+  console.log(findSmallestElement([4, 1, 9, 10]));
+
+  // or
+
+  // O: smallest number from the given array
+// I: an array
+// C: none
+// E: if arr empty ret 0
+
+// declare a container for smallest element / placeholder
+// loop thru arr
+  // check values of elements to find smallest
+  // store smallest in container
+// return container
+
+function findSmallestElement(arr) {
+    if (arr.length < 1) {  
+      return 0;
+    }
+    var smallest = arr[0]; 
+    for (var x = 0 ; x < arr.length ; x++) {
+      if (arr[x] < smallest) {  
+        smallest = arr[x];
+      }
+    }
+    return smallest;
+  }
+  console.log(findSmallestElement([4, 1, 9, 10]));
+
+  // or
+
+  function findSmallestElement(arr) {
+  if (arr.length === 0) return 0;
+  
+  var smallest = Infinity;
+  
+  for (i in arr) {
+    if (arr[i] < smallest) smallest = arr[i];
+  }
+  
+  return smallest;
+}
+
+// or 
+
+function findSmallestElement(arr) {
+  // your code here
+
+  if (arr.length === 0) {
+    return 0;
+  }
+  
+  var min = Math.min(...arr);
+  return min;
+  
+}
+*************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-119-findShortestElement*
+
+Write a function called “findShortestElement”.
+
+Given an array, “findShortestElement” returns the shortest string within the given array.
+
+Notes:
+* If there are ties, it should return the first element to appear.
+* If the given array is empty, it should return an empty string.
+
+var output = findShortestElement(['a', 'two', 'three']);
+console.log(output); // --> 'a'
+
+Your Code Should Pass:
+
+describe("findShortestElement", function() {
+  it("should return a string", function() {
+    expect(typeof(findShortestElement(["one", "two", "three"]))).toBe("string");
+  });
+  it("should return the shortest element in an array", function() {
+    expect(findShortestElement(["a", "two", "three"])).toBe("a");
+  });
+  it("should return the first shortest element in an array when there are ties", function() {
+    expect(findShortestElement(["one", "to", "no"])).toBe("to");
+  });
+  it("should return an empty string if the array is empty", function() {
+    expect(findShortestElement([])).toBe("");
+  })
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: shortest str from the given array
+// I: shortest str
+// C: none
+// E: if arr empty ret "" and ties ret first element
+
+// declare a container as placeholder
+// loop thru arr
+  // check values of elements to find shortest
+  // store shortest in container
+// return container
+
+function findShortestElement(arr) {
+  if (arr.length < 1) {  
+      return "";
+    }
+    var shortest = arr[0]; 
+    for (var x in arr) {
+      if (arr[x].length < shortest.length) {  
+        shortest = arr[x];
+      }
+    }
+    return shortest;
+}
+
+// or
+
+function findShortestElement(arr) {
+  var shortest = arr[0];
+  
+  if (shortest === undefined) { shortest = ""; }
+  
+  arr.forEach((element) => {
+    if (element.length < shortest.length) shortest = element;
+  });
+  
+  return shortest;
+}
+
+// or
+
+function findShortestElement(arr) {
+  
+  if (arr.length === 0) {
+    return '';
+  }
+  
+  arr.sort(function(a, b) {
+    return a.length - b.length
+  });
+  return arr[0];
+  
+}
+*************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-120-getLargestElement*
+
+Write a function called “getLargestElement”.
+
+Given an array, “getLargestElement” returns the largest number in the given array.
+
+Notes:
+* It should return 0 if the array is empty.
+
+var output = getLargestElement([5, 2, 8, 3]);
+console.log(output); // --> 8;
+
+Your Code Should Pass:
+
+describe("getLargestElement", function() {
+  it("should return a number", function() {
+    expect(typeof getLargestElement([3, 5, 3, 1])).toBe("number");
+  });
+  it("should return the largest element in an array", function() {
+    expect(getLargestElement([3, 5, 3, 1])).toBe(5);
+  });
+  it("should return the largest element in an array when there are ties", function() {
+    expect(getLargestElement([3, 5, 3, 1, 5])).toBe(5);
+  });
+  it("should return the largest element in an array when they are all negative", function() {
+    expect(getLargestElement([-1, -5, -3])).toBe(-1);
+  });
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: largest number from the given array
+// I: an array
+// C: none
+// E: if arr empty ret 0
+
+// declare a container as placeholder
+// loop thru arr
+  // check values of elements to find largest
+  // store largest in container
+// return container
+
+function getLargestElement(arr) {
+  if (arr.length < 0) {
+    return 0;
+  }
+  
+  var largest = -Infinity;
+  for (var x in arr) {
+    if (largest < arr[x]) {
+      largest = arr[x];
+    }
+  }
+  return largest;
+}
+
+// or 
+
+function getLargestElement(arr) {
+  var largest = -Infinity;
+  
+  if (arr === []) return 0;
+  
+  arr.forEach((x) => { if (x > largest) largest = x });
+  
+  return largest;
+}
+
+// or
+
+var largNum = arr[0];
+ if(arr.length < 1){
+  return 0;
+}
+
+for(i = 0; i < arr.length; i++){
+  if(arr[i] > largNum){
+    largNum = arr[i];
+  }
+ }
+return largNum;
+}
+
+// or
+
+function getLargestElement(arr) {
+  // your code here
+  
+  if (arr.length === 0) {
+    return 0;
+  }
+  
+  var max = Math.max(...arr);
+  return max;
+  
+}
+***************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-121-computeSumOfAllElements*
+
+Write a function called “computeSumOfAllElements”.
+
+Given an array of numbers, “computeSumOfAllElements” returns the sum of all the elements in the given array.
+
+var output = computeSumOfAllElements([1, 2, 3])
+console.log(output); // --> 6
+
+Your Code Should Pass:
+
+describe("computeSumOfAllElements", function() {
+  it("should return a number", function() {
+    expect(typeof computeSumOfAllElements([1, 2, 4])).toBe("number");
+  });
+  it("return the sum of all elements", function() {
+    expect(computeSumOfAllElements([1, 2, 4])).toBe(7);
+  });
+  it("return 0 if the passed in array is empty", function() {
+    expect(computeSumOfAllElements([])).toBe(0);
+  });
+});
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: Σ
+// I: an arr
+// C: none 
+// E: none
+
+// declare placeholder/container
+// loop/ iterate thru arr
+  // start adding values and storing them in placeholder
+// return placeholder
+
+function computeSumOfAllElements(arr) {
+  var Σ = 0;
+  
+  for (x in arr) {
+    Σ += arr[x];
+  }
+  return Σ;
+}
+
+// or 
+
+function computeSumOfAllElements(arr) {
+  if (arr.length === 0) return 0;
+  
+  return arr.reduce((a, b) => a + b);
+}
+
+// or
+
+function computeSumOfAllElements(arr) {
+  return arr.length ? arr.reduce((num1, num2) => { return num1 + num2 }) : 0;
+}
+*************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-122-calculateBillTotal
+
+Write a function called “calculateBillTotal”.
+
+Given the pre tax and pre tip amount of a meal, “calculateBillTotal” returns the total amount due after tax and tip.
+
+Notes:
+* Assume that sales tax is 9.5% and tip is 15%.
+* Do NOT tip on the sales tax, only on the pre tip amount.
+
+var output = calculateBillTotal(20);
+console.log(output); // --> 24.9
+
+Your Code Should Pass:
+
+describe("calculateBillTotal", function() {
+  it("should return a number", function() {
+    expect(typeof calculateBillTotal(20)).toBe("number");
+  });
+  it("should return the bill total, incuding tax and tip", function() {
+    expect(calculateBillTotal(20)).toBe(24.9);
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: total amount after tax (0.095) and tip (0.15)
+// I: preTaxAndTipAmount
+// C: none
+// E: tip is only for the meal
+
+// declare placeholder
+// obtain the tip amount
+// obtain sales tax
+// add tip and tax to placeholder
+
+function calculateBillTotal(preTaxAndTipAmount) {
+  var tip = preTaxAndTipAmount*0.15
+  var tax = preTaxAndTipAmount*0.095
+  return preTaxAndTipAmount + tip + tax;
+}
+
+// or
+
+function calculateBillTotal(p) {
+  return p + (p * .15) + (p * .095);
+}
+***********************************************************************************************************************************
+preImmersive-buildingBlocksMastery-123-getStringLength
+
+Write a function called “getStringLength”.
+
+Given a string, “getStringLength” returns the length of the given string.
+
+Notes:
+* Do NOT use any native ‘length’ methods.
+* You might consider using ‘substring’ or ‘slice’ as alternatives.
+
+var output = getStringLength('hello');
+console.log(output); // --> 5
+
+Your Code Should Pass:
+
+describe("getStringLength", function() {
+  it("should return a number", function() {
+    expect(typeof getStringLength("heyo")).toBe("number");
+  });
+  it("should not use the native length operator", function() {
+    var body = getStringLength.toString();
+    expect(/length/.test(body)).toBe(false);
+  });
+  it("should return the length of a string", function() {
+    expect(getStringLength("heyo")).toBe(4);
+  });
+  it("should return the length of an empty string", function() {
+    expect(getStringLength("")).toBe(0);
+  });
+});
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: length of given string
+// I: a string
+// C: Do NOT use any native ‘length’ methods.
+// E: none
+
+// declare placeholder
+// condition to extract letters
+  // a way to count them
+  // add values to placeholder
+// return value of placeholder
+
+function getStringLength(string) {
+  
+  y = 0;
+  for (var x in string) {
+    y +=1;
+  }
+  return y;
+}
+
+var output = getStringLength('hello');
+console.log(output); // --> 5
+
+// or
+
+function getStringLength(string) {
+  var strArr = string.split("");
+  var count = 0;
+  while (strArr.pop() != undefined) {
+    count++;
+  }
+  
+  return count;
+}
+
+// or
+
+function getStringLength(string) {
+
+var charNum = 0;
+
+for(char in string){
+  charNum += 1;
+}
+return charNum;
+
+}
+
+// or 
+
+function getStringLength(string) {
+  // your code here
+  
+  var letters = string.split('');
+  const count = letters.reduce((tally, letter) => {
+  tally[letter] = (tally[letter] || 0) + 1 ;
+  return tally;
+} , {});
+  var sum = Object.values(count);
+  const finalCount = sum.reduce((prev, curr) => prev + curr, 0);
+  
+  return finalCount;
+
+}
+
+// or
+
+function getStringLength(string) {
+  var count = 0;
+  for(char in string){
+    count ++;
+  }
+  return count;
+}
+
+************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-124-joinArraysOfArrays
+
+Write a function called “joinArrayOfArrays”.
+
+Given an array of arrays, “joinArrayOfArrays” returns a single array containing the elements of the nested arrays.
+
+var output = joinArrayOfArrays([[1, 4], [true, false], ['x', 'y']]);
+console.log(output); // --> [1, 4, true, false, 'x', 'y']
+You should be familiar with the “concat” method for this problem.
+
+Your Code Should Pass:
+
+describe("joinArrayOfArrays", function() {
+  it("should return an array", function() {
+    expect(Array.isArray(joinArrayOfArrays([['a', 'b'], [1, 3], [true, false]]))).toBe(true);
+  });
+  it("should return an array with the elements from all the nested arrays", function() {
+    expect(joinArrayOfArrays([['a', 'b'], [1, 3], [true, false]])).toEqual(['a', 'b', 1, 3, true, false]);
+  });
+  it("should handle empty arrays in the first position", function() {
+    expect(joinArrayOfArrays([[], [1, 3], [true, false]])).toEqual([1, 3, true, false]);
+  });
+  it("should handle empty arrays in the second position", function() {
+    expect(joinArrayOfArrays([['a', 'b'], [], [true, false]])).toEqual(['a', 'b', true, false]);
+  });
+  it("should handle empty arrays in the third position", function() {
+    expect(joinArrayOfArrays([['a', 'b'], [1, 3], []])).toEqual(['a', 'b', 1, 3]);
+  });
+  it("should handle empty arrays in all positions", function() {
+    expect(joinArrayOfArrays([[], [], []])).toEqual([]);
+  });
+});
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: a single array containing all arrays within the given array
+// I: an array of arrays
+// C: none
+// E: none
+
+// check concat arr[0].concat(arr[1]);
+// create placeholder
+// split arrays into vars
+// concat vars
+// return big array
+
+
+function joinArrayOfArrays(arr) {
+ var bigArray = [];
+ for (var x = 0 ; x < arr.length ; x++ ) {
+   bigArray = bigArray.concat(arr[x]);
+ }
+ return bigArray;
+}
+
+var output = joinArrayOfArrays([[1, 4], [true, false], ['x', 'y']]);
+console.log(output); // --> [1, 4, true, false, 'x', 'y']
+
+// or
+
+function joinArrayOfArrays(arr) {
+  var bigArr = [];
+  
+  arr.forEach(function (subArr) {
+    bigArr = bigArr.concat(subArr);
+  });
+  
+  return bigArr;
+}
+
+// or
+
+function joinArrayOfArrays(arr) {
+  // your code here
+  var store = [];
+  for(i in arr){
+    store = store.concat(arr[i]);
+  }
+  return store;
+}
+
+// or
+
+function joinArrayOfArrays(arr) {
+  var flat = arr.reduce((total, amount) => total.concat(amount), []);
+  return flat;
+}
+**************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-125-getProductOfAllElementsAtProperty*
+
+Write a function called “getProductOfAllElementsAtProperty”.
+
+Given an object and a key, “getProductOfAllElementsAtProperty” returns the product of all the elements in the array located at the given key.
+
+Notes:
+* If the array is empty, it should return 0.
+* If the property at the given key is not an array, it should return 0.
+* If there is no property at the given key, it should return 0.
+
+var obj = {
+  key: [1, 2, 3, 4]
+};
+var output = getProductOfAllElementsAtProperty(obj, 'key');
+console.log(output); // --> 24
+
+Your Code Should Pass:
+
+describe("getProductOfAllElementsAtProperty", function() {
+  it("should return the product of all the elements of the array located at key", function() {
+    var obj = {
+      array: [1, 2, 4]
+    };
+    expect(getProductOfAllElementsAtProperty(obj, "array")).toBe(8);
+  });
+  it("should return 0 if the array is empty", function() {
+    var obj = {
+      array: []
+    };
+    expect(getProductOfAllElementsAtProperty(obj, "array")).toBe(0);
+  });
+  it("should return 0 if the property is not an array", function() {
+    var obj = {
+      array: "sike"
+    };
+    expect(getProductOfAllElementsAtProperty(obj, "array")).toBe(0);
+  });
+  it("should return 0 if the property does not exist", function() {
+    var obj = {
+      what: "sike"
+    };
+    expect(getProductOfAllElementsAtProperty(obj, "array")).toBe(0);
+  });
+});
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: the product of all the elements in array obj[key]
+// I: obj[key]
+// C: none
+// E: if obj[key] 's array empty ret 0, if property not an array and if no prop
+
+// create placeholder
+// loop thru array
+  // multiply elements in array
+// return placeholder
+
+var obj = {
+  key: [1, 2, 3, 4]
+};
+
+function getProductOfAllElementsAtProperty(obj, key) {
+  if (!Array.isArray(obj[key]) || obj[key].length < 1) {
+    return 0;
+  }
+  var product = obj[key][0];
+  for (var x in obj[key]) {
+    product = obj[key][x]*product;
+  }
+  return product;
+}
+
+var output = getProductOfAllElementsAtProperty(obj, 'key');
+console.log(output); // --> 24
+
+// or
+
+function getProductOfAllElementsAtProperty(obj, key) {
+  if (!Array.isArray(obj[key]) || obj[key] === undefined || obj[key].length === 0)
+    return 0;
+    
+  var total = 1;
+  
+  obj[key].forEach(function (element) {
+    total *= element;
+  });
+  
+  return total;
+}
+
+// or
+
+function getProductOfAllElementsAtProperty(obj, key) {
+  // your code here
+  
+   if (!Array.isArray(obj[key])) {
+    return 0;
+  } else  if (!obj.hasOwnProperty(key)) {
+    return 0;
+  } else if (obj[key].length === 0) {
+    return 0;
+  } 
+   return obj[key].reduce((acc, curr) => acc * curr);
+
+}
+
+// or
+
+function getProductOfAllElementsAtProperty(obj, key) {
+  var arr = obj[key];
+  // Method 1:
+  // if(!Array.isArray(arr) || !arr.length){
+  //   return 0;
+  // }else{
+  //   return arr.reduce((e1, e2) => e1 * e2);
+  // }
+  
+  //Method 2:
+  return (!Array.isArray(arr) || !arr.length) ? 0 : arr.reduce((e1, e2) => e1 * e2);
+}
+*************************************************************************************************************************************
