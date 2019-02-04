@@ -4833,3 +4833,724 @@ function filterEvenLengthWords(words) {
   return words.filter((e) => e.length % 2 === 0);
 }
 **********************************************************************************************************************************
+preImmersive-buildingBlocksMastery-107-getLengthOfLongestElement*
+
+Write a function called “getLengthOfLongestElement”.
+
+Given an array, “getLengthOfLongestElement” returns the length of the longest string in the given array.
+
+Notes:
+* It should return 0 if the array is empty.
+
+var output = getLengthOfLongestElement(['one', 'two', 'three']);
+console.log(output); // --> 5
+
+Your Code Should Pass:
+
+describe("getLengthOfLongestElement", function() {
+  it("should return a number", function() {
+    expect(typeof getLengthOfLongestElement(["one", "two", "three"])).toBe("number");
+  });
+  it("should return the length of the longest element in an array", function() {
+    expect(getLengthOfLongestElement(["one", "two", "three"])).toBe(5);
+  });
+  it("it should handle ties", function() {
+    expect(getLengthOfLongestElement(["one", "two", "no"])).toBe(3);
+  });
+  it("it should return 0 when given an empty array", function() {
+    expect(getLengthOfLongestElement([])).toBe(0);
+  });
+});
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function getLengthOfLongestElement(arr) {
+  var y = arr[0];
+  
+  if(arr.length === 0) {
+    return 0;
+  }
+  
+  for (var x = 0 ; x < arr.length ; x++) {
+    if (arr[x].length > y.length) {
+      y = arr[x]
+    }
+  }
+  return y.length;
+}
+
+var output = getLengthOfLongestElement(['one', 'two', 'three']);
+console.log(output); // --> 5
+
+// or
+
+function getLengthOfLongestElement(arr) {
+  var longest = "";
+  
+  arr.forEach((e) => {
+    if (e.length > longest.length) longest = e;
+  });
+  
+  return longest.length;
+}
+
+// or
+
+function getLengthOfLongestElement(arr) {
+  
+  var length;
+
+  if (arr.length === 0) {
+    return 0;
+  }
+  
+  var lengths = arr.map(x => x.length);
+  var max = Math.max(...lengths);
+  return max;
+}
+*****************************************************************************************************************************
+preImmersive-buildingBlocksMastery-108-getSmallestElementAtProperty*
+
+Write a function called “getSmallestElementAtProperty”.
+
+Given an object and a key, “getSmallestElementAtProperty” returns the smallest element in the array located at the given key.
+
+Notes:
+* If the array is empty, it should return undefined.
+* If the property at the given key is not an array, it should return undefined. 
+* If there is no property at the key, it should return undefined.
+
+var obj = {
+  key: [2, 1, 5]
+};
+var output = getSmallestElementAtProperty(obj, 'key');
+console.log(output); // --> 1
+
+Your Code Should Pass:
+
+describe("getSmallestElementAtProperty", function() {
+  it("should return the smallest element of the array located at key", function() {
+    var obj = {
+      array: [1, 2, 4]
+    };
+    expect(getSmallestElementAtProperty(obj, "array")).toBe(1);
+  });
+  it("should return undefined if the array is empty", function() {
+    var obj = {
+      array: []
+    };
+    expect(getSmallestElementAtProperty(obj, "array")).toBe(undefined);
+  });
+  it("should return undefined if the property is not an array", function() {
+    var obj = {
+      array: "sike"
+    };
+    expect(getSmallestElementAtProperty(obj, "array")).toBe(undefined);
+  });
+  it("should return undefined if the property does not exist", function() {
+    var obj = {
+      what: "sike"
+    };
+    expect(getSmallestElementAtProperty(obj, "array")).toBe(undefined);
+  });
+});
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: smallest element in key: []
+// I: obj and key
+// C: none
+// E: if key arr empty, if property is not array and if obj empty
+
+// access obj -> key -> elements in array
+// loop thru array and find smallest
+// return smallest element (how to only return smallest)
+
+
+var obj = {
+  key: [2, 1, 5]
+};
+
+function getSmallestElementAtProperty(obj, key) {
+  
+ if (!Array.isArray(obj[key])) {
+    return undefined
+  }
+  
+  var y = obj[key][0];
+
+  for (var x = 0 ; x < obj[key].length ; x++) {
+    if (obj[key][x] <= y) {
+      y = obj[key][x];
+    } 
+  }
+  return y;
+}
+
+var output = getSmallestElementAtProperty(obj, 'key');
+console.log(output); // --> 1
+
+// or
+
+
+function getSmallestElementAtProperty(obj, key) {
+  var large = Infinity;
+  
+  if (!Array.isArray(obj[key]) || obj[key] === undefined || obj[key].length === 0) {
+    return undefined;
+  }
+  
+  for (let i = 0; i < obj[key].length; i++) {
+    if (obj[key][i] < large) large = obj[key][i];
+  }
+  
+  return large;
+}
+
+// or
+
+function getSmallestElementAtProperty(obj, key) {
+
+
+ if(!Array.isArray(obj[key]) || (obj[key].length < 1) || (obj[key] === false)){
+  return undefined;
+}
+
+var smallNum = obj[key][0];
+
+for (var prop in obj[key]){
+    if (obj[key][prop] < smallNum){
+    smallNum = obj[key][prop];
+  }
+ }
+return smallNum;
+}
+
+// or 
+
+function getSmallestElementAtProperty(obj, key) {
+  if (!Array.isArray(obj[key])) {
+    return undefined;
+  }
+  
+  if (!obj.hasOwnProperty(key)) {
+    return undefined;
+  }
+  
+  if (obj[key].length === 0) {
+    return undefined;
+  }
+  
+  for (var prop in obj[key]) {
+    var pmin = Math.min(...obj[key]);
+    return pmin;
+  }
+}
+***************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-109-getLargestElementAtProperty*
+
+Write a function called “getLargestElementAtProperty”.
+
+Given an object and a key, “getLargestElementAtProperty” returns the largest element in the array located at the given key.
+
+Notes:
+* If the array is empty, it should return undefined.
+* If the property at the given key is not an array, it should return undefined.
+* If there is no property at the key, it should return undefined.
+
+var obj = {
+  key: [1, 2, 4]
+};
+var output = getLargestElementAtProperty(obj, 'key');
+console.log(output); // --> 4
+
+Your Code Should Pass:
+
+describe("getLargestElementAtProperty", function() {
+  it("should return the largest element of the array located at key", function() {
+    var obj = {
+      array: [1, 2, 4]
+    };
+    expect(getLargestElementAtProperty(obj, "array")).toBe(4);
+  });
+  it("should return undefined if the array is empty", function() {
+    var obj = {
+      array: []
+    };
+    expect(getLargestElementAtProperty(obj, "array")).toBe(undefined);
+  });
+  it("should return undefined if the property is not an array", function() {
+    var obj = {
+      array: "sike"
+    };
+    expect(getLargestElementAtProperty(obj, "array")).toBe(undefined);
+  });
+  it("should return undefined if the property does not exist", function() {
+    var obj = {
+      what: "sike"
+    };
+    expect(getLargestElementAtProperty(obj, "array")).toBe(undefined);
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: largest element in key's array
+// I: obj and key{}
+// C: none
+// E: if key arr empty, if property is not array and if obj empty
+
+// access obj -> key -> elements in array
+// loop thru array and find largest
+// return largest element (how to only return largest)
+
+
+var obj = {
+  key: [1, 2, 4]
+};
+
+function getLargestElementAtProperty(obj, key) {
+   if (!Array.isArray(obj[key])) {
+    return undefined
+  }
+  var largest = obj[key][0];
+  for (var x = 0 ; x < obj[key].length ; x++) {
+    if (obj[key][x] > largest) {
+      largest = obj[key][x];
+    }
+  }
+  return largest
+}
+
+var output = getLargestElementAtProperty(obj, 'key');
+console.log(output); // --> 4
+
+// or
+
+function getLargestElementAtProperty(obj, key) {
+  var large = -Infinity;
+  
+  if (!Array.isArray(obj[key]) || obj[key] === undefined || obj[key].length === 0) {
+    return undefined;
+  }
+  
+  for (let i = 0; i < obj[key].length; i++) {
+    if (obj[key][i] > large) large = obj[key][i];
+  }
+  
+  return large;
+}
+
+// or
+
+function getLargestElementAtProperty(obj, key) {
+
+
+ if(!Array.isArray(obj[key]) || (obj[key].length < 1) || (obj[key] === false)){
+  return undefined;
+}
+
+var largNum = obj[key][0];
+
+for (var prop in obj[key]){
+    if(obj[key][prop] > largNum){
+    largNum = obj[key][prop];
+  }
+ }
+return largNum;
+}
+
+// or
+
+function getLargestElementAtProperty(obj, key) {
+    if (!Array.isArray(obj[key]) || obj[key].length < 1) {
+    return undefined;
+  }
+
+  return Math.max(...obj[key]);
+}
+**************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-110-getAllButLastElementOfProperty
+
+Write a function called “getAllButLastElementOfProperty”.
+
+Given an object and a key, “getAllButLastElementOfProperty” returns an array containing all but the last element of the array located at the given key.
+
+Notes:
+* If the array is empty, it should return an empty array.
+* If the property at the given key is not an array, it return an empty array.
+* If there is no property at the key, it should return an empty array.
+
+var obj = {
+  key: [1, 2, 3]
+};
+var output = getAllButLastElementOfProperty(obj, 'key');
+console.log(output); // --> [1,2]
+
+Your Code Should Pass:
+
+describe("getAllButLastElementOfProperty", function() {
+  it("should return an array containing all but the last element of the array located at key", function() {
+    var obj = {
+      array: [1, 2, 4]
+    };
+    expect(getAllButLastElementOfProperty(obj, "array")).toEqual([1, 2]);
+  });
+  it("should return an empty array if the array has only 1 element", function() {
+    var obj = {
+      array: [1]
+    };
+    expect(getAllButLastElementOfProperty(obj, "array")).toEqual([]);
+  });
+  it("should return an empty array if the array is empty", function() {
+    var obj = {
+      array: []
+    };
+    expect(getAllButLastElementOfProperty(obj, "array")).toEqual([]);
+  });
+  it("should return an empty array if the property is not an array", function() {
+    var obj = {
+      array: "sike"
+    };
+    expect(getAllButLastElementOfProperty(obj, "array")).toEqual([]);
+  });
+  it("should return an empty array if the property does not exist", function() {
+    var obj = {
+      what: "sike"
+    };
+    expect(getAllButLastElementOfProperty(obj, "array")).toEqual([]);
+  });
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: an array with all element in key's array, except LAST
+// I: obj and key{}
+// C: none
+// E: if key arr empty, if property is not array and if obj empty
+
+// access obj -> key -> elements in array
+// loop thru array and get desired elemnts
+// return all element in key's array, except LAST
+
+var obj = {
+  key: [1, 2, 3]
+};
+
+function getAllButLastElementOfProperty(obj, key) {
+  if (!Array.isArray(obj[key])) {
+    return [];
+  }
+  
+  var containerArray = []; 
+  
+  for (var x = 0 ; x < (obj[key].length-1) ; x++) {
+    
+    containerArray.push(obj[key][x]);
+    
+  }
+  return containerArray;
+}
+
+var output = getAllButLastElementOfProperty(obj, 'key');
+console.log(output); // --> [1,2]
+
+// or 
+
+function getAllButLastElementOfProperty(obj, key) {
+  if (!Array.isArray(obj[key]) || obj[key] === undefined) return [];
+  return obj[key].slice(0, obj[key].length-1);
+}
+
+// or
+
+function getAllButLastElementOfProperty(obj, key) {
+
+var arr = [];
+
+ if(!Array.isArray(obj[key]) || (obj[key] === false) || (obj[key].length < 1)){
+  return arr;
+ }else if (arr = obj[key].slice(0, -1)){
+ 
+  return arr;
+ }
+}
+
+// or
+
+function getAllButLastElementOfProperty(obj, key) {
+  if (!Array.isArray(obj[key]) || !obj.hasOwnProperty(key)) {
+    return [];
+  };
+  
+  return obj[key].slice(0, (obj[key].length - 1));
+}
+
+// or
+
+function getAllButLastElementOfProperty(obj, key) {
+  var allButLast = [];
+  for(key in obj){
+    var arr = obj[key];
+    if(!Array.isArray(arr) || !arr.length){
+      return [];
+    }
+    arr.forEach((e) => {
+      allButLast.push(e);
+    });
+  }
+  return allButLast.slice(0, -1);
+}
+***************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-111-getElementOfArrayProperty
+
+Write a function called “getElementOfArrayProperty”.
+
+Given an object, a key, and a numerical index, “getElementOfArrayProperty” returns the value of the element at the given index of the array located within the given object at the given key.
+
+Notes:
+* If the array is empty, it should return undefined.
+* If the given index is out of range of the array located at the given key, it should return undefined.
+* If the property at the given key is not an array, it should return undefined.
+* If there is no property at the key, it should return undefined.
+
+var obj = {
+ key: ['Jamil', 'Albrey']
+};
+var output = getElementOfArrayProperty(obj, 'key', 0); 
+console.log(output); // --> 'Jamil'
+
+Your Code Should Pass:
+
+describe("getElementOfArrayProperty", function() {
+
+  it("should return the element at the index of the array at the key of the passed in object", function() {
+    var obj = {
+      numbers: [4, 0, 1]
+    };
+    expect(getElementOfArrayProperty(obj, "numbers", 1)).toBe(0);
+  });
+  it("should return undefined if the index is out of range", function() {
+    var obj = {
+      numbers: [4, 0, 1]
+    };
+    expect(getElementOfArrayProperty(obj, "numbers", 5)).toBe(undefined);
+  });
+  it("should return undefined if the property at the key is not an array", function() {
+    var obj = {
+      name: "you"
+    };
+    expect(getElementOfArrayProperty(obj, "name", 0)).toBe(undefined);
+  });
+  it("should return undefined if there is no property at the key", function() {
+    var obj = {
+      name: "you"
+    };
+    expect(getElementOfArrayProperty(obj, "what", 0)).toBe(undefined);
+  });
+});
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: value at obj[key][index]
+// I: obj, key, index
+// C: none
+// E: if key arr empty, if property is not array, if obj empty and 
+// if index given is out of range return undefined
+
+// access obj[key][index]
+// return desired element
+
+var obj = {
+ key: ['Jamil', 'Albrey']
+};
+
+function getElementOfArrayProperty(obj, key, index) {
+  
+  if (!Array.isArray(obj[key])) {
+    return undefined
+  }
+  return obj[key][index];
+}
+
+var output = getElementOfArrayProperty(obj, 'key', 0); 
+console.log(output); // --> 'Jamil'
+
+// or
+
+function getElementOfArrayProperty(obj, key, index) {
+  if (obj[key] === undefined) return undefined;
+  if (!Array.isArray(obj[key])) return undefined;
+  return obj[key][index];
+}
+
+// or
+
+function getElementOfArrayProperty(obj, key, index) {
+  
+  if(!Array.isArray(obj[key]) || obj[key].length < 1  || obj[key][index] === false){
+    return undefined;
+  }else{
+    var value = obj[key][index];
+  }
+  return value;
+}
+
+// or 
+
+function getElementOfArrayProperty(obj, key, index) {
+  // your code here
+  
+    if (!Array.isArray(obj[key])) {
+    return undefined;
+  } else  if (!obj.hasOwnProperty(key)) {
+    return undefined;
+  } else if (obj[key].length === 0) {
+    return undefined;
+  } else if (index > obj[key].length) {
+    return undefined;
+  }
+   return obj[key][index];
+
+}
+**************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-112-squareElements*
+
+Write a function called “squareElements”.
+Given an array of numbers, “squareElements” should return a new array where each element is the square of the element of the given array.
+var output = squareElements([1, 2, 3]); 
+console.log(output); // --> [1, 4, 9]
+
+Your Code Should Pass:
+
+describe("squareElements", function() {
+  it("should return an array", function() {
+    expect(Array.isArray(squareElements([1, 2, 3]))).toBe(true);
+  });
+  it("should return an array with the elements of the passed in array, squared", function() {
+    expect(squareElements([1, 2, 3])).toEqual([1, 4, 9]);
+  });
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: an ARRAY with squared element of the original array
+// I: an array
+// C: none
+// E: none
+
+// declare container
+// loop thru array's elements
+// square elements
+// store new values in container
+// return new array
+
+function squareElements(arr) {
+  var squares = [];
+  
+  for (var x = 0 ; x < (arr.length) ; x++) {
+    squares.push(arr[x]**2);
+  }
+  return squares;
+}
+
+// or
+
+function squareElements(arr) {
+  return arr.map((x) => x**2);
+}
+
+// or
+
+function squareElements(arr) {
+var arr2 = [];
+ 
+   for(var i = 0; i < arr.length; i++){
+    arr2.push(Math.pow(arr[i], 2));
+   }
+return arr2;
+}
+
+// or
+
+function squareElements(arr) {
+  return arr.map(x => x * x);
+}
+
+function squareElements(arr) {
+  // your code here
+}
+
+function squareElements(arr) {  // HoF
+  return arr.map(function(i) {  // squares all element in the array
+    return i * i;
+  });
+}
+**************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-113-filterOddElements*
+
+Write a function called “filterOddElements”.
+
+Given an array of numbers, “filterOddElements” returns an array containing only the odd numbers of the given array.
+var output = filterOddElements([1, 2, 3, 4, 5]); console.log(output); // --> [1, 3, 5]
+
+Your Code Should Pass:
+
+describe("filterOddElements", function() {
+  it("should return an array", function() {
+    expect(Array.isArray(filterOddElements([1, 2, 3, 4]))).toBe(true);
+  });
+  it("should return an array with the odd elements from the passed in array", function() {
+    expect(filterOddElements([1, 2, 3, 4, 5])).toEqual([1, 3, 5]);
+  });
+  it("should return an array if there are no odd numbers", function() {
+    expect(filterOddElements([2, 4, 6])).toEqual([]);
+  });
+  it("should return an array if given an emtpy array", function() {
+    expect(filterOddElements([])).toEqual([]);
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: an ARRAY with the odd elements of the original array
+// I: an array
+// C: none
+// E: none
+
+// declare container
+// loop thru array's elements
+// get odd elements
+// store new values in container
+// return new array
+
+function filterOddElements(arr) {
+  var odds = [];
+  
+  for (x = 0 ; x < arr.length ; x++) {
+    if (arr[x] % 2 !== 0) {
+      odds.push(arr[x]);
+    }
+  }
+  return odds;
+}
+
+// or
+
+
+function filterOddElements(arr) {
+  return arr.filter((x) => x % 2 !== 0)
+}
+***********************************************************************************************************************************
+preImmersive-buildingBlocksMastery-114-computeProductOfAllElements*
+
+Write a function called “computeProductOfAllElements”.
+
+Given an array of numbers, “computeProductOfAllElements” returns the products of all the elements in the given array.
+
+Notes:
+* If given array is empty, it should return 0.
+
+var output = computeProductOfAllElements([2, 5, 6]);
+console.log(output); // --> 60
+
+Your Code Should Pass:
+
+describe("computeProductOfAllElements", function() {
+  it("should return a number", function() {
+    expect(typeof computeProductOfAllElements([1, 2, 4])).toBe("number");
+  });
+  it("return the product of all elements", function() {
+    expect(computeProductOfAllElements([1, 2, 4])).toBe(8);
+  });
+  it("return 0 if the passed in array is empty", function() {
+    expect(computeProductOfAllElements([])).toBe(0);
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
