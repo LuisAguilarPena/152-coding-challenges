@@ -6551,7 +6551,70 @@ describe("sumDigits", function() {
   });
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: the sum of all digits in a number
+// I: a number
+// C: If the number is negative, the first digit should count as negative.
 
+// declare a placeholder
+// turn number into a string
+// loop thru string
+  // grab each char, turn it into a number and add it to the next
+  // place sum inside placeholder
+// return placeholer
+
+// how to identify if the first char is a neg sign
+
+function sumDigits(num) {
+  var numStr = num.toString();
+  
+  if (numStr[0] !== "-") {
+    var sum = 0;
+    for (var x = 0 ; x < numStr.length ; x++) {
+      sum += Number(numStr[x]); 
+    }
+    return sum;
+  } else if (numStr[0] === "-") {
+    var sumN = (-1)*Number(numStr[1]);
+    for (var x = 2 ; x < numStr.length ; x++) {
+      sumN += Number(numStr[x]); 
+    }
+    return sumN;
+  }
+}
+
+var output = sumDigits(-316);
+console.log(output); // --> 4
+var output = sumDigits(1148);
+console.log(output); // --> 14
+
+// or 
+
+function sumDigits(num) {
+  var chars = String(num).split("");
+  var total = 0;
+  
+  for (i in chars) {
+    if (chars[i] === "-") { chars[1] = -Number(chars[1]); }
+    else {
+      total += Number(chars[i]);
+    }
+    console.log(chars)
+
+  }
+  
+  return total;
+}
+
+// or
+
+function sumDigits(num) {
+  // your code here
+  var arrNums = String(num).match(/-?\d/g);
+  
+  var numsArr = arrNums.map(Number);
+
+  return numsArr.reduce((prev, curr) => prev + curr);
+}
 **********************************************************************************************************************************
 preImmersive-buildingBlocksMastery-127-getSumOfAllElementsAtProperty*
 
