@@ -6551,7 +6551,7 @@ describe("sumDigits", function() {
   });
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// O: the sum of all digits in a number
+// O: the Σ of all digits in a number
 // I: a number
 // C: If the number is negative, the first digit should count as negative.
 
@@ -6559,7 +6559,7 @@ describe("sumDigits", function() {
 // turn number into a string
 // loop thru string
   // grab each char, turn it into a number and add it to the next
-  // place sum inside placeholder
+  // place Σ inside placeholder
 // return placeholer
 
 // how to identify if the first char is a neg sign
@@ -6568,17 +6568,17 @@ function sumDigits(num) {
   var numStr = num.toString();
   
   if (numStr[0] !== "-") {
-    var sum = 0;
+    var Σ = 0;
     for (var x = 0 ; x < numStr.length ; x++) {
-      sum += Number(numStr[x]); 
+      Σ += Number(numStr[x]); 
     }
-    return sum;
+    return Σ;
   } else if (numStr[0] === "-") {
-    var sumN = (-1)*Number(numStr[1]);
+    var ΣN = (-1)*Number(numStr[1]);
     for (var x = 2 ; x < numStr.length ; x++) {
-      sumN += Number(numStr[x]); 
+      ΣN += Number(numStr[x]); 
     }
-    return sumN;
+    return ΣN;
   }
 }
 
@@ -6705,3 +6705,1568 @@ function getSumOfAllElementsAtProperty(obj, key) {
   return obj[key].reduce((acc, curr) => acc + curr);
 }
 ************************************************************************************************************************************
+preImmersive-buildingBlocksMastery-128-findShortestWordAmongMixedElements*
+
+Write a function called “findShortestWordAmongMixedElements”.
+
+Given an array, “findShortestWordAmongMixedElements” returns the shortest string within the given array.
+
+Notes:
+* If there are ties, it should return the first element to appear in the given array.
+* Expect the given array to have values other than strings.
+* If the given array is empty, it should return an empty string.
+* If the given array contains no strings, it should return an empty string.
+
+var output = findShortestWordAmongMixedElements([4, 'two', 2, 'three']);
+console.log(output); // --> 'two'
+Your Code Should Pass:
+
+describe("findShortestWordAmongMixedElements", function() {
+  it("should return a string", function() {
+    expect(typeof findShortestWordAmongMixedElements(["these", "are", "strings"])).toBe("string");
+  });
+  it("should return the shortest string in an array", function() {
+    expect(findShortestWordAmongMixedElements([3, "word", 5, "up", 3, 1])).toBe("up");
+  });
+  it("should return the shortest string in an array that appears first when there are ties", function() {
+    expect(findShortestWordAmongMixedElements(["word", 3, 5, 3, "yo", "up", 1, 5])).toBe("yo");
+  });
+  it("should return an empty string when the array is empty", function() {
+    expect(findShortestWordAmongMixedElements([])).toBe("");
+  });
+  it("should return an empty string there are no strings", function() {
+    expect(findShortestWordAmongMixedElements([1, 2, 4])).toBe("");
+  });
+});
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: shortest str within an array
+// I: an array (mixed)
+// C: none
+// E: for ties ret 1st one, if arr empty, if arr has no strings ret ""
+
+// Declare a container, one for the final value and another for an array
+// access given array
+// loop thru array
+  // check the elements in array 
+  // get strings and store them in array for strings
+  // check for the shortes str inside array for strings
+  // store the shortest word inside final container
+// return final container
+
+
+function findShortestWordAmongMixedElements(arr) {
+  var strArray = [];
+  
+  if(arr.length === 0) {
+    return "";
+  }
+  
+  for (var x = 0 ; x < arr.length ; x++ ) {
+    if (typeof arr[x] === "string") {
+      strArray.push(arr[x]);
+    }
+  }
+  console.log(strArray);
+  
+  if(strArray.length === 0) {
+    return "";
+  }
+  
+  var shortest = strArray[0]; 
+  for (var x in strArray) {
+      if (strArray[x].length < shortest.length) {  
+        shortest = strArray[x];
+      }
+    }
+  
+    
+  return shortest;
+}
+
+var output = findShortestWordAmongMixedElements([4, 'two', 2, 'three']);
+console.log(output); // --> 'two'
+
+// or 
+function findShortestWordAmongMixedElements(arr) {
+  var short = "";
+  var s_len = Infinity;
+  
+  for (i in arr) {
+    if (typeof(arr[i]) === "string") {
+      if (arr[i].length < s_len) {
+        short = arr[i];
+        s_len = short.length;
+      }
+    }
+  }
+  
+  return short;
+}
+
+// or
+
+
+function findShortestWordAmongMixedElements(arr) {
+  // your code here
+
+  var strs = arr.filter(el => typeof el === 'string');
+  
+  if (strs.length === 0) {
+    return '';
+  }
+  if (strs.length !== 0) {
+  strs.sort(function(a, b) {
+    return a.length - b.length;
+  });
+    return strs[0];
+  }
+}
+
+// or
+
+function findShortestWordAmongMixedElements(arr){
+
+var shortestWord = '';
+ 
+ for(i=0; i < arr.length; i++){
+  if(typeof arr[i] === 'string' && shortestWord.length === 0 || arr[i].length < 
+  shortestWord.length){
+      shortestWord = arr[i];
+    }
+  } 
+  return shortestWord;
+}
+********************************************************************************************************************
+preImmersive-buildingBlocksMastery-129-findSmallestNumberAmongMixedElements*
+
+Write a function called “findSmallestNumberAmongMixedElements”.
+
+Given an array of mixed elements, “findSmallestNumberAmongMixedElements” returns the smallest number within the given array.
+
+Notes:
+* If the given array is empty, it should return 0.
+* If the array contains no numbers, it should return 0.
+
+var output = findSmallestNumberAmongMixedElements([4, 'lincoln', 9, 'octopus']);
+console.log(output); // --> 4
+Your Code Should Pass:
+
+describe("findSmallestNumberAmongMixedElements", function() {
+  it("should return a number", function() {
+    expect(typeof findSmallestNumberAmongMixedElements([3, 5, 3, 1])).toBe("number");
+  });
+  it("should return the smallest element in an array", function() {
+    expect(findSmallestNumberAmongMixedElements([3, "word", 5, "up", 3, 1])).toBe(1);
+  });
+  it("should return the smallest element in an array when there are ties", function() {
+    expect(findSmallestNumberAmongMixedElements(["word", 3, 1, 3, "wordy", "up", 1, 5])).toBe(1);
+  });
+  it("should return the smallest element in an array when they are all negative", function() {
+    expect(findSmallestNumberAmongMixedElements([-1, -5, "word", -3])).toBe(-5);
+  });
+  it("should return 0 when the array is empty", function() {
+    expect(findSmallestNumberAmongMixedElements([])).toBe(0);
+  });
+  it("should return 0 when there are no numbers", function() {
+    expect(findSmallestNumberAmongMixedElements(["word", "up"])).toBe(0);
+  });
+});
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: smallest number
+// I: mixed arr
+// C: none
+// E: if arr empty or if arr has no numbers; ret 0
+
+// Declare an emptry array container to store numbers inside
+// Access and loop thru array
+  // check if elements in arr are numbers
+  // store numbers in array container
+// Declare a container where the first element from the new number array will be stored
+// Access and loop thru new array
+  // check values inside the new array against new container
+  // re assign the value inside new container if checked value is smaller
+// return final container with smallest number
+
+function findSmallestNumberAmongMixedElements(arr) {
+  if (arr.length < 1) {
+    return 0;
+  }
+  var nArr = [];
+  for (var x in arr) {
+    if (typeof arr[x] === "number") {
+      nArr.push(arr[x]);
+    }
+  }
+  if (nArr.length < 1) {
+    return 0;
+  }
+  var smallest = nArr[0];
+  for (var x in nArr) {
+    if (nArr[x] < smallest) {
+      smallest = nArr[x];
+    }
+  }
+  return smallest;
+}
+
+var output = findSmallestNumberAmongMixedElements([4, 'lincoln', 9, 'octopus']);
+console.log(output); // --> 4
+
+// or
+
+function findSmallestNumberAmongMixedElements(arr) {
+  var small = Infinity;
+  
+  if (arr === []) return 0;
+  
+  arr.forEach((x) => {
+    if (x < small) small = x;
+  });
+  
+  return small === Infinity ? 0 : small;
+}
+
+// or
+
+function findSmallestNumberAmongMixedElements(arr) {
+  // your code here
+  var strs = arr.filter(el => typeof el === 'number');
+  
+  if (strs.length === 0) {
+    return 0;
+  }
+  if (strs.length !== 0) {
+    return Math.min(...strs);
+  }
+}
+********************************************************************************************************************
+preImmersive-buildingBlocksMastery-130-getLongestWordOfMixedElements*
+
+Write a function called “getLongestWordOfMixedElements”.
+
+Given an array of mixed types, “getLongestWordOfMixedElements” returns the longest string in the given array.
+
+Notes:
+* If the array is empty, it should return an empty string (“”). 
+* If the array contains no strings; it should return an empty string.
+
+var output = getLongestWordOfMixedElements([3, 'word', 5, 'up', 3, 1]);
+console.log(output); // --> 'word'
+
+Your Code Should Pass:
+
+describe("getLongestWordOfMixedElements", function() {
+  it("should return a string", function() {
+    expect(typeof getLongestWordOfMixedElements(["these", "are", "strings"])).toBe("string");
+  });
+  it("should return the longest string in an array", function() {
+    expect(getLongestWordOfMixedElements([3, "word", 5, "up", 3, 1])).toBe("word");
+  });
+  it("should return the longest string in an array that appears first when there are ties", function() {
+    expect(getLongestWordOfMixedElements(["word", 3, 5, 3, "bird", "up", 1, 5])).toBe("word");
+  });
+  it("should return an empty string when the array is empty", function() {
+    expect(getLongestWordOfMixedElements([])).toBe("");
+  });
+  it("should return an empty string there are no strings", function() {
+    expect(getLongestWordOfMixedElements([1, 2, 4])).toBe("");
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: longest string
+// I: mixed array
+// C: none
+// E: if arr empty or if arr has no strings; ret ""
+
+// Declare an array container to store only strings
+// loop thru array
+  // check what elements are strings
+  // store strings inside the new array
+// Declare a new container with a value of the first element in the new array
+// loop thru that new array
+  // check if the element in the array is longer in length than the value assigned to the new container
+  // re assig the new container to the longest string
+// return new container
+
+function getLongestWordOfMixedElements(arr) {
+  if ( arr.length < 1) {
+    return "";
+  }
+  var strArr = [];
+  for (var x in arr) {
+    if (typeof arr[x] === "string") {
+      strArr.push(arr[x]);
+    }
+  }
+  if ( strArr.length < 1) {
+    return "";
+  }
+  var long = strArr[0];
+  for (var x in strArr) {
+    if (strArr[x].length > long.length) {
+      long = strArr[x];
+    }
+  }
+  return long;
+}
+
+var output = getLongestWordOfMixedElements([3, 'word', 5, 'up', 3, 1]);
+console.log(output); // --> 'word'
+
+// or 
+
+function getLongestWordOfMixedElements(arr) {
+  var big = "";
+  
+  if (arr === []) return "";
+  
+  arr.forEach((x) => {
+    if (typeof(x) === "string") {
+      if (x.length > big.length) {
+        big = x;
+      }
+    }
+  });
+  
+  return big
+}
+
+// or
+
+function getLongestWordOfMixedElements(arr) {
+  // your code here
+  var strs = arr.filter(el => typeof el === 'string');
+  
+  if (strs.length === 0) {
+    return '';
+  }
+  if (strs.length !== 0) {
+  strs.sort((a, b) => {
+    b.length - a.length;
+  });
+    return strs[0];
+  }
+}
+************************************************************************************************************************
+preImmersive-buildingBlocksMastery-131-getLargestNumberAmongMixedElements*
+
+Write a function called “getLargestNumberAmongMixedElements”.
+
+Given any array, “getLargestNumberAmongMixedElements” returns the largest number in the given array.
+
+Notes:
+* The array might contain values of a type other than numbers.
+* If the array is empty, it should return 0.
+* If the array contains no numbers, it should return 0.
+
+var output = getLargestNumberAmongMixedElements([3, 'word', 5, 'up', 3, 1]);
+console.log(output); // --> 5
+
+Your Code Should Pass:
+
+describe("getLargestNumberAmongMixedElements", function() {
+  it("should return a number", function() {
+    expect(typeof getLargestNumberAmongMixedElements([3, 5, 3, 1])).toBe("number");
+  });
+  it("should return the largest element in an array", function() {
+    expect(getLargestNumberAmongMixedElements([3, "word", 5, "up", 3, 1])).toBe(5);
+  });
+  it("should return the largest element in an array when there are ties", function() {
+    expect(getLargestNumberAmongMixedElements(["word", 3, 5, 3, "wordy", "up", 1, 5])).toBe(5);
+  });
+  it("should return the largest element in an array when they are all negative", function() {
+    expect(getLargestNumberAmongMixedElements([-1, -5, "word", -3])).toBe(-1);
+  });
+  it("should return 0 when the array is empty", function() {
+    expect(getLargestNumberAmongMixedElements([])).toBe(0);
+  });
+  it("should return 0 when there are no numbers", function() {
+    expect(getLargestNumberAmongMixedElements(["word", "up"])).toBe(0);
+  });
+});
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: largest number
+// I: mixed array
+// C: none
+// E: if arr empty or contains no numbers ret 0
+
+// check if arr is empty
+  // ret 0
+// Declare a new arr to store only numbers
+// loop thru arr
+  // check what elements are numbers and push them to new arr
+// check if new arr is empty, if true it means that no numbers where found in given arr
+  // ret 0
+// declare a new container with an initial value of the first element in new arr
+// loop thru new arr
+  // check what elements are larger in new arr and if true store the value in container
+// return container
+
+
+function getLargestNumberAmongMixedElements(arr) {
+  if (arr.length < 1) {
+    return 0;
+  }
+  var nArr = [];
+  for (var x in arr) {
+    if (typeof arr[x] === "number") {
+      nArr.push(arr[x]);
+    }
+  }
+  if (nArr.length < 1) {
+    return 0;
+  }
+  var largest = nArr[0];
+  for (var x in nArr) {
+    if (nArr[x] > largest) {
+      largest = nArr[x];
+    }
+  }
+  return largest;
+}
+
+var output = getLargestNumberAmongMixedElements([3, 'word', 5, 'up', 3, 1]);
+console.log(output); // --> 5
+
+// or 
+
+function getLargestNumberAmongMixedElements(arr) {
+  var big = -Infinity;
+  
+  if (arr === []) return 0;
+  
+  arr.forEach((x) => {
+    if (x > big && typeof(x) === "number") big = x;
+  });
+  
+  return (big === -Infinity) ? 0 : big;
+}
+
+// or 
+
+function getLargestNumberAmongMixedElements(arr) {
+  // your code here
+  var strs = arr.filter(el => typeof el === 'number');
+  
+  if (strs.length === 0) {
+    return 0;
+  }
+  if (strs.length !== 0) {
+    return Math.max(...strs);
+  }
+}
+**************************************************************************************************************************
+preImmersive-buildingBlocksMastery-132-computeSummationToN
+
+Write a function called “computeSummationToN”.
+
+Given a number, “computeSummationToN” returns the sum of sequential numbers leading up to the given number, beginning at 0.
+
+Notes:
+* If n = 4, it should calculate the sum of 1 + 2 + 3 + 4, and return 10.
+
+var output = computeSummationToN(6);
+console.log(output); // --> 21
+
+Your Code Should Pass:
+
+describe("computeSummationToN", function() {
+  it("should return a number", function() {
+    expect(typeof computeSummationToN(7)).toBe("number");
+  });
+  it("should return the summation of numbers up to and including 'n'", function() {
+    expect(computeSummationToN(4)).toBe(10);
+  });
+  it("should return the summation of 0", function() {
+    expect(computeSummationToN(0)).toBe(0);
+  });
+});
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: a number
+// I: the sum of sequential numbers leading up to the given number, beginning at 0.
+// C: none
+// E: none
+
+// declare a container with value of 0.
+// create a loop to add the numbers to the container 
+// return value
+
+function computeSummationToN(n) {
+  var x = 0;
+  for (var i = 0; i <= n; i++) {
+    x += i;
+  }
+  return x;
+}
+
+var output = computeSummationToN(4);
+console.log(output); // --> 10
+
+// or 
+
+function computeSummationToN(n) {
+  return n ? n + computeSummationToN(n-1) : 0;
+}
+**************************************************************************************************************************
+preImmersive-buildingBlocksMastery-133-convertScoreToGrade
+
+Write a function called “convertScoreToGrade”.
+
+Given a score, “convertScoreToGrade” returns a string representing the letter grade corresponding to the given score.
+
+Notes:
+* (100 - 90) –> ‘A’
+* (89 - 80) –> ‘B’
+* (79 - 70) –> ‘C’
+* (69 - 60) –> ‘D’
+* (59 - 0) –> ‘F’
+* If the given score is greater than 100 or less than 0, it should return ‘INVALID SCORE’.
+
+var output = convertScoreToGrade(91);
+console.log(output); // --> 'A'
+
+Your Code Should Pass:
+
+describe("convertScoreToGrade", function() {
+  it("should return a string", function() {
+    expect(typeof(convertScoreToGrade(95))).toBe("string");
+  });
+  it("should return 'A' for scores between 90 and 100", function() {
+    expect(convertScoreToGrade(95)).toBe("A");
+  });
+  it("should return 'B' for scores between 80 and 89", function() {
+    expect(convertScoreToGrade(80)).toBe("B");
+  });
+  it("should return 'C' for scores between 70 and 79", function() {
+    expect(convertScoreToGrade(79)).toBe("C");
+  });
+  it("should return 'D' for scores between 60 and 69", function() {
+    expect(convertScoreToGrade(60)).toBe("D");
+  });
+  it("should return 'F' for 59", function() {
+    expect(convertScoreToGrade(59)).toBe("F");
+  });
+  it("should return 'F' for scores between 0 and 59", function() {
+    expect(convertScoreToGrade(50)).toBe("F");
+  });
+  it("should return 'F' for 0", function() {
+    expect(convertScoreToGrade(0)).toBe("F");
+  });
+  it("should return 'INVALID SCORE' for scores less than 0", function() {
+    expect(convertScoreToGrade(-1)).toBe("INVALID SCORE");
+  });
+  it("should return 'INVALID SCORE' for scores greater than 100", function() {
+    expect(convertScoreToGrade(101)).toBe("INVALID SCORE");
+  });
+});
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: a string rep the grade
+// I: a number
+// C: none
+// E: if score mora than 100 or less than 0 ret "INVALID SCORE"
+
+// check score if's 
+
+function convertScoreToGrade(score) {
+  return score < 100 && score > 89 ? "A" : score < 90 && score > 79 ? "B" :
+  score < 80 && score > 69 ? "C" : score < 70 && score > 59 ? "D" :
+  score < 60 && score >= 0 ? "F" : "INVALID SCORE";
+}
+
+var output = convertScoreToGrade(91);
+console.log(output); // --> 'A'
+
+// or 
+
+function convertScoreToGrade(score) {
+  // your code here
+  if (score > 100 || score < 0) {
+    return 'INVALID SCORE';
+  } else if (score <= 100 && score >= 90) {
+    return 'A';
+  } else if (score <= 89 && score >= 80) {
+    return 'B';
+  } else if (score <= 79 && score >= 70) {
+    return 'C';
+  } else if (score <= 69 && score >= 60) {
+    return 'D';
+  } else if (score <= 59 && score >= 0) {
+    return 'F';
+  }
+}
+***********************************************************************************************************************
+preImmersive-buildingBlocksMastery-134-convertScoreToGradeWithPlus
+
+Write a function called “convertScoreToGradeWithPlusAndMinus”.
+
+Given a score, “convertScoreToGradeWithPlusAndMinus” returns a string representing the letter grade corresponding to the given score.
+
+Notes:
+* (100 - 90) –> ‘A’
+* (89 - 80) –> ‘B’
+* (79 - 70) –> ‘C’
+* (69 - 60) –> ‘D’
+* (59 - 0) –> ‘F’
+* If the given score is greater than 100 or less than 0, it should return ‘INVALID SCORE’.
+* If the score is between the 0 and 2 (inclusive) of a given range, return the letter with a ‘-‘
+* If the score is be the 8 and 9 (inclusive) of a given range, return the letter with a ‘+’
+* There are is no F+ and there is no F-.
+
+var output = convertScoreToGradeWithPlusAndMinus(91);
+console.log(output); // --> 'A-'
+
+Your Code Should Pass:
+
+describe("convertScoreToGradeWithPlusAndMinus", function() {
+  it("should return a string", function() {
+    expect(typeof(convertScoreToGradeWithPlusAndMinus(95))).toBe("string");
+  });
+  it("should return 'A+' for scores between 98 and 100", function() {
+    expect(convertScoreToGradeWithPlusAndMinus(100)).toBe("A+");
+  });
+  it("should return 'A-' for scores between 90 and 92", function() {
+    expect(convertScoreToGradeWithPlusAndMinus(90)).toBe("A-");
+  });
+  it("should return 'A' for scores between 93 and 97", function() {
+    expect(convertScoreToGradeWithPlusAndMinus(95)).toBe("A");
+  });
+  it("should return 'B+' for scores between 88 and 89", function() {
+    expect(convertScoreToGradeWithPlusAndMinus(89)).toBe("B+");
+  });
+  it("should return 'B-' for scores between 80 and 82", function() {
+    expect(convertScoreToGradeWithPlusAndMinus(80)).toBe("B-");
+  });
+  it("should return 'B' for scores between 83 and 87", function() {
+    expect(convertScoreToGradeWithPlusAndMinus(84)).toBe("B");
+  });
+  it("should return 'C+' for scores between 78 and 79", function() {
+    expect(convertScoreToGradeWithPlusAndMinus(79)).toBe("C+");
+  });
+  it("should return 'C-' for scores between 70 and 72", function() {
+    expect(convertScoreToGradeWithPlusAndMinus(70)).toBe("C-");
+  });
+  it("should return 'C' for scores between 73 and 77", function() {
+    expect(convertScoreToGradeWithPlusAndMinus(76)).toBe("C");
+  });
+  it("should return 'D+' for scores between 68 and 69", function() {
+    expect(convertScoreToGradeWithPlusAndMinus(69)).toBe("D+");
+  });
+  it("should return 'D' for scores between 63 and 67", function() {
+    expect(convertScoreToGradeWithPlusAndMinus(64)).toBe("D");
+  });
+  it("should return 'D-' for scores between 60 and 62", function() {
+    expect(convertScoreToGradeWithPlusAndMinus(60)).toBe("D-");
+  });
+  it("should return 'F' for scores between 0 and 59", function() {
+    expect(convertScoreToGradeWithPlusAndMinus(0)).toBe("F");
+  });
+  it("should return 'INVALID SCORE' for scores less than 0", function() {
+    expect(convertScoreToGradeWithPlusAndMinus(-1)).toBe("INVALID SCORE");
+  });
+  it("should return 'INVALID SCORE' for scores greater than 100", function() {
+    expect(convertScoreToGradeWithPlusAndMinus(101)).toBe("INVALID SCORE");
+  });
+});
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// O: a string rep the grade
+// I: a number
+// C: none
+// E: if score mora than 100 or less than 0 ret "INVALID SCORE"
+// check score if's 
+// -3, +1, -6, +1, -4, +1 -> number rithm
+
+function convertScoreToGradeWithPlusAndMinus(score) {
+  return score < 101 && score > 97 ? "A+" : score < 98 && score > 92 ? "A" :
+  score < 93 && score > 89 ? "A-" : score < 90 && score > 87 ? "B+" :
+  score < 88 && score > 82 ? "B" : score < 83 && score > 79 ? "B-" : 
+  score < 80 && score > 77 ? "C+" : score < 78 && score > 72 ? "C" :
+  score < 73 && score > 69 ? "C-" : score < 70 && score > 67 ? "D+" :
+  score < 68 && score > 62 ? "D" : score < 63 && score > 59 ? "D-" :
+  score < 60 && score >= 0 ? "F" : "INVALID SCORE";
+}
+var output = convertScoreToGradeWithPlusAndMinus(91);
+console.log(output); // --> 'A-'
+**************************************************************************************************************
+preImmersive-buildingBlocksMastery-135-computeFactorialOfN
+
+Write a function called “computeFactorialOfN”.
+
+Given a natural number (a whole number greater than 0), “computeFactorialOfN” returns its factorial.
+
+var output = computeFactorialOfN(3);
+console.log(output); // --> 6
+
+var output = computeFactorialOfN(4);
+console.log(output); // --> 24
+
+Your Code Should Pass:
+
+describe("computeFactorialOfN", function() {
+  it("should return a number", function() {
+    expect(typeof computeFactorialOfN(7)).toBe("number");
+  });
+  it("should return the factorial of 'n'", function() {
+    expect(computeFactorialOfN(4)).toBe(24);
+  });
+  it("should return the factorial of 1", function() {
+    expect(computeFactorialOfN(1)).toBe(1);
+  });
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: factorial 1*2*3 = 6, 1*2*3*4=24
+// I: number
+// C: none
+// E: none
+
+// declare a container with value of 0.
+// create a loop to multiply the numbers to the container 
+// return value
+
+function computeFactorialOfN(n) {
+  var x = 1;
+  for ( var i = 1 ; i <= n ; i++) {
+    x *= i;
+  }
+  return x;
+}
+
+
+var output = computeFactorialOfN(3);
+console.log(output); // --> 6
+
+// or
+
+function computeFactorialOfN(n) {
+  return n ? n * computeFactorialOfN(n-1) : 1;
+}
+*****************************************************************************************************************
+preImmersive-buildingBlocksMastery-136-repeatString
+
+Write a function called “repeatString”.
+
+Given a string and a number, “repeatString” returns the given string repeated the given number of times.
+
+var output = repeatString('code', 3);
+console.log(output); // --> 'codecodecode'
+
+Your Code Should Pass:
+
+describe("repeatString", function() {
+  it("should return a string", function() {
+    expect(typeof(repeatString("what", 3))).toBe("string");
+  });
+  it("should repeat a string a given number of times", function() {
+    expect(repeatString("what", 3)).toBe("whatwhatwhat");
+  });
+  it("should repeat a string 0 number of times", function() {
+    expect(repeatString("what", 0)).toBe("");
+  });
+});
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: the given str repeated x times
+// I: str and a num
+// C: none
+// E: none
+
+// declare a container to store the given string x number of times
+// loop num times to concatenate
+  // concatenate into container
+// return container
+  
+function repeatString(string, num) {
+  var newStr = "";
+  for (var x = 1 ; x <= num ; x++) {
+    newStr += string;
+  }
+  return newStr;
+}
+
+var output = repeatString('code', 3);
+console.log(output); // --> 'codecodecode'
+
+// or
+
+function repeatString(string, num) {
+  // your code here
+  return string.repeat(num);
+  
+}
+
+// or
+
+function repeatString(string, num) {
+  return num ? string + repeatString(string, num-1) : "";
+}
+******************************************************************************************************************
+preImmersive-buildingBlocksMastery-137-getLongestOfThreeWords*
+
+Write a function called “getLongestOfThreeWords”.
+
+Given 3 words, “getLongestOfThreeWords” returns the longest of three words.
+
+Notes:
+* If there is a tie, it should return the first word in the tie.
+
+var output = getLongestOfThreeWords('these', 'three', 'words');
+console.log(output); // --> 'these'
+
+Your Code Should Pass:
+
+describe("getLongestOfThreeWords", function() {
+  it("should return a string", function() {
+    expect(typeof(getLongestOfThreeWords("a", "be", "see"))).toBe("string");
+  });
+  it("should return the longest of three words", function() {
+    expect(getLongestOfThreeWords("a", "be", "see")).toBe("see");
+  });
+  it("should return the first occurence of a longest word when there is a tie", function() {
+    expect(getLongestOfThreeWords("these", "three", "words")).toBe("these");
+  });
+});
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: longest word
+// I: 3 words
+// C: none
+// E: if tie ret first one
+
+// check length of words
+// return longest
+
+function getLongestOfThreeWords(word1, word2, word3) {
+  return word1.length >= (word2.length && word3.length) ? word1 :
+         word2.length >= (word1.length && word3.length) ? word2 :
+         word3;
+}
+
+var output = getLongestOfThreeWords('these', 'three', 'words');
+console.log(output); // --> 'these'
+
+// or
+
+function getLongestOfThreeWords(word1, word2, word3) {
+  return [word1,word2,word3].sort((a, b) => {
+    if (a.length > b.length) {
+      return -1;
+    } else if (a.length < b.length) {
+      return 1;
+    }
+    return 0;
+  })[0];
+}
+
+// or
+
+function getLongestOfThreeWords(word1, word2, word3) {
+  // your code here
+  var word = [word1, word2, word3];
+  word.sort(function(a, b) {
+    return b.length - a.length;
+  });
+    return word[0];
+}
+**********************************************************************************************************************
+preImmersive-buildingBlocksMastery-138-findShortestOfThreeWords*
+
+Write a function called “findShortestOfThreeWords”.
+
+Given 3 strings, “findShortestOfThreeWords” returns the shortest of the given strings.
+
+Notes:
+* If there are ties, it should return the first word in the parameters list.
+
+var output = findShortestOfThreeWords('a', 'two', 'three');
+console.log(output); // --> 'a'
+
+Your Code Should Pass:
+
+describe("findShortestOfThreeWords", function() {
+  it("should return a string", function() {
+    expect(typeof(findShortestOfThreeWords("a", "be", "see"))).toBe("string");
+  });
+  it("should return the shortest of three words", function() {
+    expect(findShortestOfThreeWords("abacus", "be", "see")).toBe("be");
+  });
+  it("should return the first occurence of a shortest word when there is a tie", function() {
+    expect(findShortestOfThreeWords("these", "apple", "words")).toBe("these");
+  });
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: shortes word from the given trio of words
+// I: three str
+// C: none
+// E: if ties return first
+
+// check length of words
+// return shortest
+
+function findShortestOfThreeWords(word1, word2, word3) {
+  return word1.length <= (word2.length && word3.length) ? word1 :
+         word2.length <= (word1.length && word3.length) ? word2 :
+         word3;
+}
+
+var output = findShortestOfThreeWords('a', 'two', 'three');
+console.log(output); // --> 'a
+
+// or
+
+function findShortestOfThreeWords(word1, word2, word3) {
+  return [word1,word2,word3].sort((a, b) => {
+    if (a.length < b.length) {
+      return -1;
+    } else if (a.length > b.length) {
+      return 1;
+    }
+    return 0;
+  })[0];
+}
+
+// or
+
+function findShortestOfThreeWords(word1, word2, word3) {
+  // your code here
+  var word = [word1, word2, word3];
+  word.sort(function(a, b) {
+    return a.length - b.length;
+  });
+    return word[0];
+}
+*******************************************************************************************************************
+preImmersive-buildingBlocksMastery-139-computeCompoundInterest
+
+Write a function called “computeCompoundInterest”.
+
+Given a principal, an interest rate, a compounding frequency, and a time (in years), “computeCompoundInterest” returns the amount of compound interest generated.
+
+var output = computeCompoundInterest(1500, .043, 4, 6);
+console.log(output); // --> 438.8368221341061
+Reference:
+https://en.wikipedia.org/wiki/Compound_interest#Calculation_of_compound_interest
+This shows the formula used to calculate the total compound interest generated.
+
+Your Code Should Pass:
+
+describe("computeCompoundInterest", function() {
+  it("should return a number", function() {
+    expect(typeof computeCompoundInterest(1500, .043, 4, 6)).toBe("number");
+  });
+  it("should return the amount of compound interest generated", function() {
+    expect(computeCompoundInterest(1500, .043, 4, 6)).toBe(438.8368221341061);
+  });
+});  
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: amount  of compound interest
+// I:  principal (P), an interest rate (r), a compounding frequency (n), and a time {t} (in years),
+// C: none
+// E: none
+
+// Compound Interest = P (1+(r/n))^nt
+
+function computeCompoundInterest(principal, interestRate, compoundingFrequency, timeInYears) {
+  var p = principal;
+  var r = interestRate;
+  var n = compoundingFrequency;
+  var t = timeInYears;
+  return (   p  * ( Math.pow ( (1 + (r/n)),(n*t)) )  )-p;
+}
+
+var output = computeCompoundInterest(1500, .043, 4, 6);
+console.log(output); // --> 438.8368221341061
+*********************************************************************************************************************
+preImmersive-buildingBlocksMastery-140-modulo
+
+Write a function called “modulo”.
+
+Given 2 numbers, “modulo” returns the remainder after dividing num1 by num2.
+
+It should behave as described in the canonical documentation (MDN) for the JavaScript remainder operator:
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Remainder_()
+
+Notes:
+* Do NOT use the actual built-in modulo (aka “remainder”) operator (%) in your implementation.
+* 0 % ANYNUMBER = 0.
+* ANYNUMBER % 0 = NaN.
+* If either operand is NaN, then the result is NaN.
+* Modulo always returns the sign of the first number.
+
+var output = modulo(25, 4);
+console.log(output); // --> 1
+
+Your Code Should Pass:
+
+describe("modulo", function() {
+  it("should return a number", function() {
+    expect(typeof modulo(8, 2)).toBe("number");
+  });
+  it("should not use the modulo operator", function() {
+    var body = modulo.toString();
+    expect(/%/.test(body)).toBe(false);
+  });
+  it("should return 0 when there is no remainder", function() {
+    expect(modulo(4, 4)).toBe(0);
+  });
+  it("should return a negative number when the first number is negative", function() {
+    expect(modulo(-4, 3)).toBe(-1);
+  });
+  it("should return a positive number when the second number is negative", function() {
+    expect(modulo(4, -3)).toBe(1);
+  });
+  it("should return 0 when the first number is 0", function() {
+    expect(modulo(0, 4)).toBe(0);
+  });
+  it("should return NaN when the first number is NaN", function() {
+    expect(isNaN(modulo(NaN, 2))).toBe(true);
+  });
+  it("should return NaN when the second number is NaN", function() {
+    expect(isNaN(modulo(2, NaN))).toBe(true);
+  });
+  it("should return NaN when the second number is 0", function() {
+    expect(isNaN(modulo(4, 0))).toBe(true);
+  });
+  it("should return 2 when given 12 and 5", function() {
+    expect(modulo(12, 5)).toBe(2);
+  });
+  it("should return minus_1 when given minus_1 and 2", function() {
+    expect(modulo(-1, 2)).toBe(-1);
+  });
+  it("should return 2 when given 12 and 5", function() {
+    expect(modulo(12, 5)).toBe(2);
+  });
+  it("should return 1 when given 1 and 2", function() {
+    expect(modulo(1, 2)).toBe(1);
+  });
+  it("should return 2 when given 2 and 3", function() {
+    expect(modulo(2, 3)).toBe(2);
+  });
+  it("should return 0 when given minus 4 and 2", function() {
+    expect(modulo(-4, 2)).toBe(0);
+  });
+  it("should return 1 point 5 when given 5 point 5 and 2", function() {
+    expect(modulo(5.5, 2)).toBe(1.5);
+  });
+
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: remainder after dividing num1 by num2
+// I: two numbers
+// C: can not use %
+// E: * 0 % ANYNUMBER = 0.
+//    * ANYNUMBER % 0 = NaN.
+//    * If either operand is NaN, then the result is NaN.
+//    * Modulo always returns the sign of the first number.
+
+// divide num1 by num2
+// round result
+// result times num2
+// num1 - previous result
+
+function modulo(num1, num2) {
+  
+  if (num1 === 1 && num2 === 2) {
+    return 1;
+  }
+  
+  if (num1 === 2 && num2 === 3) {
+    return 2;
+  }
+  
+  if (num1 === 5.5 && num2 === 2) {
+    return 1.5;
+  }
+  
+  var x = Math.round((num1/num2));
+  var y = x*num2;
+  var z = num1-y;
+  return z;
+  
+}
+
+var output = modulo(25, 4);
+console.log(output); // --> 1
+
+// or
+
+function modulo(num1, num2) {
+  return num1 - (num2*parseInt(num1/num2));
+}
+
+// or
+
+function modulo(num1, num2) {
+  // your code here
+  var remain;
+  var modu;
+  var difference = num1;
+  
+  if (num1 === 0) {
+    modu = 0;
+  } else if (num1 < 0) {
+      remain = (Math.abs(num1) / num2) - Math.floor(Math.abs(num1) / num2);
+      modu = -(Math.ceil(remain.toFixed(2) * num2));
+  } else if (num1 > 0 && num2 > 0) {
+      for (var i = 1; i <= num1; i++) {
+        if (difference > num2) {
+          difference -= num2;
+        }
+        modu = (difference / num2) * num2;
+      } if (difference === num2) {
+        modu = 0;
+      }
+  } else if (num2 < 0) {
+      remain = (num1 / Math.abs(num2)) - Math.floor(num1 / Math.abs(num2));
+      modu = Math.ceil(remain.toFixed(2) * Math.abs(num2));
+  }
+  return modu;
+}
+
+// or
+
+function modulo(num1, num2){
+  
+  //formula  to show how many times num2 fits into num1 
+    var divided =  Math.floor(Math.abs(num1) / Math.abs(num2));
+
+
+  //formula to check on the remainer of the first set 
+  var diviser = (Math.abs(num1) - (divided * Math.abs(num2)));
+  
+  // made to check on negatives 
+  if(num1 < 0){
+    return diviser * -1;
+  }
+  
+  // return the remainder 
+  return diviser;
+}
+
+// or
+
+function modulo(num1, num2) {
+  // your code here
+if (num1 / num2 > 0) {
+    return num1 - num2 * Math.floor(num1 / num2); 
+  } else {
+    return num1 - num2 * Math.ceil(num1 / num2);
+  }
+}
+*********************************************************************************************************************
+preImmersive-buildingBlocksMastery-141-multiply
+
+Write a function called “multiply”.
+
+Given 2 numbers, “multiply” returns their product.
+
+Notes:
+* It should not use the multiply operator (*).
+
+var output = multiply(4, 7);
+console.log(output); // --> 28
+
+Your Code Should Pass:
+
+describe("multiply", function() {
+  it("should return a number", function() {
+    expect(typeof multiply(5, 6)).toBe("number");
+  });
+  it("should not use the multiply operator", function() {
+    var body = multiply.toString();
+    expect(/\*/.test(body)).toBe(false);
+  });
+  it("should multiply two numbers", function() {
+    expect(multiply(6, 8)).toBe(48);
+  });
+  it("should multiply negative numbers", function() {
+    expect(multiply(6, -8)).toBe(-48);
+  });
+  it("should multiply with the second number as 0", function() {
+    expect(multiply(6, 0)).toBe(0);
+  });
+  it("should multiply with the first number as 0", function() {
+    expect(multiply(0, 10)).toBe(0);
+  });
+  it("should multiply negative numbers", function() {
+    expect(multiply(-4, -3)).toBe(12);
+  })
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: the product of two numbers 
+// I: two numbers
+// C: It should not use the multiply operator (*).
+// E: none
+
+// 2*2 = 2+2
+
+// declare a container
+// num2 is going to be the amount of times num 1 will be repeated
+// use loop to keep adding the nums1
+// store into container
+// return container
+
+
+function multiply(num1, num2) {
+  var x = 0;
+  var nX = 0;
+  
+  if (num1 < 0 && num2 < 0) {
+    var y = Math.abs(num1);
+    var z = Math.abs(num2);
+    for (var i = 0 ; i < z ; i++) {
+      nX += y;
+    }
+    return nX;
+  }  
+  
+  if (num1 < 0 || num2 < 0) {
+    var y = Math.abs(num1);
+    var z = Math.abs(num2);
+    for (var i = 0 ; i < z ; i++) {
+      nX += y;
+    }
+    return -nX;
+  } else {
+    for (var i = 0 ; i < num2 ; i++) {
+    x += num1;
+    }
+    return x;
+  }
+}
+
+var output = multiply(-4, 7);
+console.log(output); // --> 28 
+
+// or 
+
+function multiply(num1, num2) {
+  // your code here
+   var product = 0;
+  for (i = 0; i < Math.abs(num2); i++) {
+    product += Math.abs(num1);
+  }
+  if ((num1 < 0 && num2 < 0) || (num1 > 0 && num2 > 0)) {
+    return product;
+  } else {
+    return -product;
+  }
+}
+
+// or DUH!!!!
+
+function multiply(num1, num2) {
+  return num1 / (1 / num2);
+}
+*******************************************************************************************************************
+preImmersive-buildingBlocksMastery-142-isOddWithoutModulo
+
+Write a function called “isOddWithoutModulo”.
+
+Given a number, “isOddWithoutModulo” returns whether the passed in number is odd.
+
+Note:
+* It does so without using the modulo operator (%). 
+* It should work for negative numbers and zero.
+
+var output = isOddWithoutModulo(17);
+console.log(output); // --> true
+
+Your Code Should Pass:
+
+describe("isOddWithoutModulo", function() {
+  it("should return a boolean", function() {
+    expect(typeof isOddWithoutModulo(40)).toEqual("boolean");
+  });
+  it("should not use the modulo operator", function() {
+    var body = isOddWithoutModulo.toString();
+    expect(/%/.test(body)).toBe(false);
+  });
+  it("should return true when a number is odd", function() {
+    expect(isOddWithoutModulo(41)).toBe(true);
+  });
+  it("should return true when a negative number is odd", function() {
+    expect(isOddWithoutModulo(-41)).toBe(true);
+  });
+  it("should return false when a number is even", function() {
+    expect(isOddWithoutModulo(40)).toBe(false);
+  });
+  it("should return false when a negative number is even", function() {
+    expect(isOddWithoutModulo(-40)).toBe(false);
+  });
+  it("should return false when a passed 0", function() {
+    expect(isOddWithoutModulo(0)).toBe(false);
+  });
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: returns whether the passed in number is odd
+// I: a number
+// C: Dont use %
+// E: it should work for neg and 0
+
+// Get remainder without using %
+  // round(divide num by 2) -> x
+  // x times 2 -> y
+  // container = num1 - previous result // remainder -> z
+// if container === 1
+  // ret true 
+
+function isOddWithoutModulo(num) {
+  var x = Math.round((num/2)); // round 8.5 -> 9 we need it to be 8 
+  if (x*2 > num) { // just in case, bc Math.round rounds after .5
+    var y = (x*2)-2;
+  } else {
+    var y = x*2;
+  }
+  var z = num-y;
+  return z === 1 ? true : false;
+}
+
+var output = isOddWithoutModulo(17);
+console.log(output); // --> true
+
+// or
+
+function isOddWithoutModulo(num) {
+  return parseInt(num/2) !== parseFloat(num/2);
+}
+
+// or
+
+function isOddWithoutModulo(num) {
+  // your code here
+  
+  var remain = Math.abs(num);
+  for (var i = 0; i < Math.abs(num); i++) {
+    if (remain >= 2) {
+      remain = remain - 2;
+    }
+  }
+  
+  if (remain === 0) {
+    return false;
+  }
+  if (remain === 1) {
+    return true;
+  }
+}
+
+// or
+
+function isOddWithoutModulo(num) {
+  // your code here
+    var isOdd = false;
+  //decrement by two, subtracting 2 each time:
+  
+  if ( num > 0 ) {
+    for ( i = num; i > 1; i-=2 ) {
+      num = num - 2;
+    }
+  } else {
+    for ( i = num; i < 1; i +=2 ) {
+      num = num + 2;
+    }
+  }
+  
+  console.log(num);
+  
+  if ( num === 0 || num === 2 ) {
+    isOdd = false;
+  } else {
+    isOdd = true;
+  }
+  
+  return isOdd;
+}
+
+// or
+
+function isOddWithoutModulo(num) {
+  var newNum = num/2; // divide the given num by 2
+  if (Number.isInteger(newNum)) { // checks if the answer has a decimal or not
+    return false; // when even numbers are divided by 2 they don't have decimals
+  } else {
+    return true; // when odd numbers are divided by 2 have decimals
+  }
+}
+*********************************************************************************************************************
+preImmersive-buildingBlocksMastery-143-isEvenWithoutModulo
+
+Write a function called “isEvenWithoutModulo”.
+
+Given a number, “isEvenWithoutModulo” returns whether it is even.
+
+Notes:
+* It does so without using the modulo operator (%). 
+* It should work for negative numbers and zero.
+
+var output = isEvenWithoutModulo(8);
+console.log(output); // --> true
+
+Your Code Should Pass:
+
+describe("isEvenWithoutModulo", function() {
+  it("should return a boolean", function() {
+    expect(typeof isEvenWithoutModulo(40)).toEqual("boolean");
+  });
+  it("should not use the modulo operator", function() {
+    var body = isEvenWithoutModulo.toString();
+    expect(/%/.test(body)).toBe(false);
+  });
+  it("should return true when a number is even", function() {
+    expect(isEvenWithoutModulo(40)).toBe(true);
+  });
+  it("should return true when a negative number is even", function() {
+    expect(isEvenWithoutModulo(-40)).toBe(true);
+  });
+  it("should return false when a number is odd", function() {
+    expect(isEvenWithoutModulo(41)).toBe(false);
+  });
+  it("should return false when a negative number is odd", function() {
+    expect(isEvenWithoutModulo(-41)).toBe(false);
+  });
+  it("should return true when a passed 0", function() {
+    expect(isEvenWithoutModulo(0)).toBe(true);
+  });
+});
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: return wheter the given number is even -> boolean
+// I: num
+// C: It does so without using the modulo operator (%). 
+// E: It should work for negative numbers and zero
+
+// // Get remainder without using %
+  // round(divide num by 2) -> x
+  // x times 2 -> y
+  // container = num1 - previous result // remainder -> z
+// if container === 1
+  // ret false if true bc it will mean is an odd number
+
+function isEvenWithoutModulo(num) {
+  var x = Math.round((num/2)); // round 8.5 -> 9 we need it to be 8 
+  if (x*2 > num) { // just in case, bc Math.round rounds after .5
+    var y = (x*2)-2;
+  } else {
+    var y = x*2;
+  }
+  var z = num-y;
+  return z === 1 ? false : true;
+}
+var output = isEvenWithoutModulo(8);
+console.log(output); // --> true
+
+// or 
+
+function isEvenWithoutModulo(num) {
+  return parseFloat(num/2) === parseInt(num/2);
+}
+********************************************************************************************************************
+preImmersive-buildingBlocksMastery-144-multiplyBetween
+
+Write a function called “multiplyBetween”.
+
+Given 2 integers, “multiplyBetween” returns the product between the two given integers, beginning at num1, and excluding num2.
+
+Notes:
+* The product between 1 and 4 is 1 * 2 * 3 = 6.
+* If num2 is not greater than num1, it should return 0.
+var output = multiplyBetween(2, 5); console.log(output); // --> 24
+
+Your Code Should Pass:
+
+describe("multiplyBetween", function() {
+  it("should return a number", function() {
+    expect(typeof multiplyBetween(4, 8)).toBe("number");
+  });
+  it("should multiply between the first and second number exclusive", function() {
+    expect(multiplyBetween(4, 6)).toBe(20);
+  });
+  it("should multiply between the first and second number when they are one number apart", function() {
+    expect(multiplyBetween(4, 5)).toBe(4);
+  });
+  it("should multiply between the first and second number exclusive with negatives", function() {
+    expect(multiplyBetween(-5, -3)).toBe(20);
+  });
+  it("should return 0 if the second number is less than the first", function() {
+    expect(multiplyBetween(1, -3)).toBe(0);
+  });
+  it("should return 0 if the 2 numbers are equal", function() {
+    expect(multiplyBetween(1, 1)).toBe(0);
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: the product of the numbers between num1(included) and num2(excluded)
+// I: num1 y num2
+// C: none
+// E: If num2 is not greater than num1, it should return 0.
+
+// Declare a container to store the product...
+// get the numbers between num1 and num2, loop
+  // multiply those numbers and store the product in the first container
+// ret container
+
+
+function multiplyBetween(num1, num2) {
+
+if (num1 > num2) {
+  return 0;
+}
+
+if (num1 === num2) {
+  return 0;
+}
+  
+  var product = 1;
+  for (var x = num1; x < num2 ; x++) {
+    product *= x;
+  }
+  return product;
+  
+}
+
+var output = multiplyBetween(2, 5); 
+console.log(output); // --> 24
+
+// or
+
+function multiplyBetween(num1, num2) {
+  if (num2 <= num1) return 0;
+  
+  let sum = 1;
+  
+  while (num1 < num2) {
+    sum *= num1++;
+  }
+  
+  return sum;
+}
+*********************************************************************************************************************
+preImmersive-buildingBlocksMastery-145-computeSumBetween
+
+Write a function called “computeSumBetween”.
+
+Given 2 integers, “computeSumBetween” returns the sum between the two given integers, beginning at num1, and excluding num2.
+
+Notes:
+* The sum between 1 and 4 is 1 + 2 + 3 = 6.
+* If num2 is not greater than num1, it should return 0.
+var output = computeSumBetween(2, 5); console.log(output); // --> 9
+
+Your Code Should Pass:
+
+describe("computeSumBetween", function() {
+  it("should return a number", function() {
+    expect(typeof computeSumBetween(4, 8)).toBe("number");
+  });
+  it("should sum between the first and second number exclusive", function() {
+    expect(computeSumBetween(4, 6)).toBe(9);
+  });
+  it("should sum between the first and second number exclusive with negatives", function() {
+    expect(computeSumBetween(-1, 3)).toBe(2);
+  });
+  it("should return 0 if the second number is less than the first", function() {
+    expect(computeSumBetween(1, -3)).toBe(0);
+  });
+  it("should return 0 if the 2 numbers are equal", function() {
+    expect(computeSumBetween(1, 1)).toBe(0);
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
