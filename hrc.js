@@ -8270,3 +8270,746 @@ describe("computeSumBetween", function() {
   });
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: the sum between the two given integers, beginning at num1, and excluding num2.
+// I: num1 and num2
+// C: none
+// E: If num2 is not greater than num1, it should return 0.
+
+// Declare a container to store the product...
+// get the numbers between num1 and num2, loop
+  // add those numbers and store the product in the first container
+// ret container
+
+function computeSumBetween(num1, num2) {
+ 
+ if (num1 > num2) {
+  return 0;
+}
+
+  var fetus = 0;
+  for (var x = num1; x < num2 ; x++) {
+    fetus += x;
+  }
+  return fetus;
+  
+}
+
+var output = computeSumBetween(2, 5);
+console.log(output); // --> 9
+
+// or
+
+function computeSumBetween(num1, num2) {
+  sum = 0;
+  
+  while (num1 < num2) {
+    sum += num1++;
+  }
+  
+  return sum;
+}
+
+// or
+
+function computeSumBetween(num1, num2) {
+  
+    if (num1 === num2 || num1 > num2) {
+    return 0;
+  }
+
+  if (num1 > 0 && num2 > 0) {
+    var product = 0;
+    for (var i = num1; i < num2; i++) {
+      product+=i
+  }
+  return product;
+  }
+  
+  if (num1 < 0) {
+    var negative = 0;
+    for (var i = num1; i < num2; i++) {
+      negative += i;
+  } 
+  return negative;
+  }
+}
+***************************************************************************************************************
+preImmersive-buildingBlocksMastery-146-convertArrayToObject1
+
+Write a function ‘transformFirstAndLast’ that takes in an array, and returns an object with:
+1) the first element of the array as the object’s key, and
+2) the last element of the array as that key’s value.
+
+Example input:
+['Queen', 'Elizabeth', 'Of Hearts', 'Beyonce']
+
+Function’s return value (output):
+{ Queen : 'Beyonce' }
+
+Do not change the input array. Assume all elements in the input array will be of type ‘string’.
+
+Note that the input array may have a varying number of elements. Your code should flexibly accommodate that.
+
+E.g. it should handle input like:
+['Kevin', 'Bacon', 'Love', 'Hart', 'Costner', 'Spacey']
+
+Function’s return value (output):
+{ Kevin : 'Spacey' }
+
+Your Code Should Pass:
+
+describe('transformFirstAndLast', function() {
+  it('should_properly_assign_key_and_value_pair', function (){
+
+    var input = ['Marie', 'Kayla', 'Jackson', 'Richard', 'Kyle', 'Sarah', 'Mars', 'Wayne', 'Mary'];
+
+    var output = transformFirstAndLast(input);
+
+    expect(output).not.toBeUndefined();
+    expect(typeof output).toBe('object');
+    expect(output.Marie).toBe('Mary');
+  });
+
+  it('should_not_modify_input_array', function() {
+    var input = ['Mars', 'Wayne', 'Mary'];
+    var copy = input.slice(0);
+    var output = transformFirstAndLast(input);
+
+    expect(input.length).toBe(copy.length);
+    expect(copy[0]).toBe(input[0]);
+    expect(copy[1]).toBe(input[1]);
+    expect(copy[2]).toBe(input[2]);
+
+  });
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: an object with:
+  //  1) the first element of the array as the object’s key, and
+  //  2) the last element of the array as that key’s value.
+// I: an array
+// C: none
+// E: Assume all elements in the input array will be of type ‘string’
+
+// Declare an empty obj to store the property
+// access arr
+// get arr first element and make it the obj key
+// get arr last element and set it to obj[key]=
+// ret that obj
+
+function transformFirstAndLast(array) {
+  var obj = {};
+  obj[array[0]] = array[array.length-1];
+  return obj;
+}
+******************************************************************************************************************
+preImmersive-buildingBlocksMastery-147-convertArrayToObject2
+
+Write a function ‘fromListToObject’ which takes in an array of arrays, and returns an object with each pair of elements in the array as a key-value pair.
+
+Example input:
+[['make', 'Ford'], ['model', 'Mustang'], ['year', 1964]]
+
+Function’s return value (output):
+{ make : 'Ford', model : 'Mustang', year : 1964 }
+
+Do not change the input string. Assume that all elements in the array will be of type ‘string’.
+
+Note that the input may have a different number of elements than the given sample.
+For instance, if the input had 6 values instead of 4, your code should flexibly accommodate that.
+
+Your Code Should Pass:
+
+describe ('fromtListToObject', function(){
+  it ('should_properly_transform_values', function() {
+    var input = [['firstName', 'John'], ['lastName', 'McLane'], ['occupation', 'law enforcement'], ['spouse', 'Holly McLane']];
+    var output = fromListToObject(input);
+
+    expect(typeof output).toBe('object');
+    expect(output[input[0][0]]).toBe(input[0][1]);
+    expect(output[input[1][0]]).toBe(input[1][1]);
+    expect(output[input[2][0]]).toBe(input[2][1]);
+    expect(output[input[3][0]]).toBe(input[3][1]);
+
+  });
+  it ('should_not_modify_input_array', function() {
+    var input = [['firstName', 'John'], ['lastName', 'McLane'], ['occupation', 'law enforcement'], ['spouse', 'Holly McLane']];
+    var inputCopy = input.slice(0);
+    var output = fromListToObject(input);
+
+    expect(input.length).toBe(inputCopy.length);
+    expect(input[0][0]).toBe(inputCopy[0][0]);
+    expect(input[3][0]).toBe(inputCopy[3][0]);
+  });
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: an object with each pair of elements in the array as a key-value pair.
+// I: an array of arrays
+// C: none
+// E: Assume that all elements in the array will be of type ‘string’.
+
+// Declare an empty obj to store the property
+// access arr, loop
+// get the array's first inside arrays and make them the obj properties
+// ret that obj
+
+function fromListToObject(array) {
+  var obj = {};
+  for (var x in array) { // for in for array is actually not recommended
+    obj[array[x][0]] = array[x][1];
+  }
+  return obj;
+}
+// or
+
+function fromListToObject(array) {
+  var newObj = {};
+  
+  array.forEach((e) => {
+    newObj[e[0]] = e[1];
+  });
+  
+  return newObj;
+}
+**********************************************************************************************************************
+preImmersive-buildingBlocksMastery-148-convertArrayToObject3
+
+Write a function called “transformEmployeeData” that transforms some employee data from one format to another.
+
+The argument will look like this:
+
+[
+    [
+        ['firstName', 'Joe'], ['lastName', 'Blow'], ['age', 42], ['role', 'clerk']
+    ],
+    [
+        ['firstName', 'Mary'], ['lastName', 'Jenkins'], ['age', 36], ['role', 'manager']
+    ]
+]
+Given that input, the return value should look like this:
+
+[
+    {firstName: 'Joe', lastName: 'Blow', age: 42, role: 'clerk'},
+    {firstName: 'Mary', lastName: 'Jenkins', age: 36, role: 'manager'}
+]
+Note that the input may have a different number of rows or different keys than the given sample.
+
+For example, let’s say the HR department adds a “tshirtSize” field to each employee record.
+Your code should flexibly accommodate that.
+
+Your Code Should Pass:
+
+describe('transformEmployeeData', function() {
+  it('transforms_the_sample_data', function() {
+    var input = [[['firstName', 'Joe'], ['lastName', 'Blow'], ['age', 42], ['role', 'clerk']],
+                 [['firstName', 'Mary'], ['lastName', 'Jenkins'], ['age', 36], ['role', 'manager']]];
+    var output = transformEmployeeData(input);
+    expect(output).toBeDefined();
+    expect(output[0].firstName).toEqual('Joe');
+    expect(output[1].age).toEqual(36);
+  });
+
+  it('transforms_some_other_data', function() {
+    var input = [[['firstName', 'Joe'], ['lastName', 'Blow'], ['favoriteIceCream', 'chocolate'], ['role', 'clerk']],
+                 [['firstName', 'Carl'], ['lastName', 'Sagan'], ['favoriteIceCream', 'starfruit'], ['role', 'seer']],
+                 [['firstName', 'Mary'], ['lastName', 'Jenkins'], ['favoriteIceCream', 'vanilla'], ['role', 'manager']]];
+    var output = transformEmployeeData(input);
+    expect(output).toBeDefined();
+    expect(output[1].favoriteIceCream).toEqual('starfruit');
+  });
+
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: OBJECT [  {4 properties are the array -> key and value}, {4 properties are the array -> key and value}]
+// I: ARRAY of arrays -> [  [4 arrays with 2 elementseach], [4 arrays with 2 elements each]  ]
+// C: none 
+// E: flexible
+
+// how are they diff, input is an array and output is an obj
+// Declare an array to later push two elements; two obbjects
+// access the elements inside employeeData, 2 elements
+// iterate thru employeeData, 0&1
+  // declare employee object to store in a similar fashion to 147
+  // iterate thru employee's info; 4 arrays with 2 elements each; key&valu; 0&1&2&3
+    // add the required into the employee object container
+  // back out from nested loop and push employee object container, one at a time, into arr container, this is going to happen twice so two different objects will be push into array
+// return container array  
+
+var z = 
+[[['firstName', 'Joe'], ['lastName', 'Blow'], ['age', 42], ['role', 'clerk']],
+[['firstName', 'Mary'], ['lastName', 'Jenkins'], ['age', 36], ['role', 'manager']]]
+
+function transformEmployeeData(employeeData) {
+  var arrayOfObjects = []; // Declare an array
+  for (var x = 0 ; x < employeeData.length; x++) {
+    var employeeObject = {};
+    for (var y = 0 ; y < employeeData[x].length ; y++) {
+      employeeObject[employeeData[x][y][0]] = employeeData[x][y][1];
+    }
+    arrayOfObjects.push(employeeObject)
+  }
+  return arrayOfObjects;
+}
+
+transformEmployeeData(z);
+
+// or
+
+function transformEmployeeData(employeeData) {
+  var objArray = [];
+  
+  employeeData.forEach((dataArray) => {
+    var item = {};
+    for (i in dataArray) {
+      item[dataArray[i][0]] = dataArray[i][1];
+    }
+    objArray.push(item);
+  });
+  
+  return objArray;
+}
+*********************************************************************************************************************
+preImmersive-buildingBlocksMastery-149-convertObjectToList1
+
+Write a function called “getAllKeys” which returns an array of all the input object’s keys.
+Example input:
+{ name : 'Sam', age : 25, hasPets : true }
+
+Function’s return value (output) :
+['name', 'age', 'hasPets']
+
+Do not use “Object.keys” to solve this prompt.
+
+Note that your function should be able to handle any object passed in it.
+
+E.g. it should also handle an input like:
+{ a : 'a', number : 11, hungry : true, grammyWins : 1 }
+
+Function’s return value (output):
+['a', 'number', 'hungry', 'grammyWins']
+
+Your Code Should Pass:
+
+describe('getAllKeys', function() {
+  it('should_output_an_array_of_key_names', function(){
+    var input = {
+      foo: 'bar',
+      level: 1,
+      red: 'green',
+      number: true
+    }
+    var expected = Object.keys(input);
+    var actual = getAllKeys(input);
+
+    expect(actual).not.toBeUndefined();
+    expect(actual[0]).toBe(expected[0]);
+    expect(actual[1]).toBe(expected[1]);
+    expect(actual[2]).toBe(expected[2]);
+    expect(actual[3]).toBe(expected[3]);
+  });
+
+  it ('should_not_use_restricted_methods', function() {
+    var body = getAllKeys.toString();
+
+    expect(/Object\.keys/.test(body)).toBe(false);
+  });
+
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: an array of all the input object's keys
+// I: an obj
+// C: cant use Object.keys
+// E: 
+
+// declare an empty arr container to later store all the input object keys as elements
+// find a way to access all of the object keys without object.keys
+// iterate thru each key
+  // add each key as an element
+  // then store those elements inside my arr container
+// return that container
+
+function getAllKeys(obj) {
+  var arr = [];
+  var arrEntries=Object.entries(obj);
+  for (var x = 0 ; x < arrEntries.length ; x++) {
+    arr.push(arrEntries[x][0]);
+  }
+  return arr;
+}
+// or
+
+function getAllKeys(obj) {
+  keys = []
+  
+  for (i in obj) {
+    keys.push(i);
+  }
+  
+  return keys;
+}
+
+// or
+
+function getAllKeys(obj) {
+  var allKeys = [];
+  
+  for (var key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      allKeys.push(key);
+    }
+  }
+  return allKeys;
+}
+
+// or 
+
+function getAllKeys(obj) {
+   return Reflect.ownKeys(obj) ; 
+}
+******************************************************************************************************************
+preImmersive-buildingBlocksMastery-150-convertObjectToList2
+Write a function called “listAllValues” which returns an array of all the input object’s values.
+Example input:
+
+{
+  name : 'Krysten',
+  age : 33,
+  hasPets : false
+}
+Function’s return value (output):
+
+['Krysten', 33, false]
+Note that the input may have a different number of keys and values than the given sample.
+E.g. it should also handle an input like:
+
+{
+  a : 'a',
+  number : 11,
+  hungry : true,
+  grammyWins : 1
+}
+Function’s return value (output):
+
+['a', 11, true, 1]
+
+Your Code Should Pass:
+
+describe ('listAllValues', function() {
+  it ('should_output_an_array_of_values', function(){
+    var input = {
+      foo: 'bar',
+      level: 1,
+      red: 'green',
+      number: true,
+      cry: 'excelsior'
+    }
+
+    var output = listAllValues(input);
+    console.log(Array.isArray(output));
+    console.log(output);
+
+    expect(output).not.toBeUndefined();
+    expect(output[0]).toBe('bar');
+    expect(output[1]).toBe(1);
+    expect(output[2]).toBe('green');
+    expect(output[3]).toBe(true);
+    expect(output[4]).toBe('excelsior');
+  });
+
+});
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: an array of all the input object's values
+// I: an obj
+// C: none
+// E: none
+
+// declare container
+// loop thru obj
+  // store into container
+// return container
+
+function listAllValues(obj) {
+  var arr = [];
+  var arrEntries = Object.entries(obj);
+  
+  for (var x = 0 ; x < arrEntries.length ; x++) {
+    arr.push(arrEntries[x][1]);
+  }
+  return arr;
+}
+
+// or
+
+  function listAllValues(obj) {
+  vals = [];
+  
+  for (i in obj) {
+    vals.push(obj[i]);
+  }
+  
+  return vals;
+}
+
+// or 
+
+function listAllValues(obj) {
+  // your code here
+  return Object.values(obj);
+  
+}
+***********************************************************************************************************************
+preImmersive-buildingBlocksMastery-151-convertObjectToList3
+
+Write a function called “convertObjectToList” which converts an object literal into an array of arrays, like this:
+
+Argument:
+
+{
+  name: 'Holly',
+  age: 35,
+  role: 'producer'
+}
+Return value:
+
+[['name', 'Holly'], ['age', 35], ['role', 'producer']]
+
+Your Code Should Pass:
+
+describe('convertObjectToList', function() {
+  it('converts_the_sample_data', function() {
+    var input = {
+      name: 'Holly',
+      age: 35,
+      role: 'producer'
+    };
+    var output = convertObjectToList(input);
+    expect(output[0][0]).toBe('name');
+    expect(output[0][1]).toBe('Holly');
+    expect(output[1][0]).toBe('age');
+    expect(output[1][1]).toBe(35);
+    expect(output[2][0]).toBe('role');
+    expect(output[2][1]).toBe('producer');
+  });
+});
+
+describe('convertObjectToList', function() {
+  it('converts_some_other_data', function() {
+    var input = {
+      foo: 'FOO',
+      bar: 'BAR',
+      baz: 123,
+      'another key': null
+    };
+    var output = convertObjectToList(input);
+    expect(output[0][0]).toBe('foo');
+    expect(output[0][1]).toBe('FOO');
+    expect(output[1][0]).toBe('bar');
+    expect(output[1][1]).toBe('BAR');
+    expect(output[2][0]).toBe('baz');
+    expect(output[2][1]).toBe(123);
+    expect(output[3][0]).toBe('another key');
+    expect(output[3][1]).toBe(null);
+  })
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// O: array of array
+// I: obj
+// C: none
+// E: none
+// declare container equal to the resulting array from Object.entries
+// return that arr
+function convertObjectToList(obj) {
+  var arrEntries = Object.entries(obj);
+  return arrEntries;
+}
+
+// or
+
+function convertObjectToList(obj) {
+  var objArray = [];
+  
+  for (i in obj) {
+    objArray.push([i, obj[i]]);
+  }
+  
+  return objArray;
+}
+
+// or
+
+function convertObjectToList(obj) {
+  // create master array 
+  var masArr = [];
+  
+  //make a loop that will create first array 
+  for (var prop in obj){
+    // create a temp array that will hold the prop and val 
+    tempArr = [];
+    // push that prop to temp arr
+    tempArr.push(prop);
+    // push that value to temp arr
+    tempArr.push(obj[prop]);
+     //console.log(tempArr); // used for trouble shooting 
+       masArr.push(tempArr);
+
+  }
+  return masArr;  
+}
+
+// or 
+
+function convertObjectToList(obj) {
+  var newArray = []; // placeholder array for main array
+  for (var key in obj) { // looping through given obj
+  var secArray = []; // placeholder array for second array
+    secArray.push(key) // places the key in second array
+    secArray.push(obj[key]); // places the value in the second array (obj[key] = value of key)
+    newArray.push(secArray); // pushes the second array into the main array
+  }
+  return newArray;
+}
+
+********************************************************************************************************************
+preImmersive-buildingBlocksMastery-152-greetCustomer
+
+Write a function called “greetCustomers”.
+
+Given a name, “greetCustomers” returns a greeting based on how many times that customer has visited the restaurant. Please refer to the customerData object.
+
+The greeting should be different, depending on the name on their reservation.
+
+Case 1 - Unknown customer ( Name is not present in customerData ):
+
+var output = greetCustomer('Terrance');
+console.log(output); // --> 'Welcome! Is this your first time?'
+Case 2 - Customer who has visited only once ( ‘visits’ value is 1 ):
+
+var output = greetCustomer('Joe');
+console.log(output); // --> 'Welcome back, Joe! We're glad you liked us the first time!'
+Case 3 - Repeat customer: ( ‘visits’ value is greater than 1 ):
+
+var output = greetCustomer('Carol');
+console.log(output); // --> 'Welcome back, Carol! So glad to see you again!'
+Notes:
+* Your function should not alter the customerData object to update the number of visits.
+* Do not hardcode to the exact sample data. This is a BAD IDEA:
+
+if (firstName === 'Joe') {
+  // do something
+}
+
+Your Code Should Pass:
+
+describe('greetCustomer', function() {
+  it('handles 1st time visitor from sample data', function() {
+    var output = greetCustomer('Voldemort');
+    var expected = 'Welcome! Is this your first time?';
+    expect(output).toEqual(expected);
+  });
+
+  it('handles 2nd time visitor from sample data', function() {
+    var output = greetCustomer('Joe');
+    var expected = "Welcome back, Joe! We're glad you liked us the first time!";
+    expect(output).toEqual(expected);
+  });
+
+  it('handles 2nd time visitor from new nonsample data', function() {
+    var oldCustomerDataJSON = JSON.stringify(customerData);
+
+    customerData['Ben'] = {
+      visits: 1
+    };
+
+    var output = greetCustomer('Ben');
+    var expected = "Welcome back, Ben! We're glad you liked us the first time!";
+    expect(output).toEqual(expected);
+
+    customerData = JSON.parse(oldCustomerDataJSON);
+  });
+
+  it('handles 3rd time visitor from sample data', function() {
+    var output = greetCustomer('Howard');
+    var expected = 'Welcome back, Howard! So glad to see you again!';
+    expect(output).toEqual(expected);
+  });
+
+  it('handles 4th time visitor from new nonsample data', function() {
+    var oldCustomerDataJSON = JSON.stringify(customerData);
+
+    customerData['Macklemore'] = {
+      visits: 3
+    };
+
+    var output = greetCustomer('Macklemore');
+    var expected = 'Welcome back, Macklemore! So glad to see you again!';
+    expect(output).toEqual(expected);
+
+    customerData = JSON.parse(oldCustomerDataJSON);
+  });
+
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// O: a greeting
+// I: a string (a name)
+// C: none
+// E: none
+
+// if a customer visits the restaurant, depending on the maount of visits it should, access obj customerData to check
+// ret a greeting 
+
+var customerData = {
+  'Joe': {
+    visits: 1
+  },
+  'Carol': {
+    visits: 2
+  },
+  'Howard': {
+    visits: 3,
+  },
+  'Carrie': {
+    visits: 4
+  }
+};
+
+function greetCustomer(firstName) {
+  
+  
+  return customerData[firstName] === undefined ? 'Welcome! Is this your first time?' :
+  customerData[firstName]["visits"] === 1 ? "Welcome back, "+ firstName+ "! We're glad you liked us the first time!" :
+  customerData[firstName]["visits"] === 2 ? "Welcome back, "+ firstName+ "! So glad to see you again!" :
+  customerData[firstName]["visits"] === 3 ? "Welcome back, "+ firstName+ "! So glad to see you again!" :
+  "";
+}
+
+var output = greetCustomer('Carol');
+console.log(output); // --> 'Welcome! Is this your first time?'
+
+// or 
+
+var customerData = {
+  'Joe': {
+    visits: 1
+  },
+  'Carol': {
+    visits: 2
+  },
+  'Howard': {
+    visits: 3,
+  },
+  'Carrie': {
+    visits: 4
+  }
+};
+
+function greetCustomer(firstName) {
+  if (customerData[firstName] === undefined) return 'Welcome! Is this your first time?';
+  v = customerData[firstName].visits;
+  
+  switch (v) {
+    case 1:
+      return 'Welcome back, '+firstName+'! We\'re glad you liked us the first time!';
+  }
+  return 'Welcome back, '+firstName+'! So glad to see you again!'
+
+}
