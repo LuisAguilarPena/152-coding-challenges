@@ -609,6 +609,8 @@ console.log(output); // --> 25.132741228718345
 
 */
 
+const computePerimeterOfACircle = r => 2*Math.PI*r;
+
 /*
 48. Write a function called “computeAreaOfACircle”.
 
@@ -617,6 +619,8 @@ Given the radius of a circle, “computeAreaOfACircle” returns its area.
 var output = computeAreaOfACircle(4);
 console.log(output); // --> 50.26548245743669
 */
+
+const computeAreaOfACircle = r => 2*Math.PI*r*2;
 
 /*
 49. Write a function called “computePower”.
@@ -628,6 +632,8 @@ console.log(output); // --> 8
 
 */
 
+const computePower = (num, exp) => Math.pow(num, exp);
+
 /*
 50. Write a function called “computeSquareRoot”.
 Given a number, “computeSquareRoot” returns its square root.
@@ -635,3 +641,5 @@ Given a number, “computeSquareRoot” returns its square root.
 var output = computeSquareRoot(9);
 console.log(output); // --> 3
 */
+
+const computeSquareRoot = num => Math.sqrt(num);
